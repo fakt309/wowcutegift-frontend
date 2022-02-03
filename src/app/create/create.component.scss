@@ -1,0 +1,253 @@
+:host {
+  .optionGift {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #eeeeee00;
+    transition: background-color ease 0.3s;
+    -webkit-transition: background-color ease 0.3s;
+    -moz-transition: background-color ease 0.3s;
+    -o-transition: background-color ease 0.3s;
+    .icoGift {
+      margin: 10px;
+      min-width: 100px;
+      min-height: 100px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    .textGift {
+      margin: 10px;
+      font-size: min(4vw, 14px);
+      color: #333;
+      overflow: hidden;
+      flex: 1;
+    }
+    .editGift, .deleteGift {
+      margin-right: 0px;
+      min-width: 0px;
+      min-height: 0px;
+      position: sticky;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 0px;
+      height: 0px;
+      transform: rotate(90deg);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.3s;
+      -moz-transition: all ease 0.3s;
+      -o-transition: all ease 0.3s;
+    }
+    .editGift {
+      background-color: #ffc107;
+      background-image: url(../../assets/penandpaper.png);
+    }
+    .deleteGift {
+      background-color: #f44336;
+      background-image: url(../../assets/trash.png);
+    }
+  }
+  .optionGift.choosenGift {
+    background-color: #eeeeeeff;
+    .editGift, .deleteGift {
+      min-width: 30px;
+      min-height: 30px;
+      transform: rotate(0deg);
+      margin-right: 10px;
+    }
+  }
+  .bottomMenu {
+    position: sticky;
+    bottom: 0px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    * {
+      margin: 10px;
+    }
+  }
+  .noneGifts {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+  }
+  .wrapSliderAdd {
+    min-width: min(80vw, 800px);
+    min-height: min(80vh, 500px);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  .bottomMenuAdd {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    * {
+      margin: 10px;
+    }
+  }
+  .wrapListEdit {
+    min-width: 80vw;
+    min-height: 90vh;
+  }
+  .skeletonEditList {
+    min-width: min(80vw, 500px);
+    min-height: min(90vh, 800px);
+  }
+  .bottomMenuListEdit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    * {
+      margin: 10px;
+    }
+  }
+  .displayEditGreetingCard {
+    width: 100%;
+    min-height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .skeletonTextareaTitle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .skeleton2TextareaTitle, .skeleton3TextareaTitle {
+    max-width: min(60vw, 400px);
+    max-height: min(20vw, 200px);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .skeleton3TextareaTitle {
+    max-width: min(70vw, 400px);
+    max-height: min(50vw, 200px);
+  }
+  .bottomMenuFrontGreeting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: sticky;
+    bottom: 0px;
+    background-color: #fff;
+    * {
+      margin: 10px;
+    }
+  }
+  .skeletonCroppingGreeting {
+    width: 100%;
+    height: 80%;
+  }
+  .skeletonListImages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    min-height: 100%;
+    * {
+      margin: 20px;
+    }
+  }
+  .uploadArrayImages {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #ddd;
+    background-color: #fafafa;
+    border-radius: 10px;
+    cursor: pointer;
+    background-image: url(../../assets/upload.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+  .labelFileUpload, .cancelUpload {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #8bc34a;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    transform: scale(1) rotate(0deg);
+    transition: all ease 0.3s;
+  }
+  .labelFileUpload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0px;
+    border: 5px solid #8bc34a;
+    background-color: unset;
+    color: #8bc34a;
+    width: 100px;
+    height: 50px;
+  }
+  .cancelUpload {
+    background-color: #f44336;
+  }
+  .fileUpload {
+    display: none;
+  }
+  .errorTextUpload {
+    margin: 10px 10%;
+    font-size: 12px;
+    color: #f44336;
+    text-align: center;
+  }
+  .skeletonColorpickerDrawSignGreeting {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #skeletonSignGreeting {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .labelcolorpickersigngreeting {
+    width: min(200px, 90vw);
+    height: min(200px, 90vw);
+    border: 5px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    z-index: 2;
+    position: absolute;
+  }
+}

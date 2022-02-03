@@ -1,0 +1,38 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .crop {
+    width: 100px;
+    height: 100px;
+    background-color: #00bcd466;
+    box-shadow:inset 0px 0px 0px 5px #00bcd4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    cursor: all-scroll;
+    .circle {
+      width: 50px;
+      height: 50px;
+      margin-right: -21px;
+      margin-bottom: -21px;
+      border-radius: 100px;
+      background-color: #00bcd4;
+      background-image: url(../../assets/dblarrows.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      cursor: nw-resize;
+    }
+  }
+}

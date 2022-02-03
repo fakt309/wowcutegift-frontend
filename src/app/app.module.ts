@@ -3,10 +3,40 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CreateComponent } from './create/create.component';
+import { FullscreenComponent } from './fullscreen/fullscreen.component';
+import { ListComponent } from './list/list.component';
+import { ButtonComponent } from './button/button.component';
+import { EmptyListComponent } from './empty-list/empty-list.component';
+import { PopupComponent } from './popup/popup.component';
+import { SliderGiftsComponent } from './slider-gifts/slider-gifts.component';
+import { List2Component } from './list2/list2.component';
+import { GreetingCardComponent } from './greeting-card/greeting-card.component';
+import { EditOptionComponent } from './edit-option/edit-option.component';
+import { TextareaComponent } from './textarea/textarea.component';
+import { CroppingComponent } from './cropping/cropping.component';
+import { ImageListArrayComponent } from './image-list-array/image-list-array.component';
+import { Textarea2Component } from './textarea2/textarea2.component';
+import { DrawComponent } from './draw/draw.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateComponent,
+    FullscreenComponent,
+    ListComponent,
+    ButtonComponent,
+    EmptyListComponent,
+    PopupComponent,
+    SliderGiftsComponent,
+    List2Component,
+    GreetingCardComponent,
+    EditOptionComponent,
+    TextareaComponent,
+    CroppingComponent,
+    ImageListArrayComponent,
+    Textarea2Component,
+    DrawComponent
   ],
   imports: [
     BrowserModule,

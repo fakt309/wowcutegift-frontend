@@ -1,0 +1,55 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eeeeee00;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  .title {
+    margin: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  .value {
+    margin: 20px;
+    font-size: 16px;
+    color: #999;
+  }
+}
+@keyframes wave {
+  0% {
+    background-color: #eeeeee00;
+  }
+  25% {
+    background-color: #eeeeeeff;
+  }
+  50% {
+    background-color: #eeeeee00;
+  }
+  60% {
+    background-color: #eeeeeeff;
+  }
+  70% {
+    background-color: #eeeeee00;
+  }
+  75% {
+    background-color: #eeeeeeff;
+  }
+  80% {
+    background-color: #eeeeee00;
+  }
+  85% {
+    background-color: #eeeeeeff;
+  }
+  90% {
+    background-color: #eeeeee00;
+  }
+  95% {
+    background-color: #eeeeeeff;
+  }
+  100% {
+    background-color: #eeeeee00;
+  }
+}

@@ -1,0 +1,248 @@
+<app-popup #addpopup>
+  <div class="wrapSliderAdd">
+    <app-slider-gifts #slideradd></app-slider-gifts>
+  </div>
+  <div class="bottomMenuAdd">
+    <app-button color='#f44336' (click)='addpopup.hide();slideradd.activate(false);'>Cancel</app-button>
+    <app-button color='#8bc34a' (click)='addGift(slideradd.getValue());setSizesListGifts();setSizesEditDemo();'>Add</app-button>
+  </div>
+</app-popup>
+
+<app-popup #editgreetingpopup>
+  <div class="skeletonEditList">
+    <app-list2 #listEditGreeting>
+      <div class="displayEditGreetingCard">
+        <app-greeting-card #editgreetingcard></app-greeting-card>
+      </div>
+      <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgreetingpopup.hideNoAnim();editingtitle.showNoAnim();listEditingTitle.scrollToStart()"></app-edit-option>
+      <app-edit-option #editoptionfront [title]='"Front"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingfrontgreeting.showNoAnim();croppingobjectfrontgreeting.setSize()"></app-edit-option>
+      <app-edit-option #editoptionback [title]='"Back"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize()"></app-edit-option>
+      <app-edit-option [title]='"Text"' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
+      <app-edit-option [title]='"Sign"' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign()"></app-edit-option>
+      <div class="bottomMenu">
+        <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back to gifts</app-button>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #editingtitle>
+  <div class="skeletonEditList">
+    <app-list2 #listEditingTitle>
+      <div class="skeletonTextareaTitle">
+        <div class="skeleton2TextareaTitle">
+          <app-textarea #texttitle limit="100" [value]="edititngGift.title" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea>
+        </div>
+      </div>
+      <div class="bottomMenu">
+        <app-button color='#f44336' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
+        <app-button color='#8bc34a' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTitleGift();'>Save</app-button>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #croppingfrontgreeting>
+  <div class="skeletonEditList">
+    <div class="skeletonCroppingGreeting">
+      <app-cropping #croppingobjectfrontgreeting></app-cropping>
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='croppingfrontgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
+      <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();'>Change</app-button>
+      <app-button color='#8bc34a' (click)='saveCroppingFront()'>Save</app-button>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #uploadfrontgreetingpopup>
+  <div class="skeletonEditList">
+    <app-list2 #uploadfrontgreetinglist>
+      <div class="skeletonTextareaTitle">
+        <div class="errorTextUpload"></div>
+        <input type="file" id="fileUploadFrontGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 1)" />
+        <label class="labelFileUpload" for="fileUploadFrontGreetingid">Upload</label>
+        <div class="cancelUpload" (click)="uploadfrontgreetingpopup.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();">Cancel</div>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #arrayfrontimages>
+  <div class="skeletonEditList">
+    <app-list2 #listarrayfrontimages>
+      <div #skeletonArrayFrontImages class="skeletonListImages">
+        <div class="uploadArrayImages" (click)="arrayfrontimages.hideNoAnim();uploadfrontgreetingpopup.showNoAnim();uploadfrontgreetinglist.scrollToStart()"></div>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/1.png'" [checked]="true" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/2.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/3.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/4.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/5.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/6.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/7.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/8.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/9.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/10.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/11.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/12.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/13.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/14.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/15.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/16.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/17.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/18.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/19.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/20.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/21.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/22.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/23.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/24.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/25.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/26.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/27.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/28.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/29.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/30.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/31.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/32.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/33.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/34.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/35.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/36.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/37.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/38.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/39.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/front/40.png'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      </div>
+      <div class="bottomMenuFrontGreeting">
+        <app-button color='#f44336' (click)='arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();'>Cancel</app-button>
+        <app-button color='#8bc34a' (click)='setDefaultCropping();arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();'>Save</app-button>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #croppingbackgreeting>
+  <div class="skeletonEditList">
+    <div class="skeletonCroppingGreeting">
+      <app-cropping #croppingobjectbackgreeting></app-cropping>
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='croppingbackgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
+      <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();'>Change</app-button>
+      <app-button color='#8bc34a' (click)='saveCroppingBack()'>Save</app-button>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #arraybackimages>
+  <div class="skeletonEditList">
+    <app-list2 #listarraybackimages>
+      <div #skeletonArrayBackImages class="skeletonListImages">
+        <div class="uploadArrayImages" (click)="arraybackimages.hideNoAnim();uploadbackgreetingpopup.showNoAnim();uploadbackgreetinglist.scrollToStart()"></div>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/1.png'" [checked]="true" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/2.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/3.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/4.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/5.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/6.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/7.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/8.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/9.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/10.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/11.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/12.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/13.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/14.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/15.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/16.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/17.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/18.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/19.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+        <app-image-list-array [img]="'../../assets/greetingcard/back/20.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      </div>
+      <div class="bottomMenuFrontGreeting">
+        <app-button color='#f44336' (click)='arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();'>Cancel</app-button>
+        <app-button color='#8bc34a' (click)='setDefaultBackCropping();arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();'>Save</app-button>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #uploadbackgreetingpopup>
+  <div class="skeletonEditList">
+    <app-list2 #uploadbackgreetinglist>
+      <div class="skeletonTextareaTitle">
+        <div class="errorTextUpload"></div>
+        <input type="file" id="fileUploadBackGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 2)" />
+        <label class="labelFileUpload" for="fileUploadBackGreetingid">Upload</label>
+        <div class="cancelUpload" (click)="uploadbackgreetingpopup.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();">Cancel</div>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #editingtextgreeting>
+  <div class="skeletonEditList">
+    <app-list2 #listEditingTextGreeting>
+      <div class="skeletonTextareaTitle">
+        <div class="skeleton3TextareaTitle">
+          <app-textarea2 #textareaTextGreeting limit="300" [value]="edititngGift.text" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea2>
+        </div>
+      </div>
+      <div class="bottomMenu">
+        <app-button color='#f44336' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
+        <app-button color='#8bc34a' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTextGreeting();'>Save</app-button>
+      </div>
+    </app-list2>
+  </div>
+</app-popup>
+
+<app-popup #drawsigngreetingpopup>
+  <div class="skeletonEditList">
+    <div id="skeletonSignGreeting">
+      <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front?.data" [imgback]="edititngGift.back?.data" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
+      <app-draw #drawingobjectsigngreeting [width]="sizeforsigngreeting.w" [height]="0.2*sizeforsigngreeting.h" [color]="sizeforsigngreeting.color" [tool]="sizeforsigngreeting.tool" [style]="{position: 'absolute', 'z-index': '1', 'box-shadow': 'inset 0px 0px 0px 5px #ff9800', 'border': '5px solid #fff'}"></app-draw>
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
+      <app-button #erasebuttonsigngreeting color='#00bcd4' (click)='switchtool()'>Erase</app-button>
+      <app-button color='#ff9800' (click)='drawsigngreetingpopup.hideNoAnim();drawsigncolorpickgreetingpopup.showNoAnim();'>Color</app-button>
+      <app-button color='#8bc34a' (click)='saveDrawingSignGreeting();drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Save</app-button>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #drawsigncolorpickgreetingpopup>
+  <div class="skeletonEditList">
+    <div class="skeletonColorpickerDrawSignGreeting">
+      <label class="labelcolorpickersigngreeting" for="colorpickerobjectsigngreeting" [style]="{'background-color': sizeforsigngreeting.color}" >Push to change</label>
+      <input id="colorpickerobjectsigngreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorPenSignGreeting($event)" />
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='cancelDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();'>Cancel</app-button>
+      <app-button color='#8bc34a' (click)='saveDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();'>Save</app-button>
+    </div>
+  </div>
+</app-popup>
+
+<app-fullscreen>
+  <app-list2>
+
+    <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
+      <div class="icoGift">
+        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" ></app-greeting-card>
+      </div>
+      <div class="textGift">{{gift.title}}</div>
+      <div class="editGift"></div>
+      <div class="deleteGift"></div>
+    </div>
+
+    <app-empty-list *ngIf="!gifts.length">First of all you need to add gifts</app-empty-list>
+
+    <div class="bottomMenu">
+      <app-button color='#8bc34a' (click)='addpopup.show($event.pageX, $event.pageY);slideradd.activate(true);setSizesDemoSlider()'>Add</app-button>
+      <app-button #nextbutton color='#9c27b0'>Next</app-button>
+    </div>
+  </app-list2>
+</app-fullscreen>

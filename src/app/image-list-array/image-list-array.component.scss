@@ -1,0 +1,32 @@
+:host {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  border: 5px solid #ddd;
+  transition: border ease 0.3s;
+  background-color: #fafafa;
+  cursor: pointer;
+  .checkmark {
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50px;
+    margin: 10px;
+    background-color: #8bc34a;
+    background-image: url(../../assets/checkmark.png);
+    transform: scale(0) rotate(180deg);
+    transition: transform ease 0.3s;
+  }
+}
+:host(.check) {
+  border: 5px solid #8bc34a;
+  .checkmark {
+    transform: scale(1) rotate(0deg);
+  }
+}

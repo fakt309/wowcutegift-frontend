@@ -1,0 +1,21 @@
+:host {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all ease 0.1s;
+  .text {
+    margin: 20px 10px;
+    color: #fff;
+    font-size: 14px;
+  }
+  .ico {
+    display: none;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    background-color: #000;
+  }
+}
