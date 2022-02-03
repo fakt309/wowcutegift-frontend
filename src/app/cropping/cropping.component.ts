@@ -77,7 +77,7 @@ export class CroppingComponent implements OnInit {
         let ctx = cnvs.getContext('2d')
         cnvs.setAttribute('width', `${w*img.naturalWidth}px`)
         cnvs.setAttribute('height', `${h*img.naturalHeight}px`)
-        ctx!.drawImage(img, 0, 0)
+        ctx!.drawImage(img, x*img.naturalWidth, y*img.naturalHeight, w*img.naturalWidth, h*img.naturalHeight, 0, 0, w*img.naturalWidth, h*img.naturalHeight)
         resolve(cnvs.toDataURL("image/png"))
       }
       img.src = this.img
