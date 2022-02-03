@@ -16,6 +16,7 @@ export class GreetingCardComponent implements AfterViewInit {
   @Input('imgback') imgback: any = '../assets/greetingcard/back/1.png'
   @Input('text') text: any = 'May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.'
   @Input('sign') sign: any = '../assets/greetingcard/sign.png'
+  @Input('textcolor') textcolor: any = "#000"
 
   el: any = this.host.nativeElement
   size: any = { x: 0, y: 0, z: 0 }
@@ -94,6 +95,11 @@ export class GreetingCardComponent implements AfterViewInit {
     this.demoAnim = flag
   }
 
+  setTextColor(color: String) {
+    this.textcolor = color
+    this.el.querySelector('.back .text').style.color = this.textcolor
+  }
+
   setDefault() {
     let ratio = 350/500
     this.setSize(500, 500/ratio, 2)
@@ -103,6 +109,7 @@ export class GreetingCardComponent implements AfterViewInit {
     this.setBack('../assets/greetingcard/back/1.png')
     this.setText('May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.')
     this.setSign('../assets/greetingcard/sign.png')
+    this.setTextColor(this.textcolor)
   }
 
   ngAfterViewInit() {
@@ -118,5 +125,6 @@ export class GreetingCardComponent implements AfterViewInit {
     if (this.text) this.setText(this.text)
     if (this.sign || this.sign === '') this.setSign(this.sign)
     if (this.w && this.h) this.setSize(this.w, this.h, 2)
+    if (this.textcolor) this.setTextColor(this.textcolor)
   }
 }

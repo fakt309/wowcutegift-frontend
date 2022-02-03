@@ -45,7 +45,7 @@ export class CreateComponent implements AfterViewInit {
   @ViewChild('erasebuttonsigngreeting') erasebuttonsigngreeting: any
   @ViewChild('drawingobjectsigngreeting') drawingobjectsigngreeting: any
   @ViewChild('drawsigncolorpickgreetingpopup') drawsigncolorpickgreetingpopup: any
-
+  @ViewChild('editingtextcolor') editingtextcolor: any
 
   el: any = this.host.nativeElement
   gifts: any = [
@@ -60,6 +60,15 @@ export class CreateComponent implements AfterViewInit {
 
   sizeforsigngreeting: any = { w: 100, h: 150, translateY: 0, sign: 'a', tool: 'pen', color: '#cc0000' }
 
+  rgbStringToHexString(rgb: any) {
+    rgb = rgb.slice(4, -1).split(', ')
+    for (let i = 0; i < rgb.length; i++) {
+      rgb[i] = parseInt(rgb[i])
+    }
+    rgb = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2] << 0)
+    return '#' + (0x1000000 + rgb).toString(16).slice(1)
+  }
+
   chooseGift(id: number): void {
     let el = this.el.querySelector(`.optionGift[idgift='${id}']`)
     let options = this.el.querySelectorAll('.optionGift')
@@ -73,11 +82,25 @@ export class CreateComponent implements AfterViewInit {
     }
   }
 
+  setColorTitleGreeting(e: any) {
+    if (e.target) {
+      e.target.parentNode.querySelector(".labelcolorpickersigngreeting").style.backgroundColor = e.target.value
+    }
+  }
+
   saveDrawingSignColorGreeting(): void {
     this.sizeforsigngreeting.color = this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor
   }
   cancelDrawingSignColorGreeting(): void {
     this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.sizeforsigngreeting.color
+  }
+
+  saveTitleColorGreeting(): void {
+    this.edititngGift.colorText = this.rgbStringToHexString(this.editingtextcolor.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
+    this.editgreetingcard.setTextColor(this.edititngGift.colorText)
+  }
+  cancelTitleColorGreeting(): void {
+    this.editingtextcolor.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.colorText
   }
 
   switchtool(): void {
@@ -278,6 +301,7 @@ export class CreateComponent implements AfterViewInit {
       gift.back = { data: '../assets/greetingcard/back/1.png' }
       gift.text = "May you be gifted with life’s biggest joys and never-ending bliss.<br>After all, you yourself are a gift to earth, so you deserve the best.<br>Happy birthday."
       gift.sign = ""
+      gift.colorText = "#000"
       this.editgreetingpopup.showNoAnim()
       this.listEditGreeting.scrollToStart()
     }

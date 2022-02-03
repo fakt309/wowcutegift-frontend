@@ -19,8 +19,9 @@
       <app-edit-option #editoptionback [title]='"Back"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize()"></app-edit-option>
       <app-edit-option [title]='"Text"' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
       <app-edit-option [title]='"Sign"' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign()"></app-edit-option>
+      <app-edit-option [title]='"Text color"' [val]='edititngGift.colorText ? edititngGift.colorText : "#000"' (click)="editgreetingpopup.hideNoAnim();editingtextcolor.showNoAnim();"></app-edit-option>
       <div class="bottomMenu">
-        <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back to gifts</app-button>
+        <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back</app-button>
       </div>
     </app-list2>
   </div>
@@ -198,6 +199,19 @@
   </div>
 </app-popup>
 
+<app-popup #editingtextcolor>
+  <div class="skeletonEditList">
+    <div class="skeletonColorpickerDrawSignGreeting">
+      <label class="labelcolorpickersigngreeting" for="colorpickertextgreeting" [style]="{'background-color': this.edititngGift.colorText}" >Push to change</label>
+      <input id="colorpickertextgreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorTitleGreeting($event)" />
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='cancelTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Cancel</app-button>
+      <app-button color='#8bc34a' (click)='saveTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Save</app-button>
+    </div>
+  </div>
+</app-popup>
+
 <app-popup #drawsigngreetingpopup>
   <div class="skeletonEditList">
     <div id="skeletonSignGreeting">
@@ -231,7 +245,7 @@
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
       <div class="icoGift">
-        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" ></app-greeting-card>
+        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="this.edititngGift.colorText" ></app-greeting-card>
       </div>
       <div class="textGift">{{gift.title}}</div>
       <div class="editGift"></div>

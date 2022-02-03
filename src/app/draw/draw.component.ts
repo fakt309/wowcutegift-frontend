@@ -36,11 +36,6 @@ export class DrawComponent implements OnInit {
       let ctx = this.el.querySelector('canvas').getContext('2d')
 
       if (this.tool == 'pen') {
-        // ctx.beginPath();
-        // ctx.arc(x, y, 2, 0, 2*Math.PI)
-        // ctx.fillStyle = this.color
-        // ctx.fill()
-
         if (this.prev.ready) {
           ctx.beginPath()
           ctx.moveTo(this.prev.x, this.prev.y)
@@ -48,19 +43,6 @@ export class DrawComponent implements OnInit {
           ctx.strokeStyle = this.color
           ctx.lineWidth = 3
           ctx.stroke()
-          // let sizeAddit = 0.5
-          // let pathLength = ((this.prev.x-x)**2+(this.prev.y-y)**2)**(1/2)
-          // if (pathLength > sizeAddit) {
-          //   let n = parseInt((pathLength/sizeAddit)+'')
-          //   let dx = (x-this.prev.x)/n
-          //   let dy = (y-this.prev.y)/n
-          //   for (let i = 1; i < n; i++) {
-          //     ctx.beginPath();
-          //     ctx.arc(x+dx*i, y+dy*i, 2, 0, 2*Math.PI)
-          //     ctx.fillStyle = this.color
-          //     ctx.fill()
-          //   }
-          // }
         } else {
           this.prev.ready = true
         }
@@ -85,10 +67,6 @@ export class DrawComponent implements OnInit {
       let ctx = this.el.querySelector('canvas').getContext('2d')
 
       if (this.tool == 'pen') {
-        // ctx.beginPath();
-        // ctx.arc(x, y, 3, 0, 2*Math.PI)
-        // ctx.fillStyle = this.color
-        // ctx.fill()
 
         if (this.prev.ready) {
           ctx.beginPath()
@@ -97,19 +75,6 @@ export class DrawComponent implements OnInit {
           ctx.strokeStyle = this.color
           ctx.lineWidth = 5
           ctx.stroke()
-          // let sizeAddit = 1.9
-          // let pathLength = ((this.prev.x-x)**2+(this.prev.y-y)**2)**(1/2)
-          // if (pathLength > sizeAddit) {
-          //   let n = parseInt((pathLength/sizeAddit)+'')
-          //   let dx = (x-this.prev.x)/n
-          //   let dy = (y-this.prev.y)/n
-          //   for (let i = 1; i < n; i++) {
-          //     ctx.beginPath();
-          //     ctx.arc(x+dx*i, y+dy*i, 3, 0, 2*Math.PI)
-          //     ctx.fillStyle = this.color
-          //     ctx.fill()
-          //   }
-          // }
         } else {
           this.prev.ready = true
         }
