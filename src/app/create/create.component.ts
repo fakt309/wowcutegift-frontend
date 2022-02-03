@@ -130,6 +130,19 @@ export class CreateComponent implements AfterViewInit {
     }
   }
 
+  deleteGift(e: any, id: Number) {
+    let bounding = e.target.parentNode
+    bounding.style.transform = 'scale(0) rotate(180deg)'
+    setTimeout(() => {
+      for (let i = 0; i < this.gifts.length; i++) {
+        if (id == this.gifts[i].id) {
+          this.gifts.splice(i, 1)
+          break
+        }
+      }
+    }, 300);
+  }
+
   openEditGift(e: any, id: Number) {
     let gift = null
     for (let i = 0; i < this.gifts.length; i++) {

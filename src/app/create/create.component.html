@@ -249,7 +249,7 @@
       </div>
       <div class="textGift">{{gift.title}}</div>
       <div class="editGift" (click)="openEditGift($event, gift.id)"></div>
-      <div class="deleteGift"></div>
+      <div class="deleteGift" (click)="deleteGift($event, gift.id)"></div>
     </div>
 
     <app-empty-list *ngIf="!gifts.length">First of all you need to add gifts</app-empty-list>
