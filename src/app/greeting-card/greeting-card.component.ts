@@ -15,7 +15,7 @@ export class GreetingCardComponent implements AfterViewInit {
   @Input('img') img: any = '../assets/greetingcard/front/1.png'
   @Input('imgback') imgback: any = '../assets/greetingcard/back/1.png'
   @Input('text') text: any = 'May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.'
-  @Input('sign') sign: any = '../assets/greetingcard/sign.png'
+  @Input('sign') sign: any = ''
   @Input('textcolor') textcolor: any = "#000"
 
   el: any = this.host.nativeElement
@@ -108,7 +108,7 @@ export class GreetingCardComponent implements AfterViewInit {
     this.setFront(this.img)
     this.setBack('../assets/greetingcard/back/1.png')
     this.setText('May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.')
-    this.setSign('../assets/greetingcard/sign.png')
+    this.setSign(this.sign)
     this.setTextColor(this.textcolor)
   }
 

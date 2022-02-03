@@ -245,10 +245,10 @@
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
       <div class="icoGift">
-        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="this.edititngGift.colorText" ></app-greeting-card>
+        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.colorText" ></app-greeting-card>
       </div>
       <div class="textGift">{{gift.title}}</div>
-      <div class="editGift"></div>
+      <div class="editGift" (click)="openEditGift($event, gift.id)"></div>
       <div class="deleteGift"></div>
     </div>
 

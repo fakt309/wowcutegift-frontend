@@ -130,6 +130,36 @@ export class CreateComponent implements AfterViewInit {
     }
   }
 
+  openEditGift(e: any, id: Number) {
+    let gift = null
+    for (let i = 0; i < this.gifts.length; i++) {
+      if (id == this.gifts[i].id) {
+        gift = this.gifts[i]
+        break
+      }
+    }
+    this.edititngGift = gift
+    if (gift.type == 'greetingcard') {
+      this.editgreetingcard.setFront(this.edititngGift.front.data)
+      this.editgreetingcard.setBack(this.edititngGift.back.data)
+      this.editgreetingcard.setText(this.edititngGift.front.data.text)
+      this.editgreetingcard.setSign()
+      this.drawingobjectsigngreeting.clear()
+
+      this.editgreetingpopup.show(e.clientX, e.clientY)
+      this.listEditGreeting.scrollToStart()
+
+      this.editgreetingcard.setTextColor(this.edititngGift.colorText)
+
+      this.croppingobjectfrontgreeting.setRation(100/150)
+      this.croppingobjectbackgreeting.setRation(100/100)
+      setTimeout(() => {
+        this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
+        this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
+      }, 100);
+    }
+  }
+
   setSizesEditDemo(): void {
     let bounding = this.editgreetingcard.el.parentNode.getBoundingClientRect()
     this.editgreetingcard.setSize((2/3)*bounding.height*0.9, bounding.height*0.9, 2)
