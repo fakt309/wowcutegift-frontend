@@ -78,6 +78,12 @@ export class PopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+
+    if (isTouch) {
+      this.el.querySelector('.contentPopup').style.height = "90%"
+      this.el.querySelector('.contentPopup').style.width = "90%"
+    }
   }
 
 }

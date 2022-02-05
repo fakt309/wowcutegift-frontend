@@ -9,26 +9,24 @@
 </app-popup>
 
 <app-popup #editgreetingpopup>
-  <div class="skeletonEditList">
-    <app-list2 #listEditGreeting>
-      <div class="displayEditGreetingCard">
-        <app-greeting-card #editgreetingcard></app-greeting-card>
-      </div>
-      <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgreetingpopup.hideNoAnim();editingtitle.showNoAnim();listEditingTitle.scrollToStart()"></app-edit-option>
-      <app-edit-option #editoptionfront [title]='"Front"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingfrontgreeting.showNoAnim();croppingobjectfrontgreeting.setSize()"></app-edit-option>
-      <app-edit-option #editoptionback [title]='"Back"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize()"></app-edit-option>
-      <app-edit-option [title]='"Text"' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
-      <app-edit-option [title]='"Sign"' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign()"></app-edit-option>
-      <app-edit-option [title]='"Text color"' [val]='edititngGift.colorText ? edititngGift.colorText : "#000"' (click)="editgreetingpopup.hideNoAnim();editingtextcolor.showNoAnim();"></app-edit-option>
-      <div class="bottomMenu">
-        <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back</app-button>
-      </div>
-    </app-list2>
-  </div>
+  <app-list2 #listEditGreeting>
+    <div class="displayEditGreetingCard">
+      <app-greeting-card #editgreetingcard></app-greeting-card>
+    </div>
+    <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgreetingpopup.hideNoAnim();editingtitle.showNoAnim();listEditingTitle.scrollToStart()"></app-edit-option>
+    <app-edit-option #editoptionfront [title]='"Front"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingfrontgreeting.showNoAnim();croppingobjectfrontgreeting.setSize()"></app-edit-option>
+    <app-edit-option #editoptionback [title]='"Back"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize()"></app-edit-option>
+    <app-edit-option [title]='"Text"' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
+    <app-edit-option [title]='"Sign"' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign()"></app-edit-option>
+    <app-edit-option [title]='"Text color"' [val]='edititngGift.colorText ? edititngGift.colorText : "#000"' (click)="editgreetingpopup.hideNoAnim();editingtextcolor.showNoAnim();"></app-edit-option>
+    <div class="bottomMenu">
+      <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back</app-button>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #editingtitle>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #listEditingTitle>
       <div class="skeletonTextareaTitle">
         <div class="skeleton2TextareaTitle">
@@ -40,11 +38,11 @@
         <app-button color='#8bc34a' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTitleGift();'>Save</app-button>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #croppingfrontgreeting>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <div class="skeletonCroppingGreeting">
       <app-cropping #croppingobjectfrontgreeting></app-cropping>
     </div>
@@ -53,11 +51,11 @@
       <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();'>Change</app-button>
       <app-button color='#8bc34a' (click)='saveCroppingFront()'>Save</app-button>
     </div>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #uploadfrontgreetingpopup>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #uploadfrontgreetinglist>
       <div class="skeletonTextareaTitle">
         <div class="errorTextUpload"></div>
@@ -66,11 +64,11 @@
         <div class="cancelUpload" (click)="uploadfrontgreetingpopup.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();">Cancel</div>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #arrayfrontimages>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #listarrayfrontimages>
       <div #skeletonArrayFrontImages class="skeletonListImages">
         <div class="uploadArrayImages" (click)="arrayfrontimages.hideNoAnim();uploadfrontgreetingpopup.showNoAnim();uploadfrontgreetinglist.scrollToStart()"></div>
@@ -120,11 +118,11 @@
         <app-button color='#8bc34a' (click)='setDefaultCropping();arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();'>Save</app-button>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #croppingbackgreeting>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <div class="skeletonCroppingGreeting">
       <app-cropping #croppingobjectbackgreeting></app-cropping>
     </div>
@@ -133,11 +131,11 @@
       <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();'>Change</app-button>
       <app-button color='#8bc34a' (click)='saveCroppingBack()'>Save</app-button>
     </div>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #arraybackimages>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #listarraybackimages>
       <div #skeletonArrayBackImages class="skeletonListImages">
         <div class="uploadArrayImages" (click)="arraybackimages.hideNoAnim();uploadbackgreetingpopup.showNoAnim();uploadbackgreetinglist.scrollToStart()"></div>
@@ -167,11 +165,11 @@
         <app-button color='#8bc34a' (click)='setDefaultBackCropping();arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();'>Save</app-button>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #uploadbackgreetingpopup>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #uploadbackgreetinglist>
       <div class="skeletonTextareaTitle">
         <div class="errorTextUpload"></div>
@@ -180,11 +178,11 @@
         <div class="cancelUpload" (click)="uploadbackgreetingpopup.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();">Cancel</div>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #editingtextgreeting>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <app-list2 #listEditingTextGreeting>
       <div class="skeletonTextareaTitle">
         <div class="skeleton3TextareaTitle">
@@ -196,11 +194,11 @@
         <app-button color='#8bc34a' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTextGreeting();'>Save</app-button>
       </div>
     </app-list2>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #editingtextcolor>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <div class="skeletonColorpickerDrawSignGreeting">
       <label class="labelcolorpickersigngreeting" for="colorpickertextgreeting" [style]="{'background-color': this.edititngGift.colorText}" >Push to change</label>
       <input id="colorpickertextgreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorTitleGreeting($event)" />
@@ -209,11 +207,11 @@
       <app-button color='#f44336' (click)='cancelTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Cancel</app-button>
       <app-button color='#8bc34a' (click)='saveTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Save</app-button>
     </div>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #drawsigngreetingpopup>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <div id="skeletonSignGreeting">
       <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front?.data" [imgback]="edititngGift.back?.data" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
       <app-draw #drawingobjectsigngreeting [width]="sizeforsigngreeting.w" [height]="0.2*sizeforsigngreeting.h" [color]="sizeforsigngreeting.color" [tool]="sizeforsigngreeting.tool" [style]="{position: 'absolute', 'z-index': '1', 'box-shadow': 'inset 0px 0px 0px 5px #ff9800', 'border': '5px solid #fff'}"></app-draw>
@@ -224,11 +222,11 @@
       <app-button color='#ff9800' (click)='drawsigngreetingpopup.hideNoAnim();drawsigncolorpickgreetingpopup.showNoAnim();'>Color</app-button>
       <app-button color='#8bc34a' (click)='saveDrawingSignGreeting();drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Save</app-button>
     </div>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-popup #drawsigncolorpickgreetingpopup>
-  <div class="skeletonEditList">
+  <!-- <div class="skeletonEditList"> -->
     <div class="skeletonColorpickerDrawSignGreeting">
       <label class="labelcolorpickersigngreeting" for="colorpickerobjectsigngreeting" [style]="{'background-color': sizeforsigngreeting.color}" >Push to change</label>
       <input id="colorpickerobjectsigngreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorPenSignGreeting($event)" />
@@ -237,7 +235,7 @@
       <app-button color='#f44336' (click)='cancelDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();'>Cancel</app-button>
       <app-button color='#8bc34a' (click)='saveDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();'>Save</app-button>
     </div>
-  </div>
+  <!-- </div> -->
 </app-popup>
 
 <app-fullscreen>

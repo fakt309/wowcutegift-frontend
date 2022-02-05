@@ -34,7 +34,7 @@ export class CroppingComponent implements OnInit {
       h = w/(this.sizeOriginal[0]/this.sizeOriginal[1])
     } else if (this.sizeOriginal[0] < this.sizeOriginal[1]) {
       if (this.sizeOriginal[1] > bounding.height) {
-        h = bounding.width
+        h = bounding.height
       } else {
         h = this.sizeOriginal[1]
       }

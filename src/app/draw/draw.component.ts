@@ -28,7 +28,33 @@ export class DrawComponent implements OnInit {
     ctx.clearRect(0, 0, this.width, this.height);
   }
 
+  setSign(url: string): void {
+    let img = new Image()
+    img.onload = () => {
+      let cnvs = this.el.querySelector('canvas')
+      let ctx = cnvs.getContext('2d')
+      ctx.drawImage(img, 0, 0, this.width, this.height)
+    }
+    img.src = url
+  }
+
   ngOnInit(): void {
+    this.el.addEventListener('touchstart', (e: any) => {
+      let bounding = this.el.querySelector('canvas').getBoundingClientRect()
+      let x = e.touches[0].clientX-bounding.x
+      let y = e.touches[0].clientY-bounding.y
+      let ctx = this.el.querySelector('canvas').getContext('2d')
+      if (this.tool == 'pen') {
+        ctx.beginPath();
+        ctx.fillStyle = this.color
+        ctx.arc(x, y, 1.5, 0, 2*Math.PI);
+        ctx.fill();
+      }
+
+      this.prev.x = x
+      this.prev.y = y
+      this.prev.ready = true
+    })
     this.el.addEventListener('touchmove', (e: any) => {
       let bounding = this.el.querySelector('canvas').getBoundingClientRect()
       let x = e.touches[0].clientX-bounding.x
@@ -57,6 +83,21 @@ export class DrawComponent implements OnInit {
     })
     this.el.addEventListener('mousedown', (e: any) => {
       this.canformouse = true
+      let bounding = this.el.querySelector('canvas').getBoundingClientRect()
+      let x = e.clientX-bounding.x
+      let y = e.clientY-bounding.y
+      let ctx = this.el.querySelector('canvas').getContext('2d')
+
+      if (this.tool == 'pen') {
+        ctx.beginPath();
+        ctx.fillStyle = this.color
+        ctx.arc(x, y, 2.5, 0, 2*Math.PI);
+        ctx.fill();
+      }
+
+      this.prev.ready = true
+      this.prev.x = x
+      this.prev.y = y
     })
     this.el.addEventListener('mousemove', (e: any) => {
       if (!this.canformouse) return

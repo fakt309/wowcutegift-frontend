@@ -89,18 +89,18 @@ export class CreateComponent implements AfterViewInit {
   }
 
   saveDrawingSignColorGreeting(): void {
-    this.sizeforsigngreeting.color = this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor
+    this.sizeforsigngreeting.color = this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor
   }
   cancelDrawingSignColorGreeting(): void {
-    this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.sizeforsigngreeting.color
+    this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.sizeforsigngreeting.color
   }
 
   saveTitleColorGreeting(): void {
-    this.edititngGift.colorText = this.rgbStringToHexString(this.editingtextcolor.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
+    this.edititngGift.colorText = this.rgbStringToHexString(this.editingtextcolor.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
     this.editgreetingcard.setTextColor(this.edititngGift.colorText)
   }
   cancelTitleColorGreeting(): void {
-    this.editingtextcolor.el.querySelector(".skeletonEditList .skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.colorText
+    this.editingtextcolor.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.colorText
   }
 
   switchtool(): void {
@@ -156,20 +156,20 @@ export class CreateComponent implements AfterViewInit {
       this.editgreetingcard.setFront(this.edititngGift.front.data)
       this.editgreetingcard.setBack(this.edititngGift.back.data)
       this.editgreetingcard.setText(this.edititngGift.front.data.text)
-      this.editgreetingcard.setSign()
-      this.drawingobjectsigngreeting.clear()
+      this.editgreetingcard.setSign(this.edititngGift.sign)
+      this.drawingobjectsigngreeting.setSign(this.edititngGift.sign)
 
       this.editgreetingpopup.show(e.clientX, e.clientY)
-      this.listEditGreeting.scrollToStart()
 
       this.editgreetingcard.setTextColor(this.edititngGift.colorText)
 
       this.croppingobjectfrontgreeting.setRation(100/150)
       this.croppingobjectbackgreeting.setRation(100/100)
       setTimeout(() => {
+        this.listEditGreeting.scrollToStart()
         this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
         this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
-      }, 100);
+      }, 300);
     }
   }
 

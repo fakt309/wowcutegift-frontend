@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { FullscreenComponent } from './fullscreen/fullscreen.component';
-import { ListComponent } from './list/list.component';
 import { ButtonComponent } from './button/button.component';
 import { EmptyListComponent } from './empty-list/empty-list.component';
 import { PopupComponent } from './popup/popup.component';
@@ -19,13 +18,13 @@ import { ImageListArrayComponent } from './image-list-array/image-list-array.com
 import { Textarea2Component } from './textarea2/textarea2.component';
 import { DrawComponent } from './draw/draw.component';
 import { GameComponent } from './game/game.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
     FullscreenComponent,
-    ListComponent,
     ButtonComponent,
     EmptyListComponent,
     PopupComponent,
@@ -38,7 +37,8 @@ import { GameComponent } from './game/game.component';
     ImageListArrayComponent,
     Textarea2Component,
     DrawComponent,
-    GameComponent
+    GameComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

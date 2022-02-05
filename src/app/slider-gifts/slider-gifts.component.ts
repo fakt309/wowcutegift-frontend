@@ -25,7 +25,7 @@ export class SliderGiftsComponent implements AfterViewInit {
   setSizes(): void {
     setTimeout(() => {
       let sizesDemo = this.el.querySelector('.content .option .display').getBoundingClientRect()
-      this.demogreetingcard.setSize((2/3)*sizesDemo.height, sizesDemo.height, 2)
+      this.demogreetingcard.setSize((2/3)*sizesDemo.height*0.9, sizesDemo.height*0.9, 2)
       this.demogreetingcard.demoAnimate(true)
       this.demogreetingcard.setText()
     }, 301);
