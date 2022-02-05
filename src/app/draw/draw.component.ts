@@ -29,6 +29,8 @@ export class DrawComponent implements OnInit {
   }
 
   setSign(url: string): void {
+    this.clear()
+    
     let img = new Image()
     img.onload = () => {
       let cnvs = this.el.querySelector('canvas')
