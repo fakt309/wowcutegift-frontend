@@ -333,14 +333,14 @@ export class CreateComponent implements AfterViewInit {
     }
     this.addpopup.hideNoAnim()
     if (type == 'greetingcard') {
-      this.editgreetingcard.setFront('../assets/greetingcard/front/1.png')
+      this.editgreetingcard.setFront('../assets/greetingcard/front/1.jpg')
       this.editgreetingcard.setBack('../assets/greetingcard/back/1.png')
       this.editgreetingcard.setText('May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.')
       this.editgreetingcard.setSign()
       this.drawingobjectsigngreeting.clear()
 
       gift.title = 'Greeting card'
-      gift.front = { data: '../assets/greetingcard/front/1.png' }
+      gift.front = { data: '../assets/greetingcard/front/1.jpg' }
       gift.back = { data: '../assets/greetingcard/back/1.png' }
       gift.text = "May you be gifted with life’s biggest joys and never-ending bliss.<br>After all, you yourself are a gift to earth, so you deserve the best.<br>Happy birthday."
       gift.sign = ""

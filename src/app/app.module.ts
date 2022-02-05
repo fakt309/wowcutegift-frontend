@@ -18,6 +18,7 @@ import { CroppingComponent } from './cropping/cropping.component';
 import { ImageListArrayComponent } from './image-list-array/image-list-array.component';
 import { Textarea2Component } from './textarea2/textarea2.component';
 import { DrawComponent } from './draw/draw.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DrawComponent } from './draw/draw.component';
     CroppingComponent,
     ImageListArrayComponent,
     Textarea2Component,
-    DrawComponent
+    DrawComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

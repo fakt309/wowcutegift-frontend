@@ -12,7 +12,7 @@ export class GreetingCardComponent implements AfterViewInit {
   @Input('w') w: any = 100
   @Input('h') h: any = 150
   @Input('animate') animate: any = false
-  @Input('img') img: any = '../assets/greetingcard/front/1.png'
+  @Input('img') img: any = '../assets/greetingcard/front/1.jpg'
   @Input('imgback') imgback: any = '../assets/greetingcard/back/1.png'
   @Input('text') text: any = 'May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.'
   @Input('sign') sign: any = ''
