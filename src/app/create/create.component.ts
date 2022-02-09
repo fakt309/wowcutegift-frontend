@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url);
@@ -46,6 +46,23 @@ export class CreateComponent implements AfterViewInit {
   @ViewChild('drawingobjectsigngreeting') drawingobjectsigngreeting: any
   @ViewChild('drawsigncolorpickgreetingpopup') drawsigncolorpickgreetingpopup: any
   @ViewChild('editingtextcolor') editingtextcolor: any
+  @ViewChild('editgamepopup') editgamepopup: any
+  @ViewChild('listEditGame') listEditGame: any
+  @ViewChild('texttitlegame') texttitlegame: any
+  @ViewChild('listEditingPlatformGame') listEditingPlatformGame: any
+  @ViewChild('textcodegame') textcodegame: any
+  @ViewChild('croppingobjectfrontgame') croppingobjectfrontgame: any
+  @ViewChild('uploadfrontgamepopup') uploadfrontgamepopup: any
+  @ViewChild('croppingfrontgame') croppingfrontgame: any
+  @ViewChild('editingcolorgame') editingcolorgame: any
+  @ViewChild('croppingobjectwrapgame') croppingobjectwrapgame: any
+  @ViewChild('croppingwrapgame') croppingwrapgame: any
+  @ViewChild('uploadwrapgamepopup') uploadwrapgamepopup: any
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.setSizesDemoSlider()
+  }
 
   el: any = this.host.nativeElement
   gifts: any = [
@@ -69,6 +86,50 @@ export class CreateComponent implements AfterViewInit {
     return '#' + (0x1000000 + rgb).toString(16).slice(1)
   }
 
+  setOptionPlatformGame(e: any) {
+    let el: any = null
+    let options: any = []
+    if (e.target.classList[0] != "optionPlatformGame") {
+      el = e.target.parentNode
+      options = e.target.parentNode.parentNode.querySelectorAll(".optionPlatformGame")
+    } else {
+      el = e.target
+      options = e.target.parentNode.querySelectorAll(".optionPlatformGame")
+    }
+    for (let i = 0; i < options.length; i++) {
+      options[i].classList.remove("checked")
+    }
+    el.classList.add("checked")
+  }
+
+  saveOptionPlatformGame() {
+    let option = this.listEditingPlatformGame.el.querySelector(".optionPlatformGame.checked")
+    this.edititngGift.platform = option.getAttribute('value')
+
+    if (this.edititngGift.platform == "playstation") {
+      this.edititngGift.color = '#006FCD'
+      this.edititngGift.leftimg = '../../assets/game/psleft.png'
+      this.edititngGift.wrap = '../../assets/game/ps.png'
+    } else if (this.edititngGift.platform == "xbox") {
+      this.edititngGift.color = '#107C10'
+      this.edititngGift.leftimg = '../../assets/game/xboxleft.png'
+      this.edititngGift.wrap = '../../assets/game/xbox.png'
+    } else if (this.edititngGift.platform == "steam") {
+      this.edititngGift.color = '#30537e'
+      this.edititngGift.leftimg = '../../assets/game/steamleft.png'
+      this.edititngGift.wrap = '../../assets/game/steam.png'
+    } else if (this.edititngGift.platform == "other") {
+      this.edititngGift.color = '#ff5722'
+      this.edititngGift.leftimg = '../../assets/game/gameleft.png'
+      this.edititngGift.wrap = '../../assets/game/game.png'
+    } else if (this.edititngGift.platform == "custom") {
+      this.edititngGift.color = '#999'
+      this.edititngGift.leftimg = '../../assets/game/gameleft.png'
+      this.edititngGift.wrap = '../../assets/game/game.png'
+      this.croppingobjectwrapgame.setImage('../../assets/game/game.png')
+    }
+  }
+
   chooseGift(id: number): void {
     let el = this.el.querySelector(`.optionGift[idgift='${id}']`)
     let options = this.el.querySelectorAll('.optionGift')
@@ -88,6 +149,12 @@ export class CreateComponent implements AfterViewInit {
     }
   }
 
+  setColorGame(e: any) {
+    if (e.target) {
+      e.target.parentNode.querySelector(".labelcolorpickersigngreeting").style.backgroundColor = e.target.value
+    }
+  }
+
   saveDrawingSignColorGreeting(): void {
     this.sizeforsigngreeting.color = this.drawsigncolorpickgreetingpopup.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor
   }
@@ -101,6 +168,13 @@ export class CreateComponent implements AfterViewInit {
   }
   cancelTitleColorGreeting(): void {
     this.editingtextcolor.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.colorText
+  }
+
+  saveColorGame(): void {
+    this.edititngGift.color = this.rgbStringToHexString(this.editingcolorgame.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
+  }
+  cancelColorGame(): void {
+    this.editingcolorgame.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.color
   }
 
   switchtool(): void {
@@ -170,6 +244,16 @@ export class CreateComponent implements AfterViewInit {
         this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
         this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
       }, 300);
+    } else if (gift.type == 'game') {
+      this.editgamepopup.show(e.clientX, e.clientY)
+
+      this.croppingobjectfrontgame.setRation(135/(190-2*135*0.1))
+      this.croppingobjectwrapgame.setRation(100/100)
+      setTimeout(() => {
+        this.listEditGame.scrollToStart()
+        this.croppingobjectfrontgame.setImage(this.edititngGift.img)
+        this.croppingobjectwrapgame.setImage(this.edititngGift.wrap)
+      }, 300);
     }
   }
 
@@ -182,6 +266,14 @@ export class CreateComponent implements AfterViewInit {
 
   setTitleGift(): void {
     this.edititngGift.title = this.texttitle.value
+  }
+
+  setTitleGiftGame(): void {
+    this.edititngGift.title = this.texttitlegame.value
+  }
+
+  setCodeGiftGame(): void {
+    this.edititngGift.code = this.textcodegame.value
   }
 
   setTextGreeting(): void {
@@ -209,6 +301,36 @@ export class CreateComponent implements AfterViewInit {
     })
   }
 
+  saveCroppingFrontGame(): void {
+    this.croppingobjectfrontgame.getImage().then((img: any) => {
+      this.edititngGift.img = img
+      this.croppingfrontgame.hideNoAnim()
+      this.editgamepopup.showNoAnim()
+    })
+  }
+
+  saveCroppingWrapGame(): void {
+    this.croppingobjectwrapgame.getImage().then((img: any) => {
+      this.edititngGift.wrap = img
+      this.croppingwrapgame.hideNoAnim()
+      this.editgamepopup.showNoAnim()
+    })
+  }
+
+  saveCroppingFrontGameDefault(): void {
+    this.edititngGift.img = '../../assets/game/anygame.png'
+    this.croppingobjectfrontgame.setImage('../../assets/game/anygame.png')
+    this.croppingfrontgame.hideNoAnim()
+    this.editgamepopup.showNoAnim()
+  }
+
+  saveCroppingWrapGameDefault(): void {
+    this.edititngGift.wrap = '../../assets/game/game.png'
+    this.croppingobjectwrapgame.setImage('../../assets/game/game.png')
+    this.croppingwrapgame.hideNoAnim()
+    this.editgamepopup.showNoAnim()
+  }
+
   saveCroppingBack(): void {
     this.croppingobjectbackgreeting.getImage().then((img: any) => {
       this.edititngGift.back.data = img
@@ -234,14 +356,14 @@ export class CreateComponent implements AfterViewInit {
     fr.onload = () => {
       let img: any = new Image
       img.onload = () => {
-        if (forwhat == 1) {
+        if (forwhat == 1 || forwhat == 3) {
           if (img.width < 500) {
             err.push('width must be at least 500px')
           }
           if (img.height < 500) {
             err.push('height must be at least 500px')
           }
-        } else if (forwhat == 2) {
+        } else if (forwhat == 2 || forwhat == 4) {
           if (img.width < 50) {
             err.push('width must be at least 50px')
           }
@@ -249,7 +371,6 @@ export class CreateComponent implements AfterViewInit {
             err.push('height must be at least 50px')
           }
         }
-
 
         if (err.length == 1) {
           e.target.parentNode.querySelector('.errorTextUpload').innerHTML = err[0]
@@ -269,6 +390,14 @@ export class CreateComponent implements AfterViewInit {
             this.croppingobjectbackgreeting.setImage(fr.result)
             this.uploadbackgreetingpopup.hideNoAnim()
             this.croppingbackgreeting.showNoAnim()
+          } else if (forwhat == 3) {
+            this.croppingobjectfrontgame.setImage(fr.result)
+            this.uploadfrontgamepopup.hideNoAnim()
+            this.croppingfrontgame.showNoAnim()
+          } else if (forwhat == 4) {
+            this.croppingobjectwrapgame.setImage(fr.result)
+            this.uploadwrapgamepopup.hideNoAnim()
+            this.croppingwrapgame.showNoAnim()
           }
         }
       }
@@ -347,6 +476,17 @@ export class CreateComponent implements AfterViewInit {
       gift.colorText = "#000"
       this.editgreetingpopup.showNoAnim()
       this.listEditGreeting.scrollToStart()
+    } else if (type == 'game') {
+      gift.title = 'Game'
+      gift.platform = 'playstation'
+      gift.color = '#006FCD'
+      gift.img = '../../assets/game/anygame.png'
+      gift.leftimg = '../../assets/game/psleft.png'
+      gift.wrap = '../../assets/game/ps.png'
+      gift.code = ''
+
+      this.editgamepopup.showNoAnim()
+      this.listEditGame.scrollToStart()
     }
     this.gifts.push(gift)
     this.edititngGift = this.gifts[this.gifts.length-1]
@@ -357,11 +497,17 @@ export class CreateComponent implements AfterViewInit {
         this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
         this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
       }, 100);
+    } else if (type == 'game') {
+      this.croppingobjectfrontgame.setRation(135/(190-2*135*0.1))
+      this.croppingobjectwrapgame.setRation(100/100)
+      setTimeout(() => {
+        this.croppingobjectfrontgame.setImage(this.edititngGift.img)
+        this.croppingobjectwrapgame.setImage(this.edititngGift.wrap)
+      }, 100);
     }
   }
 
   ngAfterViewInit(): void {
-    this.nextbutton.hide()
 
     window.addEventListener('resize', () => {
       this.setSizeGreetingForSign()

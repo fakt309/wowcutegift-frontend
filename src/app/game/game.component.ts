@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-game',
@@ -21,6 +21,10 @@ export class GameComponent implements OnInit {
   @Input('holes') holes: any = []
   @Input('code') code: any = []
   @Input('leftimg') leftimg: string = ''
+  @Input('animate') animate: boolean = false
+  @Input('scratch') scratch: boolean = false
+
+  @HostBinding('class.animate') animateBind: boolean = false
 
   canScratch: boolean = false
 
@@ -105,6 +109,7 @@ export class GameComponent implements OnInit {
   }
 
   addHole(e: any): void {
+    if (!this.scratch) return
     if (!this.canScratch) return
     if (e.touches && e.touches.length > 1) return
     let x, y
@@ -120,8 +125,14 @@ export class GameComponent implements OnInit {
     this.setCanvas()
   }
 
+  setAnimate(): void {
+    if (this.animate) this.animateBind = true
+    if (!this.animate) this.animateBind = false
+  }
+
   ngOnInit(): void {
     this.setCanvas()
+    this.setAnimate()
   }
 
   ngOnChanges(): void {
@@ -151,6 +162,7 @@ export class GameComponent implements OnInit {
     }
 
     this.setCanvas()
+    this.setAnimate()
   }
 
 }

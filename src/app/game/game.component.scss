@@ -1,14 +1,13 @@
 :host {
-  margin-left: 600px;
-  margin-top: 300px;
-  animation-name: rotate;
-  animation-timing-function: linear;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
+  // margin-left: 600px;
+  // margin-top: 300px;
+  // animation-name: rotate;
+  // animation-timing-function: linear;
+  // animation-duration: 5s;
+  // animation-iteration-count: infinite;
   // transform: rotateZ(-90deg) rotateY(90deg);
   //------
 
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -194,13 +193,13 @@
     }
   }
 }
+:host(.animate) {
+  animation-name: rotate;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
 @keyframes rotate {
-  // 0% {
-  //   transform: rotateX(0deg) rotateY(0deg);
-  // }
-  // 100% {
-  //   transform: rotateX(360deg) rotateY(360deg);
-  // }
   0% {
     transform: rotateY(0deg);
   }

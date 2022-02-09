@@ -1,3 +1,5 @@
+@use "sass:math";
+
 :host {
   .optionGift {
     display: flex;
@@ -80,13 +82,13 @@
     flex: 1;
   }
   .wrapSliderAdd {
-    min-width: min(80%, 800px);
-    min-height: min(80%, 500px);
-    max-width: 90%;
-    max-height: 90%;
+    // min-width: min(80%, 800px);
+    // min-height: min(80%, 500px);
+    // max-width: 90%;
+    // max-height: 90%;
+    min-height: 80%;
     overflow: hidden;
     align-self: center;
-    margin-top: 6%;
   }
   .bottomMenuAdd {
     display: flex;
@@ -94,6 +96,7 @@
     align-items: center;
     justify-content: center;
     margin-top: auto;
+    z-index: 2;
     * {
       margin: 10px;
     }
@@ -164,6 +167,12 @@
   .skeletonCroppingGreeting {
     width: 100%;
     height: 80%;
+  }
+  .skeletonCroppingGame {
+    margin: auto 0px;
+    align-self: center;
+    height: 50%;
+    width: 80%;
   }
   .skeletonListImages {
     display: flex;
@@ -254,5 +263,59 @@
     font-size: 14px;
     z-index: 2;
     position: absolute;
+  }
+  .optionPlatformGame {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0.5;
+    transition: all ease 0.3s;
+    .textOptionPlatformGame {
+      margin: 20px 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .checkmarkOptionPlatformGame {
+      margin: 10px;
+      width: 30px;
+      height: 30px;
+      background-color: #8bc34a;
+      border-radius: 100px;
+      background-image: url(../../assets/checkmark.png);
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform: scale(0) rotate(180deg);
+      transition: all ease 0.3s;
+    }
+  }
+  .optionPlatformGame.checked {
+    opacity: 1;
+    .checkmarkOptionPlatformGame {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  .nextButton {
+    background: linear-gradient(0turn, #e91e63, #00bcd4);
+    animation-name: next;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}
+@keyframes next {
+  $freq: 100;
+  @for $i from 0 through $freq {
+    #{math.div($i, $freq)*100}% {
+      // @if $i < math.div($freq, 2) {
+      //   outline: #{10*math.div($i, math.div($freq, 2))}px solid #e91e63;
+      // } @else {
+      //   outline: #{10*math.div(($freq - $i), math.div($freq, 2))}px solid #e91e63;
+      // }
+
+      background: linear-gradient(#{math.div($i, $freq)}turn, #e91e63, #00bcd4);
+    }
   }
 }

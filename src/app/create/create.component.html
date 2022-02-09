@@ -8,6 +8,137 @@
   </div>
 </app-popup>
 
+<app-popup #editgamepopup>
+  <app-list2 #listEditGame>
+    <div class="displayEditGreetingCard">
+      <app-game [size]="200" [animate]="true" [color]="edititngGift.color" [img]="edititngGift.img" [leftimg]="edititngGift.leftimg" [wrap]="edititngGift.wrap" [open]="true" [code]="edititngGift.code"  [holes]="[[0.6379845668944385,0.6936383928571429],[0.6668252466295775,0.6936383928571429],[0.7030157159830103,0.6936383928571429],[0.7271426955519655,0.6936383928571429],[0.7603002375952844,0.6936383928571429],[0.7960734078094417,0.6936383928571429],[0.8495790842577221,0.6936383928571429],[0.8966416228346861,0.6579241071428571],[0.9324084091561686,0.6579241071428571],[0.972126525722796,0.6579241071428571],[1.0418688127233766,0.7293526785714286],[0.884748084736072,0.6579241071428571],[0.826836635859369,0.6579241071428571],[0.7548114155989715,0.6579241071428571],[0.7173545887413475,0.6579241071428571],[0.6798977618837235,0.6579241071428571],[0.589773574891973,0.6579241071428571],[0.4283785717736562,0.6579241071428571],[0.28138961428922393,0.6222098214285714],[0.6265853248760092,0.47935267857142855],[0.6043865425301653,0.47935267857142855],[0.5811027859931754,0.47935267857142855],[0.5518857904183448,0.47935267857142855],[0.5223640762185067,0.47935267857142855],[0.4935062661905762,0.47935267857142855],[0.45790666124147056,0.47935267857142855],[0.4365168826591004,0.47935267857142855],[0.4089971328641161,0.47935267857142855],[0.3878458870623223,0.47935267857142855],[0.36808160834118686,0.47935267857142855],[0.3541302418476705,0.47935267857142855],[0.3295627365711497,0.47935267857142855],[0.322723020295806,0.47935267857142855],[0.31751582748642254,0.47935267857142855],[0.3137939056895788,0.47935267857142855],[0.30712711559397765,0.47935267857142855],[0.3019304890663169,0.47935267857142855],[0.26029211655556495,0.47935267857142855],[0.24731611046514218,0.47935267857142855],[0.24224907509682195,0.47935267857142855],[0.23579729705783328,0.47935267857142855],[0.23070475451710468,0.47935267857142855],[0.22428599971792582,0.47935267857142855],[0.2191553171606325,0.47935267857142855],[0.21394721519333867,0.47935267857142855],[0.20865534612970518,0.47935267857142855],[0.2057575415613239,0.47935267857142855],[0.22263611932079924,0.44363839285714285],[0.2462133193576364,0.44363839285714285],[0.26523141057227423,0.44363839285714285],[0.2897694888540935,0.44363839285714285],[0.3152229870691522,0.44363839285714285],[0.35914517931699297,0.40792410714285715],[0.37831632150588945,0.37220982142857145],[0.3969789534837015,0.3364955357142857],[0.40339939984658174,0.3364955357142857],[0.40932737823846443,0.3364955357142857],[0.42223465739166055,0.3364955357142857],[0.4282598443880017,0.3364955357142857],[0.4347498835405572,0.3364955357142857],[0.44085430118743946,0.3364955357142857],[0.447384032407936,0.3364955357142857],[0.45358337420279476,0.3364955357142857],[0.46015618653323664,0.3364955357142857],[0.479705749503162,0.3364955357142857],[0.4929445270655996,0.3364955357142857],[0.5128735061104032,0.3364955357142857],[0.5328822359120511,0.3364955357142857],[0.5600157869326302,0.3364955357142857],[0.5936332946286059,0.30078125],[0.6418811934667024,0.30078125],[0.6705211356669784,0.30078125],[0.6978936903538225,0.30078125],[0.7205042840188927,0.30078125],[0.7343226183398874,0.30078125],[0.7436637910285373,0.30078125],[0.7732389188716924,0.30078125],[0.7850430137325543,0.2650669642857143],[0.7973398409165171,0.2650669642857143],[0.8021889338087415,0.22935267857142858],[0.8210649741732243,0.22935267857142858],[0.8293251058039474,0.19363839285714285],[0.8505246026393025,0.19363839285714285],[0.8591026434255723,0.19363839285714285],[0.8751217715473956,0.22935267857142858],[0.8838740316119571,0.22935267857142858],[0.8919812272188143,0.2650669642857143],[0.9009189323577357,0.2650669642857143],[0.9388115925922221,0.30078125]]"></app-game>
+    </div>
+    <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgamepopup.hideNoAnim();editingtitlegame.showNoAnim();listEditingTitleGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='"Platform"' [val]='edititngGift.platform' (click)="editgamepopup.hideNoAnim();editingplatformgame.showNoAnim();listEditingPlatformGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='"Activation code"' [val]='edititngGift.code == "" ? "empty" : edititngGift.code' (click)="editgamepopup.hideNoAnim();editingcodegame.showNoAnim();listEditingCodeGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='"Front image"' [val]='edititngGift.img == "../../assets/game/anygame.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();croppingobjectfrontgame.setSize()"></app-edit-option>
+    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='"Color"' [val]='edititngGift.color' (click)="editgamepopup.hideNoAnim();editingcolorgame.showNoAnim()"></app-edit-option>
+    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='"Inside wrapping"' [val]='edititngGift.wrap == "../../assets/game/ps.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();croppingobjectwrapgame.setSize()"></app-edit-option>
+    <div class="bottomMenu">
+      <app-button color='#795548' (click)='editgamepopup.hide()'>Back</app-button>
+    </div>
+  </app-list2>
+</app-popup>
+
+<app-popup #editingtitlegame>
+  <app-list2 #listEditingTitleGame>
+    <div class="skeletonTextareaTitle">
+      <div class="skeleton2TextareaTitle">
+        <app-textarea #texttitlegame limit="100" [value]="edititngGift.title" (click)="listEditingTitleGame.scrollToStart()" [low]="0"></app-textarea>
+      </div>
+    </div>
+    <div class="bottomMenu">
+      <app-button color='#f44336' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
+      <app-button color='#8bc34a' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setTitleGiftGame();'>Save</app-button>
+    </div>
+  </app-list2>
+</app-popup>
+
+<app-popup #editingplatformgame>
+  <app-list2 #listEditingPlatformGame>
+    <div class="optionPlatformGame checked" style="background-image: linear-gradient(90deg, #006FCD, #004ba1);" (click)="setOptionPlatformGame($event)" value="playstation">
+      <div class="textOptionPlatformGame">Playstation</div>
+      <div class="checkmarkOptionPlatformGame"></div>
+    </div>
+    <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #107C10, #16a116);" (click)="setOptionPlatformGame($event)" value="xbox">
+      <div class="textOptionPlatformGame">Xbox</div>
+      <div class="checkmarkOptionPlatformGame"></div>
+    </div>
+    <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #30537e, #1b2838);" (click)="setOptionPlatformGame($event)" value="steam">
+      <div class="textOptionPlatformGame">Steam</div>
+      <div class="checkmarkOptionPlatformGame"></div>
+    </div>
+    <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #ff9800, #ffeb3b);" (click)="setOptionPlatformGame($event)" value="other">
+      <div class="textOptionPlatformGame">Other</div>
+      <div class="checkmarkOptionPlatformGame"></div>
+    </div>
+    <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #e91e63, #9c27b0);" (click)="setOptionPlatformGame($event)" value="custom">
+      <div class="textOptionPlatformGame">Custom</div>
+      <div class="checkmarkOptionPlatformGame"></div>
+    </div>
+    <div class="bottomMenu">
+      <app-button color='#f44336' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
+      <app-button color='#8bc34a' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();saveOptionPlatformGame()'>Save</app-button>
+    </div>
+  </app-list2>
+</app-popup>
+
+<app-popup #editingcodegame>
+  <app-list2 #listEditingCodeGame>
+    <div class="skeletonTextareaTitle">
+      <div class="skeleton2TextareaTitle">
+        <app-textarea #textcodegame limit="40" [value]="edititngGift.code" (click)="listEditingCodeGame.scrollToStart()" [low]="0"></app-textarea>
+      </div>
+    </div>
+    <div class="bottomMenu">
+      <app-button color='#f44336' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
+      <app-button color='#8bc34a' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setCodeGiftGame();'>Save</app-button>
+    </div>
+  </app-list2>
+</app-popup>
+
+<app-popup #croppingfrontgame>
+  <div class="skeletonCroppingGame">
+    <app-cropping #croppingobjectfrontgame></app-cropping>
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='croppingfrontgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
+    <app-button color='#ff9800' (click)='croppingfrontgame.hideNoAnim();uploadfrontgamepopup.showNoAnim();uploadfrontgamelist.scrollToStart();'>Upload</app-button>
+    <app-button color='#2196f3' (click)='saveCroppingFrontGameDefault()'>Default</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingFrontGame()'>Save</app-button>
+  </div>
+</app-popup>
+
+<app-popup #uploadfrontgamepopup>
+  <app-list2 #uploadfrontgamelist>
+    <div class="skeletonTextareaTitle">
+      <div class="errorTextUpload"></div>
+      <input type="file" id="fileUploadFrontGameid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 3)" />
+      <label class="labelFileUpload" for="fileUploadFrontGameid">Upload</label>
+      <div class="cancelUpload" (click)="uploadfrontgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();">Cancel</div>
+    </div>
+  </app-list2>
+</app-popup>
+
+<app-popup #editingcolorgame>
+  <div class="skeletonColorpickerDrawSignGreeting">
+    <label class="labelcolorpickersigngreeting" for="colorpickercolorgame" [style]="{'background-color': this.edititngGift.color}" >Push to change</label>
+    <input id="colorpickercolorgame" type="color" name="" [value]="" style='width:1px;height:1px;overflow:hidden;position:absolute;' (input)="setColorGame($event)" />
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='cancelColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>Cancel</app-button>
+    <app-button color='#8bc34a' (click)='saveColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>Save</app-button>
+  </div>
+</app-popup>
+
+<app-popup #croppingwrapgame>
+  <div class="skeletonCroppingGame" style="background-color:#00000099;border-radius:20px;">
+    <app-cropping #croppingobjectwrapgame></app-cropping>
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='croppingwrapgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
+    <app-button color='#ff9800' (click)='croppingwrapgame.hideNoAnim();uploadwrapgamepopup.showNoAnim();uploadwrapgamelist.scrollToStart();'>Upload</app-button>
+    <app-button color='#2196f3' (click)='saveCroppingWrapGameDefault()'>Default</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingWrapGame()'>Save</app-button>
+  </div>
+</app-popup>
+
+<app-popup #uploadwrapgamepopup>
+  <app-list2 #uploadwrapgamelist>
+    <div class="skeletonTextareaTitle">
+      <div class="errorTextUpload"></div>
+      <input type="file" id="fileUploadWrapGameid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 4)" />
+      <label class="labelFileUpload" for="fileUploadWrapGameid">Upload</label>
+      <div class="cancelUpload" (click)="uploadwrapgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();">Cancel</div>
+    </div>
+  </app-list2>
+</app-popup>
+
 <app-popup #editgreetingpopup>
   <app-list2 #listEditGreeting>
     <div class="displayEditGreetingCard">
@@ -244,6 +375,7 @@
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
       <div class="icoGift">
         <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.colorText" ></app-greeting-card>
+        <app-game *ngIf="gift.type == 'game'" [size]="45" [animate]="true" [color]="gift.color" [img]="gift.img" [leftimg]="gift.leftimg" [wrap]="gift.wrap" [code]="gift.code" ></app-game>
       </div>
       <div class="textGift">{{gift.title}}</div>
       <div class="editGift" (click)="openEditGift($event, gift.id)"></div>
@@ -254,7 +386,7 @@
 
     <div class="bottomMenu">
       <app-button color='#8bc34a' (click)='addpopup.show($event.pageX, $event.pageY);slideradd.activate(true);setSizesDemoSlider()'>Add</app-button>
-      <app-button #nextbutton color='#9c27b0'>Next</app-button>
+      <app-button *ngIf="gifts.length" class="nextButton" color='#9c27b0'>Next</app-button>
     </div>
   </app-list2>
 </app-fullscreen>

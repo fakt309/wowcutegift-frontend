@@ -11,6 +11,7 @@ export class SliderGiftsComponent implements AfterViewInit {
   active: boolean = false
   el: any = this.host.nativeElement
   touch: any = {}
+  sizegame: number = 200
   @HostBinding('class.animation') animation: boolean = true
   @ViewChild('demogreetingcard') demogreetingcard: any
 
@@ -28,6 +29,7 @@ export class SliderGiftsComponent implements AfterViewInit {
       this.demogreetingcard.setSize((2/3)*sizesDemo.height*0.9, sizesDemo.height*0.9, 2)
       this.demogreetingcard.demoAnimate(true)
       this.demogreetingcard.setText()
+      this.sizegame = sizesDemo.height*0.9*(135/190)
     }, 301);
   }
 
