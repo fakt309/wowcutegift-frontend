@@ -19,6 +19,7 @@ import { Textarea2Component } from './textarea2/textarea2.component';
 import { DrawComponent } from './draw/draw.component';
 import { GameComponent } from './game/game.component';
 import { ListComponent } from './list/list.component';
+import { HangingBoardComponent } from './hanging-board/hanging-board.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ListComponent } from './list/list.component';
     Textarea2Component,
     DrawComponent,
     GameComponent,
-    ListComponent
+    ListComponent,
+    HangingBoardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 
+import { AsyncService } from "../async.service"
+
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url);
   const blob = await data.blob();
@@ -76,6 +78,23 @@ export class CreateComponent implements AfterViewInit {
   }
 
   sizeforsigngreeting: any = { w: 100, h: 150, translateY: 0, sign: 'a', tool: 'pen', color: '#cc0000' }
+
+  showbucks: boolean = false
+  transformFullsreen: string = "translateY(0%)"
+
+  async actShowBucks(): Promise<void> {
+    this.transformFullsreen = "translateY(100%)"
+    this.showbucks = true
+  }
+
+  async backFromBucks(): Promise<void> {
+    this.showbucks = false
+    this.transformFullsreen = "translateY(0%)"
+  }
+
+  async forwardToPackage(e: any): Promise<void> {
+    console.log(e)
+  }
 
   rgbStringToHexString(rgb: any) {
     rgb = rgb.slice(4, -1).split(', ')

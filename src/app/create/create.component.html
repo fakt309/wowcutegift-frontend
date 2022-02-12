@@ -1,3 +1,5 @@
+<app-hanging-board [shown]="showbucks" (close)="backFromBucks()" (accept)="forwardToPackage($event)" ></app-hanging-board>
+
 <app-popup #addpopup>
   <div class="wrapSliderAdd">
     <app-slider-gifts #slideradd></app-slider-gifts>
@@ -369,7 +371,7 @@
   <!-- </div> -->
 </app-popup>
 
-<app-fullscreen>
+<app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="transformFullsreen">
   <app-list2>
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
@@ -386,7 +388,7 @@
 
     <div class="bottomMenu">
       <app-button color='#8bc34a' (click)='addpopup.show($event.pageX, $event.pageY);slideradd.activate(true);setSizesDemoSlider()'>Add</app-button>
-      <app-button *ngIf="gifts.length" class="nextButton" color='#9c27b0'>Next</app-button>
+      <app-button *ngIf="gifts.length" class="nextButton" color='#9c27b0' (click)='actShowBucks()'>Next</app-button>
     </div>
   </app-list2>
 </app-fullscreen>

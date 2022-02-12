@@ -1,0 +1,34 @@
+<div class="content" [style.transform]="'translateY('+(translateMove ? translateMove : translateStatic)+'px)'">
+  <div class="bow"><div class="line"></div></div>
+
+  <div class="block" [style.display]="displayBlock1" [style.transform]="transformBlock1">
+    <div class="option" (click)="showPrice(true);setExample()">
+      <div class="ico"></div>
+      <div class="text">Show the exact price of gifts to the recipient</div>
+    </div>
+    <div class="option" (click)="showPrice(false);setExample()">
+      <div class="ico"></div>
+      <div class="text">Hint the price of gifts to the receiver</div>
+    </div>
+    <div class="option" (click)="hide();accept.emit(false)">
+      <div class="ico"></div>
+      <div class="text">Don't show the price of gifts at all</div>
+    </div>
+    <app-button class="back" color="#13181c" (click)="hide();close.emit()">Back</app-button>
+  </div>
+
+  <div class="block" [style.display]="displayBlock2" [style.transform]="transformBlock2">
+    <div class="text">Enter the total value of all gifts:<span *ngIf="!exact" class="texthint"><br>(the recipient will not see the exact cost, only a rough estimate)</span></div>
+    <div class="inputwrap">
+      <input class="input" type="text" value="0" (input)="inputBucks($event)">
+      <div class="dollarsign">$</div>
+    </div>
+    <div class="text" style="margin-top:20px;">How the receiver will see it:</div>
+    <div class="example">{{example.left}} <span [style.color]="example.color" [style.font-size]="example.size+'px'" style="font-weight: bold;">{{example.center}}</span> {{example.right}}</div>
+    <div class="buttons">
+      <app-button color="#13181c" (click)="backPrice()">Back</app-button>
+      <app-button color="#4caf50" (click)="hide();accept.emit([exact, cost])">Accept</app-button>
+    </div>
+
+  </div>
+</div>
