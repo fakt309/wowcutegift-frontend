@@ -1,0 +1,140 @@
+<div class="side front"
+[style]="{
+  'width': width+'px',
+  'height': height+'px',
+  'background-color': color,
+  'transform': 'translateZ('+depth/2+'px) rotateX('+(unbox ? -90 : 0)+'deg)'}"
+>
+  <!-- <div class="сlip" [style]="{'width': clips[0].w+'px', 'height': clips[0].h+'px', 'transform': clips[0].trnsf}">
+    <div class="triangle first" [style]="{'width': clips[0].wTrngl+'px', 'height': clips[0].hTrngl+'px', 'transform': clips[0].trnsfTrngl1}">
+      <div class="fill" [style]="{'width': clips[0].wFillTrngl1+'px', 'height': clips[0].hFillTrngl2+'px', transform: clips[0].trnsfFillTrngl1}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+    <div class="middle" [style]="{'width': clips[0].wMiddle+'px', 'height': clips[0].hMiddle+'px'}"></div>
+    <div class="triangle second" [style]="{'width': clips[0].wTrngl+'px', 'height': clips[0].hTrngl+'px', 'transform': clips[0].trnsfTrngl2}">
+      <div class="fill" [style]="{'width': clips[0].wFillTrngl1+'px', 'height': clips[0].hFillTrngl2+'px', transform: clips[0].trnsfFillTrngl2}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div> -->
+  <!-- <div class="сlip" [style]="{'width': clips[1].w+'px', 'height': clips[1].h+'px', 'transform': clips[1].trnsf}">
+    <div class="triangle first" [style]="{'width': clips[1].wTrngl+'px', 'height': clips[1].hTrngl+'px', 'transform': clips[1].trnsfTrngl1}">
+      <div class="fill" [style]="{'width': clips[1].wFillTrngl1+'px', 'height': clips[1].hFillTrngl2+'px', transform: clips[1].trnsfFillTrngl1}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+    <div class="middle" [style]="{'width': clips[1].wMiddle+'px', 'height': clips[1].hMiddle+'px'}"></div>
+    <div class="triangle second" [style]="{'width': clips[1].wTrngl+'px', 'height': clips[1].hTrngl+'px', 'transform': clips[1].trnsfTrngl2}">
+      <div class="fill" [style]="{'width': clips[1].wFillTrngl1+'px', 'height': clips[1].hFillTrngl2+'px', transform: clips[1].trnsfFillTrngl2}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div> -->
+  <div class="сlip" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height)+'px', 'transform': 'translateX('+(width/2+(0.4*height/5)/2)+'px) rotateY('+(bind2 || !unbox ? 90 : 0)+'deg)'}">
+    <div class="triangle first" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+(-0.4*height/2+(0.4*height/5)/2)+'px) rotateX('+(bind1 ? 90 : 0)+'deg)'}">
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', 'transform': 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(0.25*(0.4*height/5))+'px) rotateZ(45deg)'}">
+        <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+      </div>
+    </div>
+    <div class="middle" [style]="{'width': 0.4*height/5+'px', 'height': 0.4*height-2*0.4*height/5+'px'}"></div>
+    <div class="triangle second" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+((0.4*height)/2-(0.4*height/5)/2)+'px) rotateX('+(bind1 ? -90 : 0)+'deg)'}" >
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', transform: 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(-0.25*(0.4*height/5))+'px) rotateZ(-45deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+  <div class="сlip" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height)+'px', 'transform': 'translateX('+(-width/2+(0.4*height/5)/2)+'px) rotateZ(180deg) rotateY('+(bind2 || !unbox ? 90 : 0)+'deg)'}">
+    <div class="triangle first" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+(-0.4*height/2+(0.4*height/5)/2)+'px) rotateX('+(bind1 ? 90 : 0)+'deg)'}">
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', 'transform': 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(0.25*(0.4*height/5))+'px) rotateZ(45deg)'}">
+        <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+      </div>
+    </div>
+    <div class="middle" [style]="{'width': 0.4*height/5+'px', 'height': 0.4*height-2*0.4*height/5+'px'}"></div>
+    <div class="triangle second" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+((0.4*height)/2-(0.4*height/5)/2)+'px) rotateX('+(bind1 ? -90 : 0)+'deg)'}" >
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', transform: 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(-0.25*(0.4*height/5))+'px) rotateZ(-45deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+</div>
+<div class="side back"
+[style]="{
+  'width': width+'px',
+  'height': height+'px',
+  'background-color': color,
+  'transform': 'translateZ('+(-depth/2)+'px) rotateY(180deg) rotateX('+(unbox ? -90 : 0)+'deg)'}"
+>
+  <!-- <div class="сlip" [style]="{'width': clips[2].w+'px', 'height': clips[2].h+'px', 'transform': clips[2].trnsf}">
+    <div class="triangle first" [style]="{'width': clips[2].wTrngl+'px', 'height': clips[2].hTrngl+'px', 'transform': clips[2].trnsfTrngl1}">
+      <div class="fill" [style]="{'width': clips[2].wFillTrngl1+'px', 'height': clips[2].hFillTrngl2+'px', transform: clips[2].trnsfFillTrngl1}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+    <div class="middle" [style]="{'width': clips[2].wMiddle+'px', 'height': clips[2].hMiddle+'px'}"></div>
+    <div class="triangle second" [style]="{'width': clips[2].wTrngl+'px', 'height': clips[2].hTrngl+'px', 'transform': clips[2].trnsfTrngl2}">
+      <div class="fill" [style]="{'width': clips[2].wFillTrngl1+'px', 'height': clips[2].hFillTrngl2+'px', transform: clips[2].trnsfFillTrngl2}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+  <div class="сlip" [style]="{'width': clips[3].w+'px', 'height': clips[3].h+'px', 'transform': clips[3].trnsf}">
+    <div class="triangle first" [style]="{'width': clips[3].wTrngl+'px', 'height': clips[3].hTrngl+'px', 'transform': clips[3].trnsfTrngl1}">
+      <div class="fill" [style]="{'width': clips[3].wFillTrngl1+'px', 'height': clips[3].hFillTrngl2+'px', transform: clips[3].trnsfFillTrngl1}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+    <div class="middle" [style]="{'width': clips[3].wMiddle+'px', 'height': clips[3].hMiddle+'px'}"></div>
+    <div class="triangle second" [style]="{'width': clips[3].wTrngl+'px', 'height': clips[3].hTrngl+'px', 'transform': clips[3].trnsfTrngl2}">
+      <div class="fill" [style]="{'width': clips[3].wFillTrngl1+'px', 'height': clips[3].hFillTrngl2+'px', transform: clips[3].trnsfFillTrngl2}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div> -->
+  <div class="сlip" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height)+'px', 'transform': 'translateX('+(width/2+(0.4*height/5)/2)+'px) rotateY('+(bind2 || !unbox ? 90 : 0)+'deg)'}">
+    <div class="triangle first" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+(-0.4*height/2+(0.4*height/5)/2)+'px) rotateX('+(bind1 ? 90 : 0)+'deg)'}">
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', 'transform': 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(0.25*(0.4*height/5))+'px) rotateZ(45deg)'}">
+        <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+      </div>
+    </div>
+    <div class="middle" [style]="{'width': 0.4*height/5+'px', 'height': 0.4*height-2*0.4*height/5+'px'}"></div>
+    <div class="triangle second" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+((0.4*height)/2-(0.4*height/5)/2)+'px) rotateX('+(bind1 ? -90 : 0)+'deg)'}" >
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', transform: 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(-0.25*(0.4*height/5))+'px) rotateZ(-45deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+  <div class="сlip" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height)+'px', 'transform': 'translateX('+(-width/2+(0.4*height/5)/2)+'px) rotateZ(180deg) rotateY('+(bind2 || !unbox ? 90 : 0)+'deg)'}">
+    <div class="triangle first" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+(-0.4*height/2+(0.4*height/5)/2)+'px) rotateX('+(bind1 ? 90 : 0)+'deg)'}">
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', 'transform': 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(0.25*(0.4*height/5))+'px) rotateZ(45deg)'}">
+        <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+      </div>
+    </div>
+    <div class="middle" [style]="{'width': 0.4*height/5+'px', 'height': 0.4*height-2*0.4*height/5+'px'}"></div>
+    <div class="triangle second" [style]="{'width': (0.4*height/5)+'px', 'height': (0.4*height/5)+'px', 'transform': 'translateY('+((0.4*height)/2-(0.4*height/5)/2)+'px) rotateX('+(bind1 ? -90 : 0)+'deg)'}" >
+      <div class="fill" [style]="{'width': ((0.4*height/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*height/5)*(math.pow(2,(1/2))))/2+'px', transform: 'translateX('+(-0.25*(0.4*height/5))+'px) translateY('+(-0.25*(0.4*height/5))+'px) rotateZ(-45deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+</div>
+<div class="side left"
+[style]="{
+  'width': depth+'px',
+  'height': height+'px',
+  'background-color': color,
+  'transform': 'translateX('+(-width/2)+'px) rotateY(-90deg) rotateX('+(unbox ? -90 : 0)+'deg)'}"
+><div class="darkness" [style.backgroundColor]="'#00000011'"></div></div>
+<div class="side right"
+[style]="{
+  'width': depth+'px',
+  'height': height+'px',
+  'background-color': color,
+  'transform': 'translateX('+(width/2)+'px) rotateY(90deg) rotateX('+(unbox ? -90 : 0)+'deg)'}">
+  <div class="darkness" [style.backgroundColor]="'#00000011'"></div>
+  <div class="side top" [style]="{
+    'width': width+'px',
+    'height': depth+'px',
+    'background-color': color,
+    'transform': 'translateX('+(width/2)+'px) translateY('+(-height/2)+'px) rotateX('+(unbox ? 0 : 90)+'deg) rotateZ(-90deg)'}"
+  >
+  <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+  <!-- <div class="сlip" [style]="{'width': clips[4].w+'px', 'height': clips[4].h+'px', 'transform': clips[4].trnsf}">
+    <div class="triangle first" [style]="{'width': clips[4].wTrngl+'px', 'height': clips[4].hTrngl+'px', 'transform': clips[4].trnsfTrngl1}">
+      <div class="fill" [style]="{'width': clips[4].wFillTrngl1+'px', 'height': clips[4].hFillTrngl2+'px', transform: clips[4].trnsfFillTrngl1}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+    <div class="middle" [style]="{'width': clips[4].wMiddle+'px', 'height': clips[4].hMiddle+'px'}"></div>
+    <div class="triangle second" [style]="{'width': clips[4].wTrngl+'px', 'height': clips[4].hTrngl+'px', 'transform': clips[4].trnsfTrngl2}">
+      <div class="fill" [style]="{'width': clips[4].wFillTrngl1+'px', 'height': clips[4].hFillTrngl2+'px', transform: clips[4].trnsfFillTrngl2}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div> -->
+  <div class="сlip" [style]="{'width': (0.4*depth/5)+'px', 'height': (0.4*depth)+'px', 'transform': 'translateX('+(width/2+(0.4*depth/5)/2-1)+'px) rotateY('+(bind2 || !unbox ? 90 : 0)+'deg)'}">
+    <div class="triangle first" [style]="{'width': (0.4*depth/5)+'px', 'height': (0.4*depth/5)+'px', 'transform': 'translateY('+(-0.4*depth/2+(0.4*depth/5)/2)+'px) rotateX('+(bind1 ? 90 : 0)+'deg)'}">
+      <div class="fill" [style]="{'width': ((0.4*depth/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*depth/5)*(math.pow(2,(1/2))))/2+'px', 'transform': 'translateX('+(-0.25*(0.4*depth/5))+'px) translateY('+(0.25*(0.4*depth/5))+'px) rotateZ(45deg)'}">
+        <div class="darkness" [style.backgroundColor]="'#00000022'"></div>
+      </div>
+    </div>
+    <div class="middle" [style]="{'width': 0.4*depth/5+'px', 'height': 0.4*depth-2*0.4*depth/5+'px'}"></div>
+    <div class="triangle second" [style]="{'width': (0.4*depth/5)+'px', 'height': (0.4*depth/5)+'px', 'transform': 'translateY('+((0.4*depth)/2-(0.4*depth/5)/2)+'px) rotateX('+(bind1 ? -90 : 0)+'deg)'}" >
+      <div class="fill" [style]="{'width': ((0.4*depth/5)*(math.pow(2,(1/2))))+'px', 'height': ((0.4*depth/5)*(math.pow(2,(1/2))))/2+'px', transform: 'translateX('+(-0.25*(0.4*depth/5))+'px) translateY('+(-0.25*(0.4*depth/5))+'px) rotateZ(-45deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="side bottom" [style]="{'width': width+'px', 'height': depth+'px', 'background-color': color, 'transform': 'translateY('+(height/2)+'px) rotateX(-90deg)'}"><div class="darkness" [style.backgroundColor]="'#00000022'"></div></div>

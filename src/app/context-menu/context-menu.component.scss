@@ -1,0 +1,43 @@
+:host {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 1000;
+  box-shadow: 0px 0px 5px #999;
+  transition-property: transform, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  max-width: 140px;
+  min-width: 140px;
+  width: 140px;
+  .option {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    .ico {
+      margin: 10px;
+      width: 40px;
+      height: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex-shrink: 0;
+    }
+    .text {
+      margin: 10px;
+      margin-left: 0px;
+      font-size: 14px;
+      color: #999;
+    }
+  }
+  .option:hover {
+    background-color: #fafafa;
+    border-radius: 10px;
+  }
+}

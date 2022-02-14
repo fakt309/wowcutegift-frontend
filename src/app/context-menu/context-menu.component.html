@@ -1,0 +1,4 @@
+<div *ngFor="let opt of options" class="option" (click)="clickOption(opt.value)">
+  <div class="ico" [style.background-image]="'url('+opt.img+')'"></div>
+  <div class="text">{{ opt.title }}</div>
+</div>

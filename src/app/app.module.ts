@@ -20,6 +20,9 @@ import { DrawComponent } from './draw/draw.component';
 import { GameComponent } from './game/game.component';
 import { ListComponent } from './list/list.component';
 import { HangingBoardComponent } from './hanging-board/hanging-board.component';
+import { BoxComponent } from './box/box.component';
+import { ToolsComponent } from './tools/tools.component';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { HangingBoardComponent } from './hanging-board/hanging-board.component';
     DrawComponent,
     GameComponent,
     ListComponent,
-    HangingBoardComponent
+    HangingBoardComponent,
+    BoxComponent,
+    ToolsComponent,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,

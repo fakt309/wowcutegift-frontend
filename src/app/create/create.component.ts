@@ -64,6 +64,30 @@ export class CreateComponent implements AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.setSizesDemoSlider()
+    this.rack.w = window.innerHeight*(4000/1080)
+    this.rack.h = window.innerHeight
+  }
+
+  @HostListener('window:load', ['$event'])
+  onLoad() {
+    this.rack.w = window.innerHeight*(4000/1080)
+    this.rack.h = window.innerHeight
+  }
+
+  @HostListener('window:click', ['$event'])
+  onClick() {
+    if (this.rack.click) {
+      this.rack.click = false
+      this.forwardToWorkplace()
+    }
+  }
+
+  @HostListener('window:touchstart', ['$event'])
+  onTouchstart() {
+    if (this.rack.click) {
+      this.rack.click = false
+      this.forwardToWorkplace()
+    }
   }
 
   el: any = this.host.nativeElement
@@ -76,11 +100,73 @@ export class CreateComponent implements AfterViewInit {
   edititngGift: any = {
     title: ''
   }
+  bucks: any = {
+    value: 0,
+    exact: false,
+    exists: true
+  }
+  box: any = {
+    size: { x: 200, y: 100, z: 200 },
+    transform: `rotateX(90deg) rotateY(0deg)`,
+    animated: false
+  }
+  isTouch: boolean = true
 
   sizeforsigngreeting: any = { w: 100, h: 150, translateY: 0, sign: 'a', tool: 'pen', color: '#cc0000' }
 
   showbucks: boolean = false
   transformFullsreen: string = "translateY(0%)"
+
+  rack: any = { w: 0, h: 0, right: `-1000%`, click: false }
+
+  contextWorkplace: any = { show: false, x: -1000, y: -1000, dbl: false, can: true }
+
+  workplace: any = {
+    display: `none`,
+    transform: `scale(0)`,
+    tool: 'pen'
+  }
+
+  changeToolWorkplace(tool: string) {
+    this.contextWorkplace.show = false
+    if (tool == 'color') {
+      console.log('color')
+    } else {
+      this.workplace.tool = tool
+    }
+    setTimeout(() => {
+      this.contextWorkplace.x = -1000
+      this.contextWorkplace.y = -1000
+      this.contextWorkplace.can = true
+    }, 300)
+  }
+
+  testdbltouchWorkplace(e: any) {
+    if (e.changedTouches && !this.isTouch) return
+    if (!e.changedTouches && this.isTouch) return
+    if (this.contextWorkplace.dbl) {
+      this.dbltouchWorkplace(e)
+    } else {
+      this.contextWorkplace.dbl = true
+      setTimeout(() => {
+        this.contextWorkplace.dbl = false
+      }, 200);
+    }
+  }
+
+  dbltouchWorkplace(e: any) {
+    if (this.isTouch && e.changedTouches.length != 1) return
+    if (!this.contextWorkplace.can) return
+    const x = this.isTouch ? e.changedTouches[0].clientX : e.clientX
+    const y = this.isTouch ? e.changedTouches[0].clientY : e.clientY
+
+    setTimeout(() => {
+      this.contextWorkplace.x = x
+      this.contextWorkplace.y = y
+      this.contextWorkplace.show = true
+      this.contextWorkplace.can = false
+    }, 300);
+  }
 
   async actShowBucks(): Promise<void> {
     this.transformFullsreen = "translateY(100%)"
@@ -93,7 +179,31 @@ export class CreateComponent implements AfterViewInit {
   }
 
   async forwardToPackage(e: any): Promise<void> {
-    console.log(e)
+    if (!e) {
+      this.bucks.exists = false
+    } else {
+      this.bucks.exact = e[0]
+      this.bucks.value = e[1]
+    }
+    await AsyncService.delay(300)
+    this.rack.right = `0%`
+    await AsyncService.delay(2000)
+    this.rack.click = true
+  }
+
+  async forwardToWorkplace(): Promise<void> {
+    this.rack.right = `-1000%`
+    await AsyncService.delay(2000)
+    this.workplace.display = `flex`
+    await AsyncService.delay(100)
+    this.workplace.transform = `scale(1)`
+    this.box.animated = true
+    await AsyncService.delay(300)
+    this.box.transform = `rotateX(270deg) rotateY(360deg)`
+    await AsyncService.delay(2000)
+    this.box.animated = false
+    await AsyncService.delay(100)
+    this.box.transform = `rotateX(90deg) rotateY(0deg)`
   }
 
   rgbStringToHexString(rgb: any) {
@@ -527,6 +637,8 @@ export class CreateComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    this.isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
     window.addEventListener('resize', () => {
       this.setSizeGreetingForSign()

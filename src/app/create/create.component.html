@@ -371,7 +371,8 @@
   <!-- </div> -->
 </app-popup>
 
-<app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="transformFullsreen">
+<!-- [style.transform]="transformFullsreen" -->
+<app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="'translateY(-100%)'">
   <app-list2>
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
@@ -392,3 +393,20 @@
     </div>
   </app-list2>
 </app-fullscreen>
+
+<div class="wrapRack" [style.right]="rack.right" [style.width]="rack.w+'px'" [style.height]="rack.h+'px'">
+  <div class="text">A box of the right size has been found<br><span *ngIf="isTouch" class="subtext">Tap to continue</span><span *ngIf="!isTouch" class="subtext">Click to continue</span></div>
+</div>
+<!-- [style.display]="workplace.display" [style.transform]="workplace.transform" -->
+<div class="workplace" [style.display]="'flex'" [style.transform]="'scale(1)'" (mouseup)="testdbltouchWorkplace($event)" (touchend)="testdbltouchWorkplace($event)">
+  <app-context-menu [show]="contextWorkplace.show" [x]="contextWorkplace.x" [y]="contextWorkplace.y" [options]="[{title: 'pen', img: '../../assets/pen.png', value: 'pen'}, {title: 'eraser', img: '../../assets/eraser.png', value: 'eraser'}, {title: 'move', img: '../../assets/moving.png', value: 'move'}, {title: 'color', img: '../../assets/palete.png', value: 'color'}]" (choose)="changeToolWorkplace($event)"></app-context-menu>
+  <div class="explanation">Write on the inside of the box if you like.</div>
+  <app-box [class]="box.animated ? 'animatedBox' : ''" [w]="box.size.x" [h]="box.size.y" [d]="box.size.z" [style.transform]="box.transform" [unpack]="true" ></app-box>
+  <div class="buttons">
+    <app-tools class="tools" [type]="workplace.tool" ></app-tools>
+    <div class="next">
+      <div class="text">Next</div>
+      <div class="subtext">swipe right</div>
+    </div>
+  </div>
+</div>
