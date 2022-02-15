@@ -23,6 +23,7 @@ import { HangingBoardComponent } from './hanging-board/hanging-board.component';
 import { BoxComponent } from './box/box.component';
 import { ToolsComponent } from './tools/tools.component';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     HangingBoardComponent,
     BoxComponent,
     ToolsComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    ColorPickerComponent
   ],
   imports: [
     BrowserModule,

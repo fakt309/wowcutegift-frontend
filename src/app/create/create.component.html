@@ -372,7 +372,7 @@
 </app-popup>
 
 <!-- [style.transform]="transformFullsreen" -->
-<app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="'translateY(-100%)'">
+<app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="transformFullsreen">
   <app-list2>
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
@@ -398,10 +398,33 @@
   <div class="text">A box of the right size has been found<br><span *ngIf="isTouch" class="subtext">Tap to continue</span><span *ngIf="!isTouch" class="subtext">Click to continue</span></div>
 </div>
 <!-- [style.display]="workplace.display" [style.transform]="workplace.transform" -->
-<div class="workplace" [style.display]="'flex'" [style.transform]="'scale(1)'" (mouseup)="testdbltouchWorkplace($event)" (touchend)="testdbltouchWorkplace($event)">
+<div class="workplace" [style.display]="workplace.display" [style.transform]="workplace.transform" (mouseup)="testdbltouchWorkplace($event)" (touchend)="testdbltouchWorkplace($event)" (touchstart)="startMoveWorkplace($event)" (mousedown)="startMoveWorkplace($event)" (touchmove)="moveWorkplace($event)" (mousemove)="moveWorkplace($event)" (touchend)="endMoveWorkplace($event)" (mouseup)="endMoveWorkplace($event)">
+  <app-color-picker [show]="workplace.showcolor" [color]="workplace.colorpen" (chng)="changeColorWorkplace($event)" ></app-color-picker>
   <app-context-menu [show]="contextWorkplace.show" [x]="contextWorkplace.x" [y]="contextWorkplace.y" [options]="[{title: 'pen', img: '../../assets/pen.png', value: 'pen'}, {title: 'eraser', img: '../../assets/eraser.png', value: 'eraser'}, {title: 'move', img: '../../assets/moving.png', value: 'move'}, {title: 'color', img: '../../assets/palete.png', value: 'color'}]" (choose)="changeToolWorkplace($event)"></app-context-menu>
   <div class="explanation">Write on the inside of the box if you like.</div>
-  <app-box [class]="box.animated ? 'animatedBox' : ''" [w]="box.size.x" [h]="box.size.y" [d]="box.size.z" [style.transform]="box.transform" [unpack]="true" ></app-box>
+  <app-draw
+  [width]="2*box.size.x+2*box.size.y"
+  [height]="box.size.z+2*box.size.y"
+  class="drawWorkplace"
+  [color]="workplace.colorpen"
+  [tool]="workplace.tool"
+  [style.marginRight]="(-2*(box.size.x/2))+'px'"
+  [style.transform]="'translateX('+(workplace.translateDynamic[0] ? workplace.translateDynamic[0] : workplace.translateStatic[0])+'px) translateY('+(workplace.translateDynamic[1] ? workplace.translateDynamic[1] : workplace.translateStatic[1])+'px)'"
+  [ban]="[
+  {type: 'rectangle', value: [0, box.size.y/(2*(box.size.x+box.size.y)), 0, box.size.y/(2*box.size.y+box.size.z)]},
+  {type: 'rectangle', value: [(box.size.y+box.size.x)/(2*(box.size.x+box.size.y)), 1, 0, box.size.y/(2*box.size.y+box.size.z)]},
+  {type: 'rectangle', value: [0, box.size.y/(2*(box.size.x+box.size.y)), (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]},
+  {type: 'rectangle', value: [(box.size.y+box.size.x)/(2*(box.size.x+box.size.y)), 1, (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]}
+  ]"
+  ></app-draw>
+  <app-box
+  [class]="box.animated ? 'animatedBox' : ''"
+  [w]="box.size.x"
+  [h]="box.size.y"
+  [d]="box.size.z"
+  [style.transform]="box.transform"
+  [unpack]="true"
+  [style.transform]="'translateX('+(workplace.translateDynamic[0] ? workplace.translateDynamic[0] : workplace.translateStatic[0])+'px) translateY('+(workplace.translateDynamic[1] ? workplace.translateDynamic[1] : workplace.translateStatic[1])+'px) rotateX(90deg)'"></app-box>
   <div class="buttons">
     <app-tools class="tools" [type]="workplace.tool" ></app-tools>
     <div class="next">
@@ -410,3 +433,5 @@
     </div>
   </div>
 </div>
+
+<!-- [style.marginRight]="(-((2*box.size.x+2*box.size.y)/2-box.size.x/2-box.size.y))+'px'" -->

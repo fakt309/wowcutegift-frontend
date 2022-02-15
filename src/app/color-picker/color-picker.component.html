@@ -1,0 +1,14 @@
+<input type="color" [value]="color" (input)="changeColor($event)" />
+<div class="content" (click)="onClick($event)" [style.transform]="transform">
+  <div class="rect" [style.background-color]="color">
+    <div class="text" [style.color]="mode == 'dark' ? '#000' : '#fff'">Push to change color</div>
+  </div>
+  <div *ngIf="isTouch" class="close touch">
+    <div class="ico"></div>
+    <div class="text">swipe up to close</div>
+  </div>
+  <div *ngIf="!isTouch" class="close desktop">
+    <div class="ico"></div>
+    <div class="text">close</div>
+  </div>
+</div>

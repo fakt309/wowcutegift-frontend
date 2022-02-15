@@ -124,14 +124,26 @@ export class CreateComponent implements AfterViewInit {
   workplace: any = {
     display: `none`,
     transform: `scale(0)`,
-    tool: 'pen'
+    tool: 'pen',
+    showcolor: false,
+    colorpen: '#000',
+    start: [0, 0],
+    translateStatic: [0, 0],
+    translateDynamic: [0, 0],
+    canmove: false
+  }
+
+  changeColorWorkplace(e: any) {
+    this.workplace.showcolor = false
+    this.workplace.colorpen = e
   }
 
   changeToolWorkplace(tool: string) {
     this.contextWorkplace.show = false
     if (tool == 'color') {
-      console.log('color')
-    } else {
+      this.workplace.showcolor = true
+      this.workplace.tool = 'pen'
+    } else if (tool != '') {
       this.workplace.tool = tool
     }
     setTimeout(() => {
@@ -152,6 +164,64 @@ export class CreateComponent implements AfterViewInit {
         this.contextWorkplace.dbl = false
       }, 200);
     }
+  }
+
+  startMoveWorkplace(e: any): void {
+    if (this.workplace.tool != "move") return
+    if (this.isTouch && !e.touches) return
+    if (!this.isTouch && e.touches) return
+    if (this.isTouch && e.touches.length != 1) return
+    let x = 0
+    let y = 0
+    if (this.isTouch) {
+      x = e.touches[0].clientX
+      y = e.touches[0].clientY
+    } else if (!this.isTouch) {
+      x = e.clientX
+      y = e.clientY
+    }
+    this.workplace.start = [x, y]
+    this.workplace.translateDynamic = [this.workplace.translateStatic[0], this.workplace.translateStatic[1]]
+    this.workplace.canmove = true
+  }
+  moveWorkplace(e: any): void {
+    if (this.workplace.tool != "move") return
+    if (this.isTouch && !e.touches) return
+    if (!this.isTouch && e.touches) return
+    if (this.isTouch && e.touches.length != 1) return
+    if (!this.workplace.canmove) return
+    let x = 0
+    let y = 0
+    if (this.isTouch) {
+      x = e.touches[0].clientX
+      y = e.touches[0].clientY
+    } else if (!this.isTouch) {
+      x = e.clientX
+      y = e.clientY
+    }
+    x = x-this.workplace.start[0]
+    y = y-this.workplace.start[1]
+    this.workplace.translateDynamic = [this.workplace.translateStatic[0]+x, this.workplace.translateStatic[1]+y]
+    if (this.workplace.translateDynamic[0] < -1.5*this.box.size.x-this.box.size.y-window.innerWidth/2) {
+      this.workplace.translateDynamic[0] = -1.5*this.box.size.x-this.box.size.y-window.innerWidth/2
+    } else if (this.workplace.translateDynamic[0] > this.box.size.x/2+this.box.size.y+window.innerWidth/2) {
+      this.workplace.translateDynamic[0] = this.box.size.x/2+this.box.size.y+window.innerWidth/2
+    }
+    if (this.workplace.translateDynamic[1] < -this.box.size.z/2-this.box.size.y-window.innerHeight/2) {
+      this.workplace.translateDynamic[1] = -this.box.size.z/2-this.box.size.y-window.innerHeight/2
+    } else if (this.workplace.translateDynamic[1] > this.box.size.z/2+this.box.size.y+window.innerHeight/2) {
+      this.workplace.translateDynamic[1] = this.box.size.z/2+this.box.size.y+window.innerHeight/2
+    }
+  }
+  endMoveWorkplace(e: any): void {
+    if (this.workplace.tool != "move") return
+    if (this.isTouch && !e.changedTouches) return
+    if (!this.isTouch && e.changedTouches) return
+    if (this.isTouch && e.changedTouches.length != 1) return
+    this.workplace.start = [0, 0]
+    this.workplace.translateStatic = [this.workplace.translateDynamic[0], this.workplace.translateDynamic[1]]
+    this.workplace.translateDynamic = [0, 0]
+    this.workplace.canmove = false
   }
 
   dbltouchWorkplace(e: any) {

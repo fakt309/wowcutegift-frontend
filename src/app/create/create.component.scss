@@ -11,6 +11,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     transition: transform ease 0.3s;
     .explanation {
       position: absolute;
@@ -38,7 +39,7 @@
       width: 90%;
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       text-align: center;
       .next {
@@ -57,6 +58,10 @@
           color: #999;
         }
       }
+    }
+    .drawWorkplace {
+      z-index: 10;
+      position: absolute;
     }
   }
   .optionGift {

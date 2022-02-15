@@ -14,6 +14,7 @@ export class DrawComponent implements OnInit {
   @Input('height') height: number = 0
   @Input('color') color: string = '#fff'
   @Input('tool') tool: string = 'pen'
+  @Input('ban') ban: any = []
 
   prev: any = { x: 0, y: 0, ready: false }
   canformouse: boolean = false
@@ -30,7 +31,7 @@ export class DrawComponent implements OnInit {
 
   setSign(url: string): void {
     this.clear()
-    
+
     let img = new Image()
     img.onload = () => {
       let cnvs = this.el.querySelector('canvas')
@@ -46,12 +47,12 @@ export class DrawComponent implements OnInit {
       let x = e.touches[0].clientX-bounding.x
       let y = e.touches[0].clientY-bounding.y
       let ctx = this.el.querySelector('canvas').getContext('2d')
-      if (this.tool == 'pen') {
-        ctx.beginPath();
-        ctx.fillStyle = this.color
-        ctx.arc(x, y, 1.5, 0, 2*Math.PI);
-        ctx.fill();
-      }
+      // if (this.tool == 'pen') {
+      //   ctx.beginPath();
+      //   ctx.fillStyle = this.color
+      //   ctx.arc(x, y, 1.5, 0, 2*Math.PI);
+      //   ctx.fill();
+      // }
 
       this.prev.x = x
       this.prev.y = y
@@ -62,6 +63,15 @@ export class DrawComponent implements OnInit {
       let x = e.touches[0].clientX-bounding.x
       let y = e.touches[0].clientY-bounding.y
       let ctx = this.el.querySelector('canvas').getContext('2d')
+
+      for (let i = 0; i < this.ban.length; i++) {
+        if (this.ban[i].type == 'rectangle') {
+          if (x > this.ban[i].value[0]*bounding.width && x < this.ban[i].value[1]*bounding.width && y > this.ban[i].value[2]*bounding.height && y < this.ban[i].value[3]*bounding.height) {
+            this.prev.ready = false
+            return
+          }
+        }
+      }
 
       if (this.tool == 'pen') {
         if (this.prev.ready) {
@@ -90,12 +100,12 @@ export class DrawComponent implements OnInit {
       let y = e.clientY-bounding.y
       let ctx = this.el.querySelector('canvas').getContext('2d')
 
-      if (this.tool == 'pen') {
-        ctx.beginPath();
-        ctx.fillStyle = this.color
-        ctx.arc(x, y, 2.5, 0, 2*Math.PI);
-        ctx.fill();
-      }
+      // if (this.tool == 'pen') {
+      //   ctx.beginPath();
+      //   ctx.fillStyle = this.color
+      //   ctx.arc(x, y, 2.5, 0, 2*Math.PI);
+      //   ctx.fill();
+      // }
 
       this.prev.ready = true
       this.prev.x = x
