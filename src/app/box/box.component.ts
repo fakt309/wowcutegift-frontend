@@ -20,9 +20,12 @@ export class BoxComponent implements OnInit {
   @Input('d') depth: number = 400
   @Input('color') color: string = "#c3aa83"
   @Input('unpack') unbox: boolean = true
+  @Input('wrap') wrap: string = ''
 
   bind1: boolean = false
   bind2: boolean = false
+
+  sides: Array<string> = ['', '', '', '', '', '']
 
   async pack(): Promise<void> {
     this.animate = true
@@ -50,11 +53,57 @@ export class BoxComponent implements OnInit {
     return new Promise((res) => res())
   }
 
+  async setWrap(): Promise<void> {
+    if (!/^data:image\/png\;base64\,/g.test(this.wrap)) return
+
+    let w = 0, h = 0
+    let img = await AsyncService.loadImg(this.wrap)
+    const cnvs = document.createElement('canvas')
+    const ctx = cnvs.getContext('2d')
+
+    w = this.height, h = this.depth
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, 0, this.height, w, h, 0, 0, w, h)
+    this.sides[0] = cnvs.toDataURL("image/png")
+
+    w = this.width, h = this.height
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, this.height, 0, w, h, 0, 0, w, h)
+    this.sides[1] = cnvs.toDataURL("image/png")
+
+    w = this.width, h = this.depth
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, this.height, this.height, w, h, 0, 0, w, h)
+    this.sides[2] = cnvs.toDataURL("image/png")
+
+    w = this.width, h = this.height
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, this.height, this.height+this.depth, w, h, 0, 0, w, h)
+    this.sides[3] = cnvs.toDataURL("image/png")
+
+    w = this.height, h = this.depth
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, this.height+this.width, this.height, w, h, 0, 0, w, h)
+    this.sides[4] = cnvs.toDataURL("image/png")
+
+    w = this.width, h = this.depth
+    cnvs.setAttribute('width', w+'px')
+    cnvs.setAttribute('height', h+'px')
+    ctx!.drawImage(img, this.height+this.width+this.height, this.height, w, h, 0, 0, w, h)
+    this.sides[5] = cnvs.toDataURL("image/png")
+  }
+
   ngOnInit(): void {
-    
+
   }
 
   ngOnChanges(): void {
+    this.setWrap()
   }
 }
 

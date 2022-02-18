@@ -52,8 +52,15 @@
       transform: translateX(550%) rotateY(0deg);
     }
     .darkness {
+      position: absolute;
       width: 100%;
       height: 100%;
+    }
+    .wrap {
+      position: absolute;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
   }
   .side.front, .side.back, .side.left, .side.right {

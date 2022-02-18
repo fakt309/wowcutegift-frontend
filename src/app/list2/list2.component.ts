@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-list2',
@@ -11,6 +11,8 @@ export class List2Component implements OnInit {
   el: any = this.host.nativeElement
   prevScroll: any = null
   listenScroll: boolean = true
+
+  @Input('scroll') scroll: number = 0
 
   scrollToStart(): void {
     let isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
@@ -64,6 +66,13 @@ export class List2Component implements OnInit {
       // })
 
       this.scrollToStart()
+    }
+  }
+
+  ngOnChanges(): void {
+    let isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouch) {
+      this.el.scrollTop = this.scroll
     }
   }
 

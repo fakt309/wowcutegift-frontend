@@ -371,7 +371,7 @@
   <!-- </div> -->
 </app-popup>
 
-<!-- [style.transform]="transformFullsreen" -->
+
 <app-fullscreen style="transition: all cubic-bezier(0.02, 0.93, 0.8, 1.29) 0.5s" [style.transform]="transformFullsreen">
   <app-list2>
 
@@ -397,12 +397,24 @@
 <div class="wrapRack" [style.right]="rack.right" [style.width]="rack.w+'px'" [style.height]="rack.h+'px'">
   <div class="text">A box of the right size has been found<br><span *ngIf="isTouch" class="subtext">Tap to continue</span><span *ngIf="!isTouch" class="subtext">Click to continue</span></div>
 </div>
-<!-- [style.display]="workplace.display" [style.transform]="workplace.transform" -->
+
 <div class="workplace" [style.display]="workplace.display" [style.transform]="workplace.transform" (mouseup)="testdbltouchWorkplace($event)" (touchend)="testdbltouchWorkplace($event)" (touchstart)="startMoveWorkplace($event)" (mousedown)="startMoveWorkplace($event)" (touchmove)="moveWorkplace($event)" (mousemove)="moveWorkplace($event)" (touchend)="endMoveWorkplace($event)" (mouseup)="endMoveWorkplace($event)">
+  <div *ngIf="workplace.activegiftintobox != null" [style.transform]="'translateX('+transAdditLeftWorkplaceX+'px) translateY('+transAdditLeftWorkplaceY+'px)'" [style.backgroundImage]="'url(../../assets/arrowcircle.png)'" (click)="rotateGiftIntoBox($event)" class="additButton"></div>
+  <div *ngIf="workplace.activegiftintobox != null" [style.transform]="'translateX('+transAdditRightWorkplaceX+'px) translateY('+transAdditRightWorkplaceY+'px)'" [style.backgroundImage]="'url(../../assets/trash2.png)'" (click)="deleteGiftIntoBoxById(workplace.activegiftintobox.id)" class="additButton"></div>
+  <app-list-of-gifts [arr]="gifts" [added]="giftsintobox" [show]="workplace.showgiftlist" (close)="closelistgifts()" (choose)="chooselistgifts($event)" (unchoose)="deleteGiftIntoBoxById($event.id)" ></app-list-of-gifts>
   <app-color-picker [show]="workplace.showcolor" [color]="workplace.colorpen" (chng)="changeColorWorkplace($event)" ></app-color-picker>
   <app-context-menu [show]="contextWorkplace.show" [x]="contextWorkplace.x" [y]="contextWorkplace.y" [options]="[{title: 'pen', img: '../../assets/pen.png', value: 'pen'}, {title: 'eraser', img: '../../assets/eraser.png', value: 'eraser'}, {title: 'move', img: '../../assets/moving.png', value: 'move'}, {title: 'color', img: '../../assets/palete.png', value: 'color'}]" (choose)="changeToolWorkplace($event)"></app-context-menu>
-  <div class="explanation">Write on the inside of the box if you like.</div>
+  <div class="explanation"
+  [style.display]="workplace.showFirstGui != 0 ? 'flex' : 'none'"
+  [style.transform]="'scale('+(workplace.showFirstGui != 2 ? '0' : '1')+')'">Write on the inside of the box if you like.</div>
+  <div class="explanation"
+  [class.hide]="workplace.keyframesSecondTextGui == 0"
+  [class.bottom]="workplace.keyframesSecondTextGui == 1"
+  [class.center]="workplace.keyframesSecondTextGui == 2"
+  [class.top]="workplace.keyframesSecondTextGui == 3"
+  >Put gifts into the box</div>
   <app-draw
+  [style.display]="workplace.showcanvas ? 'flex' : 'none'"
   [width]="2*box.size.x+2*box.size.y"
   [height]="box.size.z+2*box.size.y"
   class="drawWorkplace"
@@ -416,22 +428,48 @@
   {type: 'rectangle', value: [0, box.size.y/(2*(box.size.x+box.size.y)), (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]},
   {type: 'rectangle', value: [(box.size.y+box.size.x)/(2*(box.size.x+box.size.y)), 1, (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]}
   ]"
+  (chng)="getImgFromWorkplaceDraw($event)"
   ></app-draw>
-  <app-box
+  <app-box #boxWorkplace
   [class]="box.animated ? 'animatedBox' : ''"
   [w]="box.size.x"
   [h]="box.size.y"
   [d]="box.size.z"
   [style.transform]="box.transform"
   [unpack]="true"
-  [style.transform]="'translateX('+(workplace.translateDynamic[0] ? workplace.translateDynamic[0] : workplace.translateStatic[0])+'px) translateY('+(workplace.translateDynamic[1] ? workplace.translateDynamic[1] : workplace.translateStatic[1])+'px) rotateX(90deg)'"></app-box>
-  <div class="buttons">
+  [wrap]="this.workplace.imgBox">
+    <div *ngFor="let gift of giftsintobox" class="skeletonGiftIntoBox" [style.transform]="'translateX('+(gift.x ? gift.x : 0)+'px) translateY('+(gift.y ? gift.y : 0)+'px) translateZ('+(gift.z ? gift.z : 0)+'px) rotateX(180deg) rotateZ('+(gift.rotate ? gift.rotate : 0)+'deg)'" idgift="gift.id"  (mousedown)="startFocusSkeletonGift($event, gift.id)" (touchstart)="startFocusSkeletonGift($event, gift.id)" (mousemove)="moveFocusSkeletonGift($event, gift.id)" (touchmove)="moveFocusSkeletonGift($event, gift.id)" (mouseup)="endFocusSkeletonGift($event, gift.id)" (touchend)="endFocusSkeletonGift($event, gift.id)" [style.width]="gift.w+20+'px'" [style.height]="gift.h+20+'px'">
+      <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="gift.w" [h]="gift.h" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.textcolor"></app-greeting-card>
+      <app-game *ngIf="gift.type == 'game'" [size]="gift.w" [color]="gift.color" [img]="gift.img" [wrap]="gift.wrap" [code]="gift.code" [leftimg]="gift.leftimg"></app-game>
+    </div>
+  </app-box>
+  <div class="buttons"
+  [style.display]="workplace.showFirstGui != 0 ? 'flex' : 'none'"
+  [style.transform]="'scale('+(workplace.showFirstGui != 2 ? '0' : '1')+')'">
     <app-tools class="tools" [type]="workplace.tool" ></app-tools>
-    <div class="next">
+    <div *ngIf="isTouch" class="next">
       <div class="text">Next</div>
-      <div class="subtext">swipe right</div>
+      <div class="subtext">triple tap</div>
+    </div>
+    <div *ngIf="!isTouch" class="next desktop" (click)="trpltouchWorkplace()">
+      <div class="text">Next</div>
+    </div>
+  </div>
+  <div class="buttons" [style.transform]="workplace.keyframesSecondTextGui == 3 ? 'translateY(0vh)' : 'translateY(30vh)'" [style.display]="workplace.keyframesSecondTextGui >= 2 ? 'flex' : 'none'">
+    <div class="btnGifts" *ngIf="isTouch">
+      <div class="textBtnGifts">Gifts</div>
+      <div class="subtextBtnGifts">double tap</div>
+    </div>
+    <div class="btnGifts desktop" *ngIf="!isTouch" (click)="showlistgifts()">
+      <div class="textBtnGifts">Gifts</div>
+    </div>
+    <div class="btnNext" *ngIf="isTouch">
+      <div class="textBtnGifts" [style.color]="gifts.length != giftsintobox.length ? '#999': '#e91e63'" [style.textDecoration]="gifts.length != giftsintobox.length ? 'line-through': 'none'">Next</div>
+      <div class="subtextBtnGifts" [style.display]="gifts.length != giftsintobox.length ? 'flex': 'none'">(add all gifts)</div>
+      <div class="subtextBtnGifts" [style.display]="gifts.length == giftsintobox.length ? 'flex': 'none'">triple tap</div>
+    </div>
+    <div class="btnNext desktop" *ngIf="!isTouch">
+      <div class="textBtnGifts" [style.color]="gifts.length != giftsintobox.length ? '#999': '#e91e63'" [style.textDecoration]="gifts.length != giftsintobox.length ? 'line-through': 'none'" (click)="forwardToWarping()">Next</div>
     </div>
   </div>
 </div>
-
-<!-- [style.marginRight]="(-((2*box.size.x+2*box.size.y)/2-box.size.x/2-box.size.y))+'px'" -->

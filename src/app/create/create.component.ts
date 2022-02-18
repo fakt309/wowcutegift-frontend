@@ -60,6 +60,7 @@ export class CreateComponent implements AfterViewInit {
   @ViewChild('croppingobjectwrapgame') croppingobjectwrapgame: any
   @ViewChild('croppingwrapgame') croppingwrapgame: any
   @ViewChild('uploadwrapgamepopup') uploadwrapgamepopup: any
+  @ViewChild('boxWorkplace') boxWorkplace: any
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -119,7 +120,7 @@ export class CreateComponent implements AfterViewInit {
 
   rack: any = { w: 0, h: 0, right: `-1000%`, click: false }
 
-  contextWorkplace: any = { show: false, x: -1000, y: -1000, dbl: false, can: true }
+  contextWorkplace: any = { show: false, x: -1000, y: -1000, dbl: false, can: true, trpl: false }
 
   workplace: any = {
     display: `none`,
@@ -130,8 +131,20 @@ export class CreateComponent implements AfterViewInit {
     start: [0, 0],
     translateStatic: [0, 0],
     translateDynamic: [0, 0],
-    canmove: false
+    canmove: false,
+    img: '',
+    showcanvas: false,
+    imgBox: '',
+    showFirstGui: 2,
+    keyframesSecondTextGui: 0,
+    stage: 0,
+    showgiftlist: false,
+    canmovegiftintobox: false,
+    activegiftintobox: null,
+    wasmoveintobox: false
   }
+
+  giftsintobox: Array<any> = []
 
   changeColorWorkplace(e: any) {
     this.workplace.showcolor = false
@@ -153,24 +166,163 @@ export class CreateComponent implements AfterViewInit {
     }, 300)
   }
 
+  timeoutsTblTrpl: any = [setTimeout(() => {}, 0), setTimeout(() => {}, 0)]
   testdbltouchWorkplace(e: any) {
     if (e.changedTouches && !this.isTouch) return
     if (!e.changedTouches && this.isTouch) return
-    if (this.contextWorkplace.dbl) {
-      this.dbltouchWorkplace(e)
+    if (this.contextWorkplace.trpl) {
+      clearTimeout(this.timeoutsTblTrpl[1])
+      if (!this.isTouch) return
+      this.trpltouchWorkplace()
+      this.contextWorkplace.dbl = false
+      this.contextWorkplace.trpl = false
+    } else if (this.contextWorkplace.dbl) {
+      clearTimeout(this.timeoutsTblTrpl[0])
+      this.contextWorkplace.trpl = true
+      this.timeoutsTblTrpl[1] = setTimeout(() => {
+        this.dbltouchWorkplace(e)
+        this.contextWorkplace.dbl = false
+        this.contextWorkplace.trpl = false
+      }, 200)
     } else {
       this.contextWorkplace.dbl = true
-      setTimeout(() => {
+      this.timeoutsTblTrpl[0] = setTimeout(() => {
         this.contextWorkplace.dbl = false
-      }, 200);
+        this.contextWorkplace.trpl = false
+      }, 200)
+    }
+  }
+
+  getImgFromWorkplaceDraw(img: string) {
+    this.workplace.img = img
+  }
+
+  async trpltouchWorkplace(): Promise<void> {
+    if (this.workplace.stage == 0) {
+      this.workplace.stage = 1
+      this.workplace.showcanvas = false
+      this.workplace.imgBox = this.workplace.img
+      await AsyncService.delay(10)
+      this.workplace.showFirstGui = 1
+      await AsyncService.delay(300)
+      this.workplace.showFirstGui = 0
+      this.workplace.keyframesSecondTextGui = 1
+      this.box.animated = true
+      await AsyncService.delay(10)
+      this.box.transform = 'rotateX(-15deg) rotateY(-15deg)'
+      this.workplace.keyframesSecondTextGui = 2
+      await AsyncService.delay(2000)
+      this.box.transform = 'rotateX(-15deg) rotateY(345deg)'
+      await AsyncService.delay(2000)
+      this.box.animated = false
+      this.box.transform = 'rotateX(-15deg) rotateY(-15deg)'
+      await AsyncService.delay(100)
+      this.box.animated = true
+      await AsyncService.delay(100)
+      this.box.transform = 'rotateX(-90deg) rotateY(0deg)'
+      this.workplace.keyframesSecondTextGui = 3
+      await AsyncService.delay(2000)
+      this.box.animated = false
+      this.workplace.stage = 2
+      this.workplace.tool = "move"
+    } else if (this.workplace.stage == 2) {
+      this.forwardToWarping()
+    }
+  }
+
+  intersectionGifts(gift1: any, gift2: any): boolean {
+    let l1 = 0, l2 = 0, r1 = 0, r2 = 0, t1 = 0, t2 = 0, b1 = 0, b2 = 0
+    if (gift1.rotate == 0 || gift1.rotate == 180) {
+      l1 = gift1.x-gift1.w/2
+      r1 = gift1.x+gift1.w/2
+      t1 = -gift1.y-gift1.h/2
+      b1 = -gift1.y+gift1.h/2
+    } else if (gift1.rotate == 90 || gift1.rotate == 270) {
+      l1 = gift1.x-gift1.h/2
+      r1 = gift1.x+gift1.h/2
+      t1 = -gift1.y-gift1.w/2
+      b1 = -gift1.y+gift1.w/2
+    }
+    if (gift2.rotate == 0 || gift2.rotate == 180) {
+      l2 = gift2.x-gift2.w/2
+      r2 = gift2.x+gift2.w/2
+      t2 = -gift2.y-gift2.h/2
+      b2 = -gift2.y+gift2.h/2
+    } else if (gift2.rotate == 90 || gift2.rotate == 270) {
+      l2 = gift2.x-gift2.h/2
+      r2 = gift2.x+gift2.h/2
+      t2 = -gift2.y-gift2.w/2
+      b2 = -gift2.y+gift2.w/2
+    }
+
+    if (l1 <= r2 && r1 >= l2) {
+      if (t1 <= b2 && b1 >= t2) {
+        return true
+      }
+    }
+    return false
+  }
+
+  async forwardToWarping() {
+    if (this.gifts.length == this.giftsintobox.length) {
+      for (let i = 0; i < this.giftsintobox.length; i++) {
+        let under = null
+        for (let j = 0; j < this.giftsintobox.length; j++) {
+          if (i == j) continue
+          if (this.giftsintobox[j].z > this.giftsintobox[i].z && this.intersectionGifts(this.giftsintobox[i], this.giftsintobox[j]) && (under == null || this.giftsintobox[j].z < under.z)) {
+            under = this.giftsintobox[j]
+          }
+        }
+
+        let zh = 0
+        if (this.giftsintobox[i].type == 'greetingcard') {
+          zh = 2
+        } else if (this.giftsintobox[i].type == 'game') {
+          zh = 11
+        }
+
+        if (under == null) {
+          this.giftsintobox[i].z = -zh/2
+        } else {
+
+          let underZh = 0
+          if (under.type == 'greetingcard') {
+            underZh = 2
+          } else if (under.type == 'game') {
+            underZh = 11
+          }
+
+          this.giftsintobox[i].z = under.z-underZh/2-zh/2
+        }
+      }
+      this.workplace.stage = 3
+      this.workplace.tool = ''
+      this.box.animated = true
+      await AsyncService.delay(10)
+      this.box.transform = `translateX(0px) translateY(0px) rotateX(-10deg) rotateY(15deg)`
+      await AsyncService.delay(2000)
+      this.box.animated = false
     }
   }
 
   startMoveWorkplace(e: any): void {
+    let workplace = e.target
+    let reset = true
+    while (1) {
+      if (workplace.classList[0] == 'workplace' || workplace.tagName == 'BODY') break
+      if (workplace.classList[0] == 'skeletonGiftIntoBox' || workplace.classList[0] == 'additButton') reset = false
+      workplace = workplace.parentNode
+    }
+    if (reset) {
+      workplace.querySelector("app-box .side.bottom .skeletonGiftIntoBox.active")?.classList.remove('active')
+      this.workplace.activegiftintobox = null
+    }
+    if (workplace.querySelector("app-box .side.bottom .skeletonGiftIntoBox.active")) return
     if (this.workplace.tool != "move") return
     if (this.isTouch && !e.touches) return
     if (!this.isTouch && e.touches) return
     if (this.isTouch && e.touches.length != 1) return
+
     let x = 0
     let y = 0
     if (this.isTouch) {
@@ -190,6 +342,7 @@ export class CreateComponent implements AfterViewInit {
     if (!this.isTouch && e.touches) return
     if (this.isTouch && e.touches.length != 1) return
     if (!this.workplace.canmove) return
+
     let x = 0
     let y = 0
     if (this.isTouch) {
@@ -212,30 +365,230 @@ export class CreateComponent implements AfterViewInit {
     } else if (this.workplace.translateDynamic[1] > this.box.size.z/2+this.box.size.y+window.innerHeight/2) {
       this.workplace.translateDynamic[1] = this.box.size.z/2+this.box.size.y+window.innerHeight/2
     }
+
+    this.box.transform = 'translateX('+this.workplace.translateDynamic[0]+'px) translateY('+this.workplace.translateDynamic[1]+'px) rotateX(-90deg)'
   }
   endMoveWorkplace(e: any): void {
     if (this.workplace.tool != "move") return
     if (this.isTouch && !e.changedTouches) return
     if (!this.isTouch && e.changedTouches) return
     if (this.isTouch && e.changedTouches.length != 1) return
+    if (!this.workplace.canmove) return
     this.workplace.start = [0, 0]
     this.workplace.translateStatic = [this.workplace.translateDynamic[0], this.workplace.translateDynamic[1]]
     this.workplace.translateDynamic = [0, 0]
     this.workplace.canmove = false
+
   }
 
   dbltouchWorkplace(e: any) {
-    if (this.isTouch && e.changedTouches.length != 1) return
-    if (!this.contextWorkplace.can) return
-    const x = this.isTouch ? e.changedTouches[0].clientX : e.clientX
-    const y = this.isTouch ? e.changedTouches[0].clientY : e.clientY
+    if (this.workplace.stage == 0) {
+      if (this.isTouch && e.changedTouches.length != 1) return
+      if (!this.contextWorkplace.can) return
+      const x = this.isTouch ? e.changedTouches[0].clientX : e.clientX
+      const y = this.isTouch ? e.changedTouches[0].clientY : e.clientY
 
-    setTimeout(() => {
-      this.contextWorkplace.x = x
-      this.contextWorkplace.y = y
-      this.contextWorkplace.show = true
-      this.contextWorkplace.can = false
-    }, 300);
+      setTimeout(() => {
+        this.contextWorkplace.x = x
+        this.contextWorkplace.y = y
+        this.contextWorkplace.show = true
+        this.contextWorkplace.can = false
+      }, 300)
+    } else if (this.workplace.stage == 2) {
+      if (!this.isTouch || (this.isTouch && e.changedTouches.length != 1)) return
+      this.showlistgifts()
+    }
+  }
+
+  startFocusSkeletonGift(e: any, id: number): void {
+    if (this.isTouch && !e.touches) return
+    if (!this.isTouch && e.touches) return
+    this.workplace.canmovegiftintobox = true
+  }
+
+  moveFocusSkeletonGift(e: any, id: number): void {
+    if (this.isTouch && !e.touches) return
+    if (!this.isTouch && e.touches) return
+    if (!this.workplace.canmovegiftintobox) return
+    if (this.workplace.activegiftintobox?.id != id) return
+
+    this.workplace.wasmoveintobox = true
+
+    let x = 0, y = 0
+    if (this.isTouch) {
+      x = e.touches[0].clientX-window.innerWidth/2
+      y = e.touches[0].clientY-window.innerHeight/2
+    } else {
+      x = e.clientX-window.innerWidth/2
+      y = e.clientY-window.innerHeight/2
+    }
+
+    let gift = null
+    for (let i = 0; i < this.giftsintobox.length; i++) {
+      if (this.giftsintobox[i].id == id) {
+        gift = this.giftsintobox[i]
+        break
+      }
+    }
+
+    let trnsX = parseInt(this.box.transform.match(/translateX\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateX\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    let trnsY = parseInt(this.box.transform.match(/translateY\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateY\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+
+    gift.x = x-trnsX
+    gift.y = -y+trnsY
+
+    this.correctEdgesIntoBox()
+
+  }
+
+  deleteGiftIntoBoxById(id: number): void {
+    let z = 0
+    for (let i = 0; i < this.giftsintobox.length; i++) {
+      if (this.giftsintobox[i].id == id) {
+        z = this.giftsintobox[i].z
+        this.giftsintobox.splice(i, 1)
+        break
+      }
+    }
+    for (let i = 0; i < this.giftsintobox.length; i++) {
+      if (this.giftsintobox[i].z < z) {
+        this.giftsintobox[i].z += 20
+      }
+    }
+    this.workplace.activegiftintobox = null
+
+    if (this.workplace.showgiftlist) {
+      this.workplace.showgiftlist = false
+    }
+  }
+
+  correctEdgesIntoBox(): void {
+    let gift = this.workplace.activegiftintobox
+    if (gift.rotate == 0 || gift.rotate == 180) {
+      if (gift.x < -this.box.size.x/2+gift.w/2) gift.x = -this.box.size.x/2+gift.w/2
+      if (gift.x > this.box.size.x/2-gift.w/2) gift.x = this.box.size.x/2-gift.w/2
+      if (gift.y < -this.box.size.z/2+gift.h/2) gift.y = -this.box.size.z/2+gift.h/2
+      if (gift.y > this.box.size.z/2-gift.h/2) gift.y = this.box.size.z/2-gift.h/2
+    } else if (gift.rotate == 90 || gift.rotate == 270) {
+      if (gift.x < -this.box.size.x/2+gift.h/2) gift.x = -this.box.size.x/2+gift.h/2
+      if (gift.x > this.box.size.x/2-gift.h/2) gift.x = this.box.size.x/2-gift.h/2
+      if (gift.y < -this.box.size.z/2+gift.w/2) gift.y = -this.box.size.z/2+gift.w/2
+      if (gift.y > this.box.size.z/2-gift.w/2) gift.y = this.box.size.z/2-gift.w/2
+    }
+  }
+
+  endFocusSkeletonGift(e: any, id: number): void {
+    if (this.isTouch && !e.changedTouches) return
+    if (!this.isTouch && e.changedTouches) return
+
+    this.workplace.canmovegiftintobox = false
+
+    if (!this.workplace.wasmoveintobox && this.workplace.stage == 2) {
+      this.chooseSkeletonGift(e, id)
+    }
+    this.workplace.wasmoveintobox = false
+  }
+
+  chooseSkeletonGift(e: any, id: number): void {
+    let el = e.target
+    while (1) {
+      if (el.tagName == 'BODY') return
+      if (el.classList[0] == 'skeletonGiftIntoBox') break
+      el = el.parentNode
+    }
+    let skeletons = el.parentNode.querySelectorAll('.skeletonGiftIntoBox')
+    for (let i = 0; i < skeletons.length; i++) {
+      skeletons[i].classList.remove('active')
+    }
+    if (this.workplace.activegiftintobox?.id == id) {
+      el.classList.remove('active')
+      this.workplace.activegiftintobox = null
+    } else {
+      el.classList.add('active')
+      for (let i = 0; i < this.giftsintobox.length; i++) {
+        if (this.giftsintobox[i].id == id) {
+          this.workplace.activegiftintobox = this.giftsintobox[i]
+          break;
+        }
+      }
+    }
+  }
+
+  get transAdditLeftWorkplaceX(): number {
+    let trnsX = parseInt(this.box.transform.match(/translateX\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateX\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
+      return trnsX+this.workplace.activegiftintobox.x-(this.workplace.activegiftintobox.w+20)/2+20-4
+    } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
+      return trnsX+this.workplace.activegiftintobox.x-(this.workplace.activegiftintobox.h+20)/2+20-4
+    }
+    return 0
+  }
+  get transAdditLeftWorkplaceY(): number {
+    let trnsY = parseInt(this.box.transform.match(/translateY\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateY\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
+      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.h+20)/2-20
+    } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
+      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.w+20)/2-20
+    }
+    return 0
+  }
+  get transAdditRightWorkplaceX(): number {
+    let trnsX = parseInt(this.box.transform.match(/translateX\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateX\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
+      return trnsX+this.workplace.activegiftintobox.x+(this.workplace.activegiftintobox.w+20)/2-20+4
+    } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
+      return trnsX+this.workplace.activegiftintobox.x+(this.workplace.activegiftintobox.h+20)/2-20+4
+    }
+    return 0
+  }
+  get transAdditRightWorkplaceY(): number {
+    let trnsY = parseInt(this.box.transform.match(/translateY\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateY\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
+      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.h+20)/2-20
+    } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
+      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.w+20)/2-20
+    }
+    return 0
+  }
+
+  rotateGiftIntoBox(e: any): void {
+    this.workplace.activegiftintobox.rotate += 90
+    if (this.workplace.activegiftintobox.rotate == 360) this.workplace.activegiftintobox.rotate = 0
+
+    this.correctEdgesIntoBox()
+  }
+
+  showlistgifts(): void {
+    this.workplace.showgiftlist = true
+  }
+
+  closelistgifts(): void {
+    this.workplace.showgiftlist = false
+  }
+
+  chooselistgifts(e: any): void {
+    this.workplace.showgiftlist = false
+    let exists = false
+    for (let i = 0; i < this.giftsintobox.length; i++) {
+      if (this.giftsintobox[i].id == e.id) {
+        exists = true
+        break
+      }
+    }
+    if (!exists) {
+      e.x = 0
+      e.y = 0
+      e.z = -(this.giftsintobox.length+1)*20
+      e.rotate = 0
+      if (e.type == 'greetingcard') {
+        e.w = 80
+        e.h = e.w/(100/150)
+      } else if (e.type == 'game') {
+        e.w = 100
+        e.h = e.w/(135/190)
+      }
+      this.giftsintobox.push(e)
+    }
   }
 
   async actShowBucks(): Promise<void> {
@@ -262,18 +615,31 @@ export class CreateComponent implements AfterViewInit {
   }
 
   async forwardToWorkplace(): Promise<void> {
+    this.workplace.showFirstGui = 0
+    this.box.transform = `rotateX(-15deg) rotateY(-15deg)`
     this.rack.right = `-1000%`
     await AsyncService.delay(2000)
     this.workplace.display = `flex`
+    this.workplace.showFirstGui = 1
     await AsyncService.delay(100)
     this.workplace.transform = `scale(1)`
     this.box.animated = true
     await AsyncService.delay(300)
-    this.box.transform = `rotateX(270deg) rotateY(360deg)`
+    this.box.transform = `rotateX(-15deg) rotateY(345deg)`
     await AsyncService.delay(2000)
+    await AsyncService.delay(10)
     this.box.animated = false
+    this.box.transform = `rotateX(-15deg) rotateY(-15deg)`
     await AsyncService.delay(100)
-    this.box.transform = `rotateX(90deg) rotateY(0deg)`
+    this.box.animated = true
+    await AsyncService.delay(10)
+    this.box.transform = `rotateX(-90deg) rotateY(0deg)`
+    await AsyncService.delay(2000)
+    this.workplace.showFirstGui = 2
+    this.box.animated = false
+    this.workplace.showcanvas = true
+    await AsyncService.delay(300)
+    this.workplace.showcanvas = true
   }
 
   rgbStringToHexString(rgb: any) {

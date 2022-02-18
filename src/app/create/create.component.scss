@@ -31,6 +31,35 @@
      -khtml-user-select: none; /* Konqueror HTML */
      -moz-user-select: none; /* Firefox */
      -ms-user-select: none; /* Internet Explorer/Edge */
+     transition: all ease 0.3s;
+    }
+    .explanation.hide {
+      font-size: 14px;
+      color: #e91e63;
+      display: none;
+      transform: translateY(100vh) scale(0);
+      z-index: 10;
+    }
+    .explanation.bottom {
+      font-size: 14px;
+      color: #e91e63;
+      display: flex;
+      transform: translateY(100vh) scale(0);
+      z-index: 10;
+    }
+    .explanation.center {
+      font-size: 14px;
+      color: #e91e63;
+      display: flex;
+      transform: translateY(50vh) scale(2);
+      z-index: 10;
+    }
+    .explanation.top {
+      font-size: 14px;
+      color: #999;
+      display: flex;
+      transform: translateY(0vh) scale(1);
+      z-index: 10;
     }
     .buttons {
       position: absolute;
@@ -42,6 +71,53 @@
       align-items: flex-end;
       justify-content: space-between;
       text-align: center;
+      transition: all ease 0.3s;
+      .btnGifts {
+        margin: 10px;
+        border-radius: 10px;
+        color: #00bcd4;
+        background-color: #00bcd400;
+        transition: all ease 0.3s;
+        .textBtnGifts {
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .subtextBtnGifts {
+          margin-top: 10px;
+          font-size: 12px;
+          color: #999;
+        }
+      }
+      .btnGifts.desktop {
+        padding: 20px;
+        cursor: pointer;
+      }
+      .btnGifts.desktop:hover {
+        background-color: #00bcd433;
+      }
+      .btnNext {
+        margin: 10px;
+        border-radius: 10px;
+        color: #e91e63;
+        background-color: #e91e6300;
+        transition: all ease 0.3s;
+        .textBtnGifts {
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .subtextBtnGifts {
+          margin-top: 10px;
+          font-size: 12px;
+          color: #999;
+        }
+      }
+      .btnNext.desktop {
+        padding: 20px;
+        cursor: pointer;
+      }
+      .btnNext.desktop:hover {
+        background-color: #e91e6333;
+      }
       .next {
         display: flex;
         flex-direction: column;
@@ -57,6 +133,18 @@
           font-size: 12px;
           color: #999;
         }
+      }
+      .next.desktop {
+        margin: 10px;
+        transition: background-color ease 0.3s;
+        border-radius: 10px;
+        .text {
+          margin: 20px;
+        }
+      }
+      .next.desktop:hover {
+        cursor: pointer;
+        background-color: #e91e632e;
       }
     }
     .drawWorkplace {
@@ -397,6 +485,28 @@
   }
   .animatedBox {
     transition: all ease 2s;
+  }
+  .skeletonGiftIntoBox {
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .skeletonGiftIntoBox.active {
+    border: 3px solid #ffeb3b;
+  }
+  .additButton {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffeb3b;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    z-index: 30;
   }
 }
 @keyframes next {

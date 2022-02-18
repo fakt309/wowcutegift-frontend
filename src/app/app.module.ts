@@ -24,6 +24,7 @@ import { BoxComponent } from './box/box.component';
 import { ToolsComponent } from './tools/tools.component';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { ListOfGiftsComponent } from './list-of-gifts/list-of-gifts.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
     BoxComponent,
     ToolsComponent,
     ContextMenuComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    ListOfGiftsComponent
   ],
   imports: [
     BrowserModule,
