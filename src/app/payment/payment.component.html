@@ -1,0 +1,40 @@
+<div [class]="error.show ? 'error show' : 'error hide'"
+[style.left]="error.x+'px'"
+[style.top]="error.y+'px'">
+  <div class="triangle"></div>
+  {{ error.text }}
+</div>
+<div [class]="'content'"
+[style.maxWidth]="isTouch ? 'none' : '500px'"
+[style.maxHeight]="isTouch ? 'none' : '600px'"
+[style.transform]="style.transform">
+  <div class="totalprice">Total price: 2$</div>
+  <div [class]="back ? 'cards back' : 'cards'">
+    <div [class]="'card'"
+    [style.width]="widthcard+'px'"
+    [style.height]="(widthcard/(85.60/53.98))+'px'">
+      <div class="title" [style.fontSize]="style.fontsizetitle+'px'">BANK CARD</div>
+      <input class="cardnumber" type="text" [style.height]="style.heightinput+'px'" [style.fontSize]="style.fontsizeinput+'px'" (input)="validNumber($event)" (click)="this.style.transform = 'translateY(0px)'" />
+      <div class="date">
+        <div class="title"[style.fontSize]="style.fontsizetext+'px'" >MONTH / YEAR</div>
+        <div class="value">
+          <div class="text" [style.fontSize]="style.fontsizetext+'px'">VALID<br>THRU</div>
+          <div class="trangle"><div class="fill"></div></div>
+          <input class="carddate" type="text" [style.height]="style.heightinput+'px'" [style.fontSize]="style.fontsizeinput+'px'" (input)="validDate($event)" (click)="this.style.transform = 'translateY(0px)'" />
+        </div>
+      </div>
+      <input class="cardholder" type="text" [style.height]="style.heightinput+'px'" [style.fontSize]="style.fontsizeinput+'px'" (input)="validHolder($event)" (click)="this.style.transform = 'translateY(0px)'" />
+    </div>
+    <div [class]="'backcard'"
+    [style.width]="widthcard+'px'"
+    [style.height]="(widthcard/(85.60/53.98))+'px'">
+      <div class="text" [style.fontSize]="style.fontsizetext+'px'">AUTHORIZED SIGNATURE</div>
+      <input class="ccvcvv" type="text" [style.height]="1.5*style.heightinput+'px'" [style.fontSize]="2*style.fontsizeinput+'px'" (input)="validCCVCVV($event)" (click)="this.style.transform = 'translateY(0px)'" />
+    </div>
+  </div>
+  <div class="buttons">
+    <div class="back" (click)="goBack()">Back</div>
+    <div class="next" (click)="goNext()">Next</div>
+  </div>
+
+</div>

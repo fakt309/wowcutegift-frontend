@@ -1,0 +1,94 @@
+:host {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > .ready {
+    margin: 40px;
+    font-size: 40px;
+    color: #4caf50;
+    text-align: center;
+    white-space: nowrap;
+    animation-name: dance;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  > .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    > .button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      > .ico {
+        margin: 10px;
+        width: 80px;
+        height: 80px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      > .text {
+        margin: 10px;
+        font-size: 16px;
+        color: #333;
+      }
+    }
+    > .button.back {
+      > .text {
+        color: #795548;
+      }
+    }
+    > .button.demo {
+      > .text {
+        color: #03a9f4;
+      }
+    }
+    > .button.payment {
+      > .text {
+        color: #e91e63;
+      }
+    }
+  }
+  @keyframes dance {
+    0% {
+      transform: rotate(0deg) scale(1);
+      color: #4caf50;
+    }
+    25% {
+      transform: rotate(15deg) scale(0.5);
+      color: #009688;
+    }
+    50% {
+      transform: rotate(0deg) scale(1);
+      color: #4caf50;
+    }
+    75% {
+      transform: rotate(-15deg) scale(0.5);
+      color: #009688;
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      color: #4caf50;
+    }
+  }
+}
+:host(.animate) {
+  transition: all ease 0.3s;
+  > .ready {
+    transition: all ease 0.3s;
+  }
+  > .buttons {
+    transition: all ease 0.3s;
+  }
+}

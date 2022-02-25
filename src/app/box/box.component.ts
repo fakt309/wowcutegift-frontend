@@ -14,6 +14,7 @@ export class BoxComponent implements OnInit {
   math: any = Math
 
   @HostBinding('class.animate') animate: boolean = false
+  @HostBinding('class.shadow') shadow: boolean = false // false
 
   @Input('w') width: number = 300
   @Input('h') height: number = 200
@@ -21,11 +22,115 @@ export class BoxComponent implements OnInit {
   @Input('color') color: string = "#c3aa83"
   @Input('unpack') unbox: boolean = true
   @Input('wrap') wrap: string = ''
+  @Input('package') package: string = '../../assets/box/package/1.jpg'
+  @Input('makepackage') makepackage: boolean = false
+  @Input('tape') tape: string = '../../assets/box/tape/1.jpg'
 
   bind1: boolean = false
   bind2: boolean = false
 
+  margin: number = 1
+
+  wrapbind1: boolean = false // false
+  wrapbind2: boolean = false // false
+  wrapbind3: boolean = false // false
+
+  hidePackage: boolean = true // true
+  displayPackage: string = 'none' // none
+
+  widthTape: number = 20
+
   sides: Array<string> = ['', '', '', '', '', '']
+
+  tapebind1: boolean = false // false
+
+  tapeshow: boolean = false // false
+  tapedisplay: boolean = false // false
+  bowshow: boolean = false // false
+  bowdisplay: boolean = false // false
+
+  // async doShowPackage(): Promise<void> {
+  //   this.animate = true
+  //   this.displayPackage = 'flex'
+  //   await AsyncService.delay(500)
+  //   this.hidePackage = false
+  //   await AsyncService.delay(2000)
+  //   this.animate = false
+  //   return new Promise((res) => res())
+  // }
+  //
+  // async undoShowPackage(): Promise<void> {
+  //   this.animate = true
+  //   await AsyncService.delay(500)
+  //   this.hidePackage = true
+  //   await AsyncService.delay(2000)
+  //   this.animate = false
+  //   this.displayPackage = 'none'
+  //   return new Promise((res) => res())
+  // }
+
+  async doTape(): Promise<void> {
+    this.animate = true
+    this.tapedisplay = true
+    this.bowdisplay = true
+    await AsyncService.delay(100)
+    this.tapeshow = true
+    await AsyncService.delay(1000)
+    this.tapebind1 = true
+    await AsyncService.delay(2000)
+    this.bowshow = true
+    await AsyncService.delay(2000)
+    return new Promise((res) => res())
+  }
+
+  async undoTape(): Promise<void> {
+    this.animate = true
+    await AsyncService.delay(100)
+    this.bowshow = false
+    await AsyncService.delay(1000)
+    this.tapebind1 = false
+    await AsyncService.delay(2000)
+    this.tapeshow = false
+    await AsyncService.delay(2000)
+    this.tapedisplay = false
+    this.bowdisplay = false
+    return new Promise((res) => res())
+  }
+
+  async doPackage(): Promise<void> {
+    this.animate = true
+    this.displayPackage = 'flex'
+    await AsyncService.delay(500)
+    this.hidePackage = false
+    await AsyncService.delay(1000)
+    this.wrapbind1 = true
+    await AsyncService.delay(2000)
+    this.wrapbind2 = true
+    await AsyncService.delay(2000)
+    this.wrapbind3 = true
+    this.shadow = true
+    await AsyncService.delay(2000)
+    this.animate = false
+    return new Promise((res) => res())
+  }
+
+  async undoPackage(): Promise<void> {
+    this.animate = true
+    await AsyncService.delay(200)
+    this.wrapbind3 = false
+    this.shadow = false
+    await AsyncService.delay(2000)
+    this.wrapbind2 = false
+    await AsyncService.delay(2000)
+    this.wrapbind1 = false
+    await AsyncService.delay(2000)
+    this.hidePackage = true
+    await AsyncService.delay(1000)
+    this.displayPackage = 'none'
+    await AsyncService.delay(100)
+    this.animate = false
+    return new Promise((res) => res())
+  }
 
   async pack(): Promise<void> {
     this.animate = true
@@ -54,6 +159,10 @@ export class BoxComponent implements OnInit {
   }
 
   async setWrap(): Promise<void> {
+    if (this.wrap == '') {
+      this.sides = ['', '', '', '', '', '']
+      return
+    }
     if (!/^data:image\/png\;base64\,/g.test(this.wrap)) return
 
     let w = 0, h = 0
@@ -98,69 +207,21 @@ export class BoxComponent implements OnInit {
     this.sides[5] = cnvs.toDataURL("image/png")
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   ngOnChanges(): void {
     this.setWrap()
+
+    // if (this.makepackage) {
+    //   this.doPackage()
+    // } else {
+    //   this.undoPackage()
+    // }
+
+    // if (this.showpackage) {
+    //   this.doShowPackage()
+    // } else {
+    //   this.undoShowPackage()
+    // }
   }
 }
-
-// export interface Clip {
-//   w: number;
-//   h: number;
-//   trnsf: string;
-//   wTrngl: number;
-//   hTrngl: number;
-//   wMiddle: number;
-//   hMiddle: number;
-//   trnsfTrngl1: string;
-//   trnsfTrngl2: string;
-//   wFillTrngl1: number;
-//   hFillTrngl2: number;
-//   trnsfFillTrngl1: string;
-//   trnsfFillTrngl2: string;
-// }
-// setClips(): void {
-//   let h = 0.4*this.height
-//   let w = h/5
-//   for (let i = 0; i < 5; i++) {
-//     this.clips[i] = {
-//       w: w,
-//       h: h,
-//       trnsf: ``,
-//       wTrngl: w,
-//       hTrngl: w,
-//       wMiddle: w,
-//       hMiddle: h-2*w,
-//       wFillTrngl1: w*(2**(1/2)),
-//       hFillTrngl2: w*(2**(1/2))/2,
-//       trnsfTrngl1: `translateY(${-h/2+w/2}px) rotateX(0deg)`,
-//       trnsfTrngl2: `translateY(${h/2-w/2}px) rotateX(0deg)`,
-//       trnsfFillTrngl1: `translateX(${-0.25*w}px) translateY(${0.25*w}px) rotateZ(45deg)`,
-//       trnsfFillTrngl2: `translateX(${-0.25*w}px) translateY(${-0.25*w}px) rotateZ(-45deg)`
-//     }
-//   }
-//   this.clips[0].trnsf = `translateX(${this.width/2+w/2}px) rotateY(0deg)`
-//   this.clips[1].trnsf = `translateX(${-this.width/2+w/2}px) rotateZ(180deg) rotateY(0deg)`
-//   this.clips[2].trnsf = `translateX(${this.width/2+w/2}px) rotateY(0deg)`
-//   this.clips[3].trnsf = `translateX(${-this.width/2+w/2}px) rotateZ(180deg) rotateY(0deg)`
-//   h = 0.4*this.depth
-//   w = h/5
-//   this.clips[4] = {
-//     w: w,
-//     h: h,
-//     trnsf: `translateX(${this.width/2+w/2}px) rotateY(0deg)`,
-//     wTrngl: w,
-//     hTrngl: w,
-//     wMiddle: w,
-//     hMiddle: h-2*w,
-//     wFillTrngl1: w*(2**(1/2)),
-//     hFillTrngl2: w*(2**(1/2))/2,
-//     trnsfTrngl1: `translateY(${-h/2+w/2}px) rotateX(0deg)`,
-//     trnsfTrngl2: `translateY(${h/2-w/2}px) rotateX(0deg)`,
-//     trnsfFillTrngl1: `translateX(${-0.25*w}px) translateY(${0.25*w}px) rotateZ(45deg)`,
-//     trnsfFillTrngl2: `translateX(${-0.25*w}px) translateY(${-0.25*w}px) rotateZ(-45deg)`
-//   }
-// }

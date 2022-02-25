@@ -1,0 +1,117 @@
+:host {
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff99;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+  .error {
+    position: fixed;
+    top: 10%;
+    z-index: 30;
+    width: 80%;
+    height: 10%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px #333;
+    background-color: #f44336;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.3s;
+    transform: translateY(-30vh);
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #333;
+    width: 100%;
+    height: 100%;
+    max-width: min(400px, 100%);
+    max-height: min(600px, 100%);
+    transform: translateY(-100vh);
+    .cropping {
+      width: 80%;
+      height: 50%;
+      margin: auto;
+    }
+    .inside {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      .option {
+        margin: 20px 0px;
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 15px;
+        border: solid 4px #999;
+        cursor: pointer;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        .checkmark {
+          flex-shrink: 0;
+          display: none;
+          margin: 10px;
+          width: 30px;
+          height: 30px;
+          border-radius: 100px;
+          background-color: #4caf50;
+          background-image: url(../../assets/checkmark.png);
+          background-size: contain;
+          background-position: center;
+        }
+      }
+      .option.active {
+        border: solid 4px #4caf50;
+        .checkmark {
+          display: flex;
+        }
+      }
+    }
+    .buttons {
+      position: sticky;
+      width: 100%;
+      bottom: 0px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      * {
+        margin: 10px;
+      }
+    }
+  }
+}
+:host(.phone) {
+  .content {
+    max-width: none;
+    max-height: none;
+  }
+}
+:host(.animate) {
+  transition: all ease 0.3s;
+  .content {
+    transition: all ease 0.3s;
+  }
+}

@@ -1,0 +1,79 @@
+<div class="error" [style.transform]="error == '' ? 'translateY(-30vh)' : 'translateY(0vh)'" >{{ error }}</div>
+<div class="content" [style.transform]="transform">
+  <app-cropping *ngIf="cropping.show" [rSize]="cropping.refresh" [sRatio]="100/100" [sImage]="cropping.image" (output)="getImage($event)" class="cropping" (mousedown)="loading = true" (touchstart)="loading = true" ></app-cropping>
+  <div class="buttons" *ngIf="cropping.show">
+    <app-button [color]="'#795548'" (click)="cancelCropping()">Back</app-button>
+    <app-button [color]="'#4caf50'" (click)="acceptCropping()">Accept</app-button>
+  </div>
+  <app-list2 *ngIf="!cropping.show">
+    <input style="display:none" type="file" accept="image/png, image/jpeg" (change)="loadImage($event)" >
+    <div class="inside">
+      <div class="option" [style.backgroundImage]="'url(../../assets/upload.png)'" (click)="openUpload($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/1.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/2.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/3.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/4.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/5.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/6.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/7.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/8.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/9.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/10.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/11.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/12.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/13.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/14.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/15.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/16.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/17.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/18.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/19.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+      <div class="option" [style.backgroundImage]="'url(../../assets/box/tape/20.jpg)'" (click)="choose($event)">
+        <div class="checkmark"></div>
+      </div>
+    </div>
+    <div class="buttons">
+      <app-button [color]="'#795548'" (click)="this.cancel.emit()">Back</app-button>
+    </div>
+  </app-list2>
+</div>

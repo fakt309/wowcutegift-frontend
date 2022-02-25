@@ -142,9 +142,24 @@
           margin: 20px;
         }
       }
+      .next.back.desktop {
+        .text {
+          color: #795548;
+        }
+      }
       .next.desktop:hover {
         cursor: pointer;
         background-color: #e91e632e;
+      }
+      .next.back.desktop:hover {
+        cursor: pointer;
+        background-color: #7955482e;
+      }
+      .rightBtns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
       }
     }
     .drawWorkplace {

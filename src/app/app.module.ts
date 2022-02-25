@@ -25,6 +25,11 @@ import { ToolsComponent } from './tools/tools.component';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { ListOfGiftsComponent } from './list-of-gifts/list-of-gifts.component';
+import { ListOfWrapsComponent } from './list-of-wraps/list-of-wraps.component';
+import { ListOfTapesComponent } from './list-of-tapes/list-of-tapes.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { PaymentComponent } from './payment/payment.component';
+import { ReadyComponent } from './ready/ready.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,12 @@ import { ListOfGiftsComponent } from './list-of-gifts/list-of-gifts.component';
     ToolsComponent,
     ContextMenuComponent,
     ColorPickerComponent,
-    ListOfGiftsComponent
+    ListOfGiftsComponent,
+    ListOfWrapsComponent,
+    ListOfTapesComponent,
+    NavigationComponent,
+    PaymentComponent,
+    ReadyComponent
   ],
   imports: [
     BrowserModule,

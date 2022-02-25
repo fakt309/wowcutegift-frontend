@@ -2,3 +2,6 @@ body {
   margin: 0px;
   font-family: 'Comfortaa', cursive;
 }
+body.unrefreshable {
+  overflow: hidden;
+}

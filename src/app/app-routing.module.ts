@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     component: CreateComponent,
     path: 'create'
+  },
+  {
+    component: CreateComponent,
+    path: 'gift'
+  },
+  {
+    component: CreateComponent,
+    path: 'payment'
   }
 ];
 

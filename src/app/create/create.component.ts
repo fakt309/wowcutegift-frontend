@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { AsyncService } from "../async.service"
 
@@ -22,7 +23,7 @@ const getBase64FromUrl = async (url: string) => {
 })
 export class CreateComponent implements AfterViewInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(private host: ElementRef, public router: Router) { }
 
   @ViewChild('nextbutton') nextbutton: any
   @ViewChild('addpopup') addpopup: any
@@ -109,7 +110,10 @@ export class CreateComponent implements AfterViewInit {
   box: any = {
     size: { x: 200, y: 100, z: 200 },
     transform: `rotateX(90deg) rotateY(0deg)`,
-    animated: false
+    animated: false,
+    unpack: true,
+    package: '../../assets/box/package/1.jpg',
+    tape: '../../assets/box/tape/1.jpg'
   }
   isTouch: boolean = true
 
@@ -121,6 +125,8 @@ export class CreateComponent implements AfterViewInit {
   rack: any = { w: 0, h: 0, right: `-1000%`, click: false }
 
   contextWorkplace: any = { show: false, x: -1000, y: -1000, dbl: false, can: true, trpl: false }
+
+  readyblock: any = { show: false }
 
   workplace: any = {
     display: `none`,
@@ -137,14 +143,82 @@ export class CreateComponent implements AfterViewInit {
     imgBox: '',
     showFirstGui: 2,
     keyframesSecondTextGui: 0,
-    stage: 0,
+    stage: -1,
     showgiftlist: false,
     canmovegiftintobox: false,
     activegiftintobox: null,
-    wasmoveintobox: false
+    wasmoveintobox: false,
+    packed: false,
+    keyframesThirdGui: 0,
+    showlistwraping: false,
+    keyframesFourGui: 0,
+    showlisttape: false,
+    shownav: false
   }
 
   giftsintobox: Array<any> = []
+
+  chooseNavigation(dir: string): void {
+    this.workplace.shownav = false
+    if (dir == 'next') {
+      if (this.workplace.stage == 0) {
+        this.forwardToDrawing()
+      } else if (this.workplace.stage == 2) {
+        this.forwardToWarping()
+      } else if (this.workplace.stage == 4) {
+        this.forwardToBow()
+      } else if (this.workplace.stage == 6) {
+        this.forwardToReady()
+      }
+    } else if (dir == 'back') {
+      if (this.workplace.stage == 0) {
+        this.backToGifts()
+      } else if (this.workplace.stage == 2) {
+        this.backToDrawing()
+      } else if (this.workplace.stage == 4) {
+        this.backToIntoGifts()
+      } else if (this.workplace.stage == 6) {
+        this.backToWarping()
+      }
+    }
+  }
+
+  async forwardToDrawing(): Promise<void> {
+    this.workplace.stage = 1
+    this.workplace.showcanvas = false
+    this.workplace.imgBox = this.workplace.img
+    await AsyncService.delay(10)
+    this.workplace.showFirstGui = 1
+    await AsyncService.delay(300)
+    this.workplace.showFirstGui = 0
+    this.workplace.keyframesSecondTextGui = 1
+    this.box.animated = true
+    await AsyncService.delay(10)
+    this.box.transform = 'rotateX(-15deg) rotateY(-15deg)'
+    this.workplace.keyframesSecondTextGui = 2
+    await AsyncService.delay(2000)
+    this.box.transform = 'rotateX(-15deg) rotateY(345deg)'
+    await AsyncService.delay(2000)
+    this.box.animated = false
+    this.box.transform = 'rotateX(-15deg) rotateY(-15deg)'
+    await AsyncService.delay(100)
+    this.box.animated = true
+    await AsyncService.delay(100)
+    this.box.transform = 'rotateX(-90deg) rotateY(0deg)'
+    this.workplace.keyframesSecondTextGui = 3
+    await AsyncService.delay(2000)
+    this.box.animated = false
+    this.workplace.stage = 2
+    this.workplace.tool = ""
+  }
+
+  refreshable(flag: boolean = false): void {
+    if (flag) {
+      document.body.classList.remove("unrefreshable")
+    } else {
+      document.body.classList.add("unrefreshable")
+    }
+  }
 
   changeColorWorkplace(e: any) {
     this.workplace.showcolor = false
@@ -172,10 +246,14 @@ export class CreateComponent implements AfterViewInit {
     if (!e.changedTouches && this.isTouch) return
     if (this.contextWorkplace.trpl) {
       clearTimeout(this.timeoutsTblTrpl[1])
-      if (!this.isTouch) return
-      this.trpltouchWorkplace()
       this.contextWorkplace.dbl = false
       this.contextWorkplace.trpl = false
+      if (!this.isTouch) return
+      if (e.target.classList[0] == 'additButton') return
+      // this.trpltouchWorkplace()
+      if (this.workplace.stage == 0 || this.workplace.stage == 2 || this.workplace.stage == 4 || this.workplace.stage == 6) {
+        this.workplace.shownav = true
+      }
     } else if (this.contextWorkplace.dbl) {
       clearTimeout(this.timeoutsTblTrpl[0])
       this.contextWorkplace.trpl = true
@@ -224,9 +302,11 @@ export class CreateComponent implements AfterViewInit {
       await AsyncService.delay(2000)
       this.box.animated = false
       this.workplace.stage = 2
-      this.workplace.tool = "move"
+      this.workplace.tool = ""
     } else if (this.workplace.stage == 2) {
       this.forwardToWarping()
+    } else if (this.workplace.stage == 4) {
+      this.forwardToBow()
     }
   }
 
@@ -263,8 +343,47 @@ export class CreateComponent implements AfterViewInit {
     return false
   }
 
+  async forwardToReady(): Promise<void> {
+    this.workplace.transform = 'scale(0)'
+    await AsyncService.delay(1000)
+    this.workplace.display = 'none'
+    this.readyblock.show = true
+    await AsyncService.delay(300)
+    return new Promise(res => res())
+  }
+
+  async forwardToBow() {
+    this.workplace.stage = 5
+    this.workplace.keyframesThirdGui = 1
+    this.box.animated = true
+    await AsyncService.delay(300)
+    this.workplace.keyframesThirdGui = 0
+    await this.boxWorkplace.doTape()
+    this.box.transform = 'translateX(0px) translateY(0px) rotateX(-15deg) rotateY(525deg)'
+    this.workplace.keyframesFourGui = 1
+    await AsyncService.delay(2100)
+    this.workplace.keyframesFourGui = 2
+    this.box.animated = false
+    this.box.transform = 'translateX(0px) translateY(0px) rotateX(-15deg) rotateY(165deg)'
+    this.workplace.stage = 6
+  }
+
+  async backToWarping(): Promise<void> {
+    this.workplace.stage = 5
+    this.workplace.keyframesFourGui = 1
+    await this.boxWorkplace.undoTape()
+    this.workplace.keyframesFourGui = 0
+    this.workplace.keyframesThirdGui = 1
+    await AsyncService.delay(300)
+    this.workplace.keyframesThirdGui = 2
+    this.workplace.stage = 4
+  }
+
   async forwardToWarping() {
     if (this.gifts.length == this.giftsintobox.length) {
+      document.querySelector("app-box .side.bottom .skeletonGiftIntoBox.active")?.classList.remove('active')
+      this.workplace.activegiftintobox = null
+
       for (let i = 0; i < this.giftsintobox.length; i++) {
         let under = null
         for (let j = 0; j < this.giftsintobox.length; j++) {
@@ -299,10 +418,40 @@ export class CreateComponent implements AfterViewInit {
       this.workplace.tool = ''
       this.box.animated = true
       await AsyncService.delay(10)
-      this.box.transform = `translateX(0px) translateY(0px) rotateX(-10deg) rotateY(15deg)`
+      this.box.transform = `translateX(0px) translateY(0px) rotateX(-15deg) rotateY(-15deg)`
+      this.workplace.keyframesSecondTextGui = 4
       await AsyncService.delay(2000)
+      this.workplace.keyframesSecondTextGui = 5
+      this.box.unpack = false
+      await AsyncService.delay(2000)
+      this.workplace.packed = true
+      await this.boxWorkplace.doPackage()
+      this.box.transform = `translateX(0px) translateY(0px) rotateX(-15deg) rotateY(165deg)`
+      this.workplace.keyframesThirdGui = 1
+      await AsyncService.delay(2200)
+      this.workplace.stage = 4
       this.box.animated = false
+      await AsyncService.delay(100)
+      // this.box.transform = `translateX(0px) translateY(0px) rotateX(-15deg) rotateY(-15deg)`
+      this.workplace.keyframesThirdGui = 2
     }
+  }
+
+  async backToIntoGifts(): Promise<void> {
+    this.box.animated = true
+    this.workplace.stage = 3
+    this.workplace.keyframesThirdGui = 1
+    await this.boxWorkplace.undoPackage()
+    this.workplace.keyframesThirdGui = 0
+    this.box.unpack = true
+    this.workplace.packed = false
+    await AsyncService.delay(300)
+    this.workplace.keyframesSecondTextGui = 4
+    this.box.transform = `translateX(0px) translateY(0px) rotateX(-90deg) rotateY(0deg)`
+    await AsyncService.delay(2000)
+    this.box.animated = false
+    this.workplace.keyframesSecondTextGui = 3
+    this.workplace.stage = 2
   }
 
   startMoveWorkplace(e: any): void {
@@ -396,8 +545,41 @@ export class CreateComponent implements AfterViewInit {
       }, 300)
     } else if (this.workplace.stage == 2) {
       if (!this.isTouch || (this.isTouch && e.changedTouches.length != 1)) return
+      if (e.target.classList[0] == 'additButton') return
       this.showlistgifts()
+    } else if (this.workplace.stage == 4) {
+      if (!this.isTouch || (this.isTouch && e.changedTouches.length != 1)) return
+      this.showlistwrapping()
+    } else if (this.workplace.stage == 6) {
+      if (!this.isTouch || (this.isTouch && e.changedTouches.length != 1)) return
+      this.showlisttape()
     }
+  }
+
+  showlistwrapping(): void {
+    this.workplace.showlistwraping = true
+  }
+
+  chooseWrap(e: any): void {
+    this.box.package = e
+    this.workplace.showlistwraping = false
+  }
+
+  cancelWrap(): void {
+    this.workplace.showlistwraping = false
+  }
+
+  showlisttape(): void {
+    this.workplace.showlisttape = true
+  }
+
+  chooseTape(e: any): void {
+    this.box.tape = e
+    this.workplace.showlisttape = false
+  }
+
+  cancelTape(): void {
+    this.workplace.showlisttape = false
   }
 
   startFocusSkeletonGift(e: any, id: number): void {
@@ -515,40 +697,40 @@ export class CreateComponent implements AfterViewInit {
   }
 
   get transAdditLeftWorkplaceX(): number {
-    let trnsX = parseInt(this.box.transform.match(/translateX\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateX\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    let halfw = 0
     if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
-      return trnsX+this.workplace.activegiftintobox.x-(this.workplace.activegiftintobox.w+20)/2+20-4
+      halfw = (this.workplace.activegiftintobox.w+20)/2
     } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
-      return trnsX+this.workplace.activegiftintobox.x-(this.workplace.activegiftintobox.h+20)/2+20-4
+      halfw = (this.workplace.activegiftintobox.h+20)/2
     }
-    return 0
+    return this.workplace.activegiftintobox.x-halfw+20-3
   }
   get transAdditLeftWorkplaceY(): number {
-    let trnsY = parseInt(this.box.transform.match(/translateY\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateY\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    let halfh = 0
     if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
-      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.h+20)/2-20
+      halfh = (this.workplace.activegiftintobox.h+20)/2
     } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
-      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.w+20)/2-20
+      halfh = (this.workplace.activegiftintobox.w+20)/2
     }
-    return 0
+    return -this.workplace.activegiftintobox.y-halfh-20
   }
   get transAdditRightWorkplaceX(): number {
-    let trnsX = parseInt(this.box.transform.match(/translateX\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateX\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    let halfw = 0
     if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
-      return trnsX+this.workplace.activegiftintobox.x+(this.workplace.activegiftintobox.w+20)/2-20+4
+      halfw = (this.workplace.activegiftintobox.w+20)/2
     } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
-      return trnsX+this.workplace.activegiftintobox.x+(this.workplace.activegiftintobox.h+20)/2-20+4
+      halfw = (this.workplace.activegiftintobox.h+20)/2
     }
-    return 0
+    return this.workplace.activegiftintobox.x+halfw-20+3
   }
   get transAdditRightWorkplaceY(): number {
-    let trnsY = parseInt(this.box.transform.match(/translateY\(\-?[0-9]+px\)/) ? this.box.transform.match(/translateY\(\-?[0-9]+px\)/)[0].slice(11, -3) : 0)
+    let halfh = 0
     if (this.workplace.activegiftintobox.rotate == 0 || this.workplace.activegiftintobox.rotate == 180) {
-      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.h+20)/2-20
+      halfh = (this.workplace.activegiftintobox.h+20)/2
     } else if (this.workplace.activegiftintobox.rotate == 90 || this.workplace.activegiftintobox.rotate == 270) {
-      return trnsY-this.workplace.activegiftintobox.y-(this.workplace.activegiftintobox.w+20)/2-20
+      halfh = (this.workplace.activegiftintobox.w+20)/2
     }
-    return 0
+    return -this.workplace.activegiftintobox.y-halfh-20
   }
 
   rotateGiftIntoBox(e: any): void {
@@ -594,14 +776,17 @@ export class CreateComponent implements AfterViewInit {
   async actShowBucks(): Promise<void> {
     this.transformFullsreen = "translateY(100%)"
     this.showbucks = true
+    this.refreshable(false)
   }
 
   async backFromBucks(): Promise<void> {
     this.showbucks = false
     this.transformFullsreen = "translateY(0%)"
+    this.refreshable(true)
   }
 
   async forwardToPackage(e: any): Promise<void> {
+    this.showbucks = false
     if (!e) {
       this.bucks.exists = false
     } else {
@@ -612,6 +797,7 @@ export class CreateComponent implements AfterViewInit {
     this.rack.right = `0%`
     await AsyncService.delay(2000)
     this.rack.click = true
+    this.refreshable(true)
   }
 
   async forwardToWorkplace(): Promise<void> {
@@ -637,9 +823,41 @@ export class CreateComponent implements AfterViewInit {
     await AsyncService.delay(2000)
     this.workplace.showFirstGui = 2
     this.box.animated = false
-    this.workplace.showcanvas = true
     await AsyncService.delay(300)
     this.workplace.showcanvas = true
+    this.refreshable(false)
+    this.workplace.stage = 0
+  }
+
+  async backToDrawing(): Promise<void> {
+    this.workplace.stage = 1
+    this.box.animated = true
+    this.giftsintobox = []
+    await AsyncService.delay(10)
+    this.workplace.keyframesSecondTextGui = 1
+    await AsyncService.delay(300)
+    this.workplace.keyframesSecondTextGui = 0
+    await AsyncService.delay(300)
+    this.workplace.showFirstGui = 1
+    await AsyncService.delay(300)
+    this.workplace.showFirstGui = 2
+    this.workplace.showcanvas = true
+    this.workplace.imgBox = ""
+    this.box.animated = false
+    this.workplace.stage = 0
+    this.workplace.tool = "pen"
+  }
+
+  async backToGifts(): Promise<void> {
+    this.workplace.showcanvas = false
+    this.workplace.showFirstGui = 1
+    this.workplace.transform = `scale(0)`
+    await AsyncService.delay(300)
+    this.workplace.showFirstGui = 0
+    this.workplace.display = `none`
+    await AsyncService.delay(10)
+    // this.showbucks = true
+    this.actShowBucks()
   }
 
   rgbStringToHexString(rgb: any) {
@@ -1006,6 +1224,21 @@ export class CreateComponent implements AfterViewInit {
         chekmarks[i].classList.remove('check')
       }
     }
+  }
+
+  async makeChooseReady(type: string): Promise<void> {
+    if (type == 'back') {
+      this.readyblock.show = false
+      this.workplace.display = 'flex'
+      await AsyncService.delay(1000)
+      this.workplace.transform = 'scale(1)'
+      await AsyncService.delay(300)
+    } else if (type == 'demo') {
+      this.router.navigate(['gift', {demo: true}])
+    } else if (type == 'payment') {
+      this.router.navigate(['payment'])
+    }
+    return new Promise(res => res())
   }
 
   setSizeGreetingForSign(): void {

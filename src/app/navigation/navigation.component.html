@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="left">
+    <div class="title back">
+      <div class="ico arrow" [style.backgroundImage]="'url(../../assets/arrleft.png)'"></div>
+      <div class="text">Back</div>
+    </div>
+    <!-- <div class="tip">
+      <div class="ico swipe" [style.backgroundImage]="'url(../../assets/swipeleft.png)'"></div>
+      <div class="text">Left swipe</div>
+    </div> -->
+  </div>
+  <div class="right">
+    <div class="title right">
+      <div [class]="bannext == '' ? 'text' : 'text textban'">Next</div>
+      <div *ngIf="bannext == ''" class="ico arrow" [style.backgroundImage]="'url(../../assets/arrright.png)'"></div>
+    </div>
+    <div class="ban" *ngIf="bannext != ''"> {{ bannext }}</div>
+    <!-- <div class="tip">
+      <div class="ico arrow"></div>
+      <div class="ico swipe" [style.backgroundImage]="'url(../../assets/swiperight.png)'"></div>
+      <div class="text">Right swipe</div>
+    </div> -->
+  </div>
+</div>
+<div class="close">
+  <div class="title close">
+    <div class="ico arrow" [style.backgroundImage]="'url(../../assets/arrup.png)'"></div>
+    <div class="text">Close</div>
+  </div>
+  <!-- <div class="tip">
+    <div class="ico arrow"></div>
+    <div class="ico swipe" [style.backgroundImage]="'url(../../assets/swipeup.png)'"></div>
+    <div class="text">Up swipe</div>
+  </div> -->
+</div>

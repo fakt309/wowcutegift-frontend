@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-cropping',
@@ -10,6 +10,12 @@ export class CroppingComponent implements OnInit {
   constructor(private host: ElementRef) { }
   el: any = this.host.nativeElement
 
+  @Input('sRatio') sRatio: number = 16/9
+  @Input('rSize') rSize: boolean = false
+  @Input('sImage') sImage: string = ''
+
+  @Output() output = new EventEmitter<any>()
+
   img: string = ""
   ratio: number = 16/9
   sizeOriginal: any = [0, 0]
@@ -20,6 +26,16 @@ export class CroppingComponent implements OnInit {
 
   setRation(ratio: number) {
     this.ratio = ratio
+  }
+
+  timeout1: any = setTimeout(() => {}, 0)
+  startSave() {
+    clearTimeout(this.timeout1)
+    this.timeout1 = setTimeout(() => {
+      this.getImage().then((img: any) => {
+        this.output.emit(img)
+      })
+    }, 1000)
   }
 
   setSize() {
@@ -104,6 +120,7 @@ export class CroppingComponent implements OnInit {
     })
     this.el.querySelector('.image .crop').addEventListener('touchend', (e: any) => {
       this.action = 'none'
+      this.startSave()
     })
     this.el.addEventListener('touchmove', (e: any) => {
       if (e.touches.length > 1) { return }
@@ -159,6 +176,7 @@ export class CroppingComponent implements OnInit {
     })
     this.el.querySelector('.image .crop').addEventListener('mouseup', (e: any) => {
       this.action = 'none'
+      this.startSave()
     })
     this.el.querySelector('.image').addEventListener('mouseleave', (e: any) => {
       this.action = 'none'
@@ -205,6 +223,18 @@ export class CroppingComponent implements OnInit {
         this.setCrop(this.crop[0], this.crop[1], w, h)
       }
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['sRatio'] && changes['sRatio'].previousValue != changes['sRatio'].currentValue) {
+      this.setRation(changes['sRatio'].currentValue)
+    }
+    if (changes['sImage'] && changes['sImage'].previousValue != changes['sImage'].currentValue) {
+      this.setImage(changes['sImage'].currentValue)
+    }
+    if (changes['rSize'] && changes['rSize'].previousValue != changes['rSize'].currentValue) {
+      this.setSize()
+    }
   }
 
 }

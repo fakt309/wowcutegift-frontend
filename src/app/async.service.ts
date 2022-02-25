@@ -21,4 +21,13 @@ export class AsyncService {
       img.src = url
     })
   }
+
+  static readFile(file: any): Promise<any> {
+    return new Promise((res, rej) => {
+      var reader = new FileReader()
+      reader.onload = () => res(reader.result)
+      reader.onerror  = err => rej(err)
+      reader.readAsDataURL(file)
+    })
+  }
 }
