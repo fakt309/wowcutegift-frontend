@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router'
 
-import { AsyncService } from "../async.service"
+import { CookieService } from 'ngx-cookie-service'
+import { AsyncService } from '../async.service'
+import { DatabaseService } from '../database.service'
 
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url);
@@ -23,7 +25,7 @@ const getBase64FromUrl = async (url: string) => {
 })
 export class CreateComponent implements AfterViewInit {
 
-  constructor(private host: ElementRef, public router: Router) { }
+  constructor(private host: ElementRef, public router: Router, private cookieService: CookieService,  private databaseService: DatabaseService) { }
 
   @ViewChild('nextbutton') nextbutton: any
   @ViewChild('addpopup') addpopup: any
@@ -128,6 +130,8 @@ export class CreateComponent implements AfterViewInit {
 
   readyblock: any = { show: false }
 
+  showRestore: boolean = true
+
   workplace: any = {
     display: `none`,
     transform: `scale(0)`,
@@ -153,10 +157,95 @@ export class CreateComponent implements AfterViewInit {
     showlistwraping: false,
     keyframesFourGui: 0,
     showlisttape: false,
-    shownav: false
+    shownav: false,
+    imgdrawing: ''
   }
 
   giftsintobox: Array<any> = []
+
+  timeoutsave: any = setTimeout(() => {}, 0);
+
+  save(): void {
+
+    clearTimeout(this.timeoutsave)
+
+    this.timeoutsave = setTimeout(() => {
+      let box: any = {}
+
+      box.gifts = this.gifts
+      box.bucks = this.bucks
+      box.insidebox = this.workplace.img
+
+      let giftsIntoBox: any = []
+      for (let i = 0; i < this.giftsintobox.length; i++) {
+        giftsIntoBox[i] = {}
+        giftsIntoBox[i].id = this.giftsintobox[i].id
+        giftsIntoBox[i].w = this.giftsintobox[i].w
+        giftsIntoBox[i].h = this.giftsintobox[i].h
+        giftsIntoBox[i].x = this.giftsintobox[i].x
+        giftsIntoBox[i].y = this.giftsintobox[i].y
+        giftsIntoBox[i].z = this.giftsintobox[i].z
+        giftsIntoBox[i].rotate = this.giftsintobox[i].rotate
+      }
+      box.giftsintobox = giftsIntoBox
+
+      box.package = this.box.package
+      box.tape = this.box.tape
+
+      if (this.cookieService.check('idbox')) {
+        box.id = this.cookieService.get('idbox')
+      }
+
+      let query = {
+        typequery: 'insert',
+        data: box
+      }
+
+      this.databaseService.setBox(query).subscribe((d: any) => {
+        console.log(d)
+        if (d.success) {
+          if (d.created) this.cookieService.set('idbox', d.id, { expires: 5, path: '/' })
+        }
+      })
+    }, 3000)
+  }
+
+  restore(): void {
+
+    let query = {
+      typequery: 'get',
+      id: this.cookieService.get('idbox')
+    }
+
+    this.databaseService.setBox(query).subscribe((d: any) => {
+      if (d.success) {
+        let data = d.box
+        this.gifts = data.gifts
+        this.bucks = data.bucks
+        this.workplace.imgdrawing = data.insidebox
+        this.box.package = data.package
+        this.box.tape = data.tape
+
+        for (let i = 0; i < data.giftsintobox.length; i++) {
+          for (let j = 0; j < this.gifts.length; j++) {
+            if (this.gifts[j].id == data.giftsintobox[i].id) {
+              data.giftsintobox[i] = {...this.gifts[j], ...data.giftsintobox[i]}
+              break
+            }
+          }
+        }
+      }
+    })
+  }
+
+  chooseRestore(val: string) {
+    if (val == 'continue') {
+      this.restore()
+    } else if (val == 'new') {
+      this.cookieService.delete('idbox')
+    }
+    this.showRestore = false
+  }
 
   chooseNavigation(dir: string): void {
     this.workplace.shownav = false
@@ -273,6 +362,7 @@ export class CreateComponent implements AfterViewInit {
 
   getImgFromWorkplaceDraw(img: string) {
     this.workplace.img = img
+    this.save()
   }
 
   async trpltouchWorkplace(): Promise<void> {
@@ -563,6 +653,8 @@ export class CreateComponent implements AfterViewInit {
   chooseWrap(e: any): void {
     this.box.package = e
     this.workplace.showlistwraping = false
+
+    this.save()
   }
 
   cancelWrap(): void {
@@ -576,6 +668,8 @@ export class CreateComponent implements AfterViewInit {
   chooseTape(e: any): void {
     this.box.tape = e
     this.workplace.showlisttape = false
+
+    this.save()
   }
 
   cancelTape(): void {
@@ -642,6 +736,8 @@ export class CreateComponent implements AfterViewInit {
     if (this.workplace.showgiftlist) {
       this.workplace.showgiftlist = false
     }
+
+    this.save()
   }
 
   correctEdgesIntoBox(): void {
@@ -669,6 +765,8 @@ export class CreateComponent implements AfterViewInit {
       this.chooseSkeletonGift(e, id)
     }
     this.workplace.wasmoveintobox = false
+
+    this.save()
   }
 
   chooseSkeletonGift(e: any, id: number): void {
@@ -738,6 +836,8 @@ export class CreateComponent implements AfterViewInit {
     if (this.workplace.activegiftintobox.rotate == 360) this.workplace.activegiftintobox.rotate = 0
 
     this.correctEdgesIntoBox()
+
+    this.save()
   }
 
   showlistgifts(): void {
@@ -771,6 +871,8 @@ export class CreateComponent implements AfterViewInit {
       }
       this.giftsintobox.push(e)
     }
+
+    this.save()
   }
 
   async actShowBucks(): Promise<void> {
@@ -789,7 +891,10 @@ export class CreateComponent implements AfterViewInit {
     this.showbucks = false
     if (!e) {
       this.bucks.exists = false
+      this.bucks.exact = false
+      this.bucks.value = 0
     } else {
+      this.bucks.exists = true
       this.bucks.exact = e[0]
       this.bucks.value = e[1]
     }
@@ -798,6 +903,7 @@ export class CreateComponent implements AfterViewInit {
     await AsyncService.delay(2000)
     this.rack.click = true
     this.refreshable(true)
+    this.save()
   }
 
   async forwardToWorkplace(): Promise<void> {
@@ -911,6 +1017,7 @@ export class CreateComponent implements AfterViewInit {
       this.edititngGift.wrap = '../../assets/game/game.png'
       this.croppingobjectwrapgame.setImage('../../assets/game/game.png')
     }
+    this.save()
   }
 
   chooseGift(id: number): void {
@@ -948,6 +1055,7 @@ export class CreateComponent implements AfterViewInit {
   saveTitleColorGreeting(): void {
     this.edititngGift.colorText = this.rgbStringToHexString(this.editingtextcolor.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
     this.editgreetingcard.setTextColor(this.edititngGift.colorText)
+    this.save()
   }
   cancelTitleColorGreeting(): void {
     this.editingtextcolor.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.colorText
@@ -955,6 +1063,7 @@ export class CreateComponent implements AfterViewInit {
 
   saveColorGame(): void {
     this.edititngGift.color = this.rgbStringToHexString(this.editingcolorgame.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor)
+    this.save()
   }
   cancelColorGame(): void {
     this.editingcolorgame.el.querySelector(".skeletonColorpickerDrawSignGreeting .labelcolorpickersigngreeting").style.backgroundColor = this.edititngGift.color
@@ -978,6 +1087,7 @@ export class CreateComponent implements AfterViewInit {
     let img = this.drawingobjectsigngreeting.getImage()
     this.editgreetingcard.setSign(img)
     this.edititngGift.sign = img
+    this.save()
   }
 
   setSizesListGifts(): void {
@@ -997,7 +1107,8 @@ export class CreateComponent implements AfterViewInit {
           break
         }
       }
-    }, 300);
+      this.save()
+    }, 300)
   }
 
   openEditGift(e: any, id: Number) {
@@ -1010,9 +1121,9 @@ export class CreateComponent implements AfterViewInit {
     }
     this.edititngGift = gift
     if (gift.type == 'greetingcard') {
-      this.editgreetingcard.setFront(this.edititngGift.front.data)
-      this.editgreetingcard.setBack(this.edititngGift.back.data)
-      this.editgreetingcard.setText(this.edititngGift.front.data.text)
+      this.editgreetingcard.setFront(this.edititngGift.front)
+      this.editgreetingcard.setBack(this.edititngGift.back)
+      this.editgreetingcard.setText(this.edititngGift.text)
       this.editgreetingcard.setSign(this.edititngGift.sign)
       this.drawingobjectsigngreeting.setSign(this.edititngGift.sign)
 
@@ -1024,8 +1135,8 @@ export class CreateComponent implements AfterViewInit {
       this.croppingobjectbackgreeting.setRation(100/100)
       setTimeout(() => {
         this.listEditGreeting.scrollToStart()
-        this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
-        this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
+        this.croppingobjectfrontgreeting.setImage(this.edititngGift.front)
+        this.croppingobjectbackgreeting.setImage(this.edititngGift.back)
       }, 300);
     } else if (gift.type == 'game') {
       this.editgamepopup.show(e.clientX, e.clientY)
@@ -1049,24 +1160,28 @@ export class CreateComponent implements AfterViewInit {
 
   setTitleGift(): void {
     this.edititngGift.title = this.texttitle.value
+    this.save()
   }
 
   setTitleGiftGame(): void {
     this.edititngGift.title = this.texttitlegame.value
+    this.save()
   }
 
   setCodeGiftGame(): void {
     this.edititngGift.code = this.textcodegame.value
+    this.save()
   }
 
   setTextGreeting(): void {
     this.edititngGift.text = this.textareaTextGreeting.value.replace(/\n/g, `<br>`)
     this.editgreetingcard.setText(this.textareaTextGreeting.value.replace(/\n/g, `<br>`))
+    this.save()
   }
 
   setDefaultCropping(): void {
     let url = this.skeletonArrayFrontImages.nativeElement.querySelector('app-image-list-array.check').getAttribute('img')
-    this.croppingobjectfrontgreeting.setImage(url);
+    this.croppingobjectfrontgreeting.setImage(url)
   }
 
   setDefaultBackCropping(): void {
@@ -1076,11 +1191,12 @@ export class CreateComponent implements AfterViewInit {
 
   saveCroppingFront(): void {
     this.croppingobjectfrontgreeting.getImage().then((img: any) => {
-      this.edititngGift.front.data = img
+      this.edititngGift.front = img
       this.editgreetingcard.setFront(img)
       this.croppingfrontgreeting.hideNoAnim()
       this.editgreetingpopup.showNoAnim()
       this.editoptionfront.setValue('custom')
+      this.save()
     })
   }
 
@@ -1089,6 +1205,7 @@ export class CreateComponent implements AfterViewInit {
       this.edititngGift.img = img
       this.croppingfrontgame.hideNoAnim()
       this.editgamepopup.showNoAnim()
+      this.save()
     })
   }
 
@@ -1097,6 +1214,7 @@ export class CreateComponent implements AfterViewInit {
       this.edititngGift.wrap = img
       this.croppingwrapgame.hideNoAnim()
       this.editgamepopup.showNoAnim()
+      this.save()
     })
   }
 
@@ -1105,6 +1223,7 @@ export class CreateComponent implements AfterViewInit {
     this.croppingobjectfrontgame.setImage('../../assets/game/anygame.png')
     this.croppingfrontgame.hideNoAnim()
     this.editgamepopup.showNoAnim()
+    this.save()
   }
 
   saveCroppingWrapGameDefault(): void {
@@ -1112,15 +1231,17 @@ export class CreateComponent implements AfterViewInit {
     this.croppingobjectwrapgame.setImage('../../assets/game/game.png')
     this.croppingwrapgame.hideNoAnim()
     this.editgamepopup.showNoAnim()
+    this.save()
   }
 
   saveCroppingBack(): void {
     this.croppingobjectbackgreeting.getImage().then((img: any) => {
-      this.edititngGift.back.data = img
+      this.edititngGift.back = img
       this.editgreetingcard.setBack(img)
       this.croppingbackgreeting.hideNoAnim()
       this.editgreetingpopup.showNoAnim()
       this.editoptionback.setValue('custom')
+      this.save()
     })
   }
 
@@ -1186,7 +1307,7 @@ export class CreateComponent implements AfterViewInit {
       }
       img.src = fr.result
     }
-    fr.readAsDataURL(file);
+    fr.readAsDataURL(file)
   }
 
   showUrlUpload(e: any): void {
@@ -1267,8 +1388,8 @@ export class CreateComponent implements AfterViewInit {
       this.drawingobjectsigngreeting.clear()
 
       gift.title = 'Greeting card'
-      gift.front = { data: '../assets/greetingcard/front/1.jpg' }
-      gift.back = { data: '../assets/greetingcard/back/1.png' }
+      gift.front = '../assets/greetingcard/front/1.jpg'
+      gift.back = '../assets/greetingcard/back/1.png'
       gift.text = "May you be gifted with life’s biggest joys and never-ending bliss.<br>After all, you yourself are a gift to earth, so you deserve the best.<br>Happy birthday."
       gift.sign = ""
       gift.colorText = "#000"
@@ -1292,8 +1413,8 @@ export class CreateComponent implements AfterViewInit {
       this.croppingobjectfrontgreeting.setRation(100/150)
       this.croppingobjectbackgreeting.setRation(100/100)
       setTimeout(() => {
-        this.croppingobjectfrontgreeting.setImage(this.edititngGift.front.data)
-        this.croppingobjectbackgreeting.setImage(this.edititngGift.back.data)
+        this.croppingobjectfrontgreeting.setImage(this.edititngGift.front)
+        this.croppingobjectbackgreeting.setImage(this.edititngGift.back)
       }, 100);
     } else if (type == 'game') {
       this.croppingobjectfrontgame.setRation(135/(190-2*135*0.1))
@@ -1303,6 +1424,8 @@ export class CreateComponent implements AfterViewInit {
         this.croppingobjectwrapgame.setImage(this.edititngGift.wrap)
       }, 100);
     }
+
+    this.save()
   }
 
   ngAfterViewInit(): void {
@@ -1316,6 +1439,10 @@ export class CreateComponent implements AfterViewInit {
     // setTimeout(() => {
     //   this.addpopup.hide()
     // }, 4000);
+
+    if (!this.cookieService.check('idbox')) {
+      this.showRestore = false
+    }
   }
 
 }

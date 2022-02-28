@@ -1,3 +1,5 @@
+<app-restore-window [show]="showRestore" (choose)="chooseRestore($event)"></app-restore-window>
+
 <app-ready [show]="readyblock.show" (choose)="makeChooseReady($event)"></app-ready>
 
 <app-hanging-board [shown]="showbucks" (close)="backFromBucks()" (accept)="forwardToPackage($event)" ></app-hanging-board>
@@ -379,7 +381,7 @@
 
     <div *ngFor="let gift of gifts" class="optionGift" (click)="chooseGift(gift.id)" [attr.idgift]="gift.id">
       <div class="icoGift">
-        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.colorText" ></app-greeting-card>
+        <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="gift.front" [imgback]="gift.back" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.colorText" ></app-greeting-card>
         <app-game *ngIf="gift.type == 'game'" [size]="45" [animate]="true" [color]="gift.color" [img]="gift.img" [leftimg]="gift.leftimg" [wrap]="gift.wrap" [code]="gift.code" ></app-game>
       </div>
       <div class="textGift">{{gift.title}}</div>
@@ -433,6 +435,7 @@
   {type: 'rectangle', value: [0, box.size.y/(2*(box.size.x+box.size.y)), (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]},
   {type: 'rectangle', value: [(box.size.y+box.size.x)/(2*(box.size.x+box.size.y)), 1, (box.size.y+box.size.z)/(2*box.size.y+box.size.z), 1]}
   ]"
+  [img]="workplace.imgdrawing"
   (chng)="getImgFromWorkplaceDraw($event)"
   ></app-draw>
   <app-box #boxWorkplace
@@ -442,12 +445,12 @@
   [d]="box.size.z"
   [style.transform]="box.transform"
   [unpack]="box.unpack"
-  [wrap]="this.workplace.imgBox"
+  [wrap]="workplace.imgBox"
   [makepackage]="workplace.packed"
   [package]="box.package"
   [tape]="box.tape">
     <div *ngFor="let gift of giftsintobox" class="skeletonGiftIntoBox" [style.transform]="'translateX('+(gift.x ? gift.x : 0)+'px) translateY('+(gift.y ? gift.y : 0)+'px) translateZ('+(gift.z ? gift.z : 0)+'px) rotateX(180deg) rotateZ('+(gift.rotate ? gift.rotate : 0)+'deg)'" idgift="gift.id"  (mousedown)="startFocusSkeletonGift($event, gift.id)" (touchstart)="startFocusSkeletonGift($event, gift.id)" (mousemove)="moveFocusSkeletonGift($event, gift.id)" (touchmove)="moveFocusSkeletonGift($event, gift.id)" (mouseup)="endFocusSkeletonGift($event, gift.id)" (touchend)="endFocusSkeletonGift($event, gift.id)" [style.width]="gift.w+20+'px'" [style.height]="gift.h+20+'px'">
-      <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="gift.w" [h]="gift.h" [img]="gift.front.data" [imgback]="gift.back.data" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.textcolor"></app-greeting-card>
+      <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="gift.w" [h]="gift.h" [img]="gift.front" [imgback]="gift.back" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.textcolor"></app-greeting-card>
       <app-game *ngIf="gift.type == 'game'" [size]="gift.w" [color]="gift.color" [img]="gift.img" [wrap]="gift.wrap" [code]="gift.code" [leftimg]="gift.leftimg"></app-game>
     </div>
   </app-box>

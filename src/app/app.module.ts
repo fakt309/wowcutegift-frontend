@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { ListOfTapesComponent } from './list-of-tapes/list-of-tapes.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReadyComponent } from './ready/ready.component';
+import { RestoreWindowComponent } from './restore-window/restore-window.component';
 
 @NgModule({
   declarations: [
@@ -60,11 +62,13 @@ import { ReadyComponent } from './ready/ready.component';
     ListOfTapesComponent,
     NavigationComponent,
     PaymentComponent,
-    ReadyComponent
+    ReadyComponent,
+    RestoreWindowComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

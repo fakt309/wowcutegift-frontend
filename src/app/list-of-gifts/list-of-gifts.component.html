@@ -1,7 +1,7 @@
 <app-list2 [scroll]="scrollist">
   <div *ngFor="let ar of arr" [class]="ar.crossed ? 'option crossed' : 'option'" (click)="makeCross($event, ar)">
     <div class="ico">
-      <app-greeting-card *ngIf="ar.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="ar.front.data" [imgback]="ar.back.data" [text]="ar.text" [sign]="ar.sign" [textcolor]="ar.colorText" ></app-greeting-card>
+      <app-greeting-card *ngIf="ar.type == 'greetingcard'" [w]="50" [h]="75" [animate]="true" [img]="ar.front" [imgback]="ar.back" [text]="ar.text" [sign]="ar.sign" [textcolor]="ar.colorText" ></app-greeting-card>
       <app-game *ngIf="ar.type == 'game'" [size]="50" [animate]="true" [color]="ar.color" [img]="ar.img" [leftimg]="ar.leftimg" [wrap]="ar.wrap" [code]="ar.code"></app-game>
     </div>
     <div class="title">{{ ar.title }}</div>

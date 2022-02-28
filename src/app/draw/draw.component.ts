@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-draw',
@@ -15,6 +15,7 @@ export class DrawComponent implements OnInit {
   @Input('color') color: string = '#fff'
   @Input('tool') tool: string = 'pen'
   @Input('ban') ban: any = []
+  @Input('img') img: string = ''
 
   @Output() chng = new EventEmitter<string>()
 
@@ -156,7 +157,10 @@ export class DrawComponent implements OnInit {
     })
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['img'] && changes['img'].previousValue != changes['img'].currentValue) {
+      this.setSign(changes['img'].currentValue)
+    }
   }
 
 }

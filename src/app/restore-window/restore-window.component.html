@@ -1,0 +1,20 @@
+<div class="content"
+[style.maxWidth]="!isTouch ? '400px' : 'none'"
+[style.maxHeight]="!isTouch ? '500px' : 'none'"
+[style.transform]="transform">
+  <app-list2>
+    <div class="content2">
+      <div class="text">You have an unfinished box, would you like to continue?</div>
+      <div class="buttons">
+        <div class="button" (click)="this.choose.emit('new')">
+          <div class="ico" [style.backgroundImage]="'url(../../assets/new.png)'"></div>
+          <div class="text" [style.color]="'#00bcd4'">New</div>
+        </div>
+        <div class="button" (click)="this.choose.emit('continue')">
+          <div class="ico" [style.backgroundImage]="'url(../../assets/continue.png)'"></div>
+          <div class="text" [style.color]="'#ff9800'">Continue</div>
+        </div>
+      </div>
+    </div>
+  </app-list2>
+</div>
