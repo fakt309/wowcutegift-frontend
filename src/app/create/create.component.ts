@@ -95,12 +95,7 @@ export class CreateComponent implements AfterViewInit {
   }
 
   el: any = this.host.nativeElement
-  gifts: any = [
-    // { id: 0, title: 'FirstFirstFirstFirstFirstFirstFirstFirstFirs FirstFirstFirstFirstFirstFirstFirstFirstFirstFirstFirstFirst First First' },
-    // { id: 1, title: 'Second Second Second Second' },
-    // { id: 2, title: 'Third' },
-    // { id: 3, title: 'Fourth' }
-  ]
+  gifts: any = []
   edititngGift: any = {
     title: ''
   }
@@ -131,6 +126,8 @@ export class CreateComponent implements AfterViewInit {
   readyblock: any = { show: false }
 
   showRestore: boolean = true
+
+  loading: boolean = false
 
   workplace: any = {
     display: `none`,
@@ -226,14 +223,17 @@ export class CreateComponent implements AfterViewInit {
         this.box.package = data.package
         this.box.tape = data.tape
 
-        for (let i = 0; i < data.giftsintobox.length; i++) {
-          for (let j = 0; j < this.gifts.length; j++) {
-            if (this.gifts[j].id == data.giftsintobox[i].id) {
-              data.giftsintobox[i] = {...this.gifts[j], ...data.giftsintobox[i]}
-              break
-            }
-          }
-        }
+        // for (let i = 0; i < data.giftsintobox.length; i++) {
+        //   for (let j = 0; j < this.gifts.length; j++) {
+        //     if (this.gifts[j].id == data.giftsintobox[i].id) {
+        //       data.giftsintobox[i] = {...this.gifts[j], ...data.giftsintobox[i]}
+        //       break
+        //     }
+        //   }
+        // }
+        // this.giftsintobox = data.giftsintobox
+
+        this.loading = false
       }
     })
   }
@@ -241,6 +241,7 @@ export class CreateComponent implements AfterViewInit {
   chooseRestore(val: string) {
     if (val == 'continue') {
       this.restore()
+      this.loading = true
     } else if (val == 'new') {
       this.cookieService.delete('idbox')
     }

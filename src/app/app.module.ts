@@ -32,6 +32,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReadyComponent } from './ready/ready.component';
 import { RestoreWindowComponent } from './restore-window/restore-window.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { RestoreWindowComponent } from './restore-window/restore-window.componen
     NavigationComponent,
     PaymentComponent,
     ReadyComponent,
-    RestoreWindowComponent
+    RestoreWindowComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

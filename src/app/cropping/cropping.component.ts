@@ -59,9 +59,22 @@ export class CroppingComponent implements OnInit {
     this.sizeDisplay = [w, h]
     this.el.querySelector(".image").style.width = `${w}px`
     this.el.querySelector(".image").style.height = `${h}px`
-    if (w <= h) {
+
+    // if (w <= h) {
+    //   this.setCrop(0, 0, w, w/this.ratio)
+    // } else if (w > h) {
+    //   this.setCrop(0, 0, h*this.ratio, h)
+    // }
+
+    // if (w/this.ratio <= h) {
+    //   this.setCrop(0, 0, w, w/this.ratio)
+    // } else if (h*this.ratio <= w) {
+    //   this.setCrop(0, 0, h*this.ratio, h)
+    // }
+
+    if (this.ratio >= 1) {
       this.setCrop(0, 0, w, w/this.ratio)
-    } else if (w > h) {
+    } else {
       this.setCrop(0, 0, h*this.ratio, h)
     }
 

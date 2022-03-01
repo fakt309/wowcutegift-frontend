@@ -1,3 +1,5 @@
+<app-loading [show]="loading"></app-loading>
+
 <app-restore-window [show]="showRestore" (choose)="chooseRestore($event)"></app-restore-window>
 
 <app-ready [show]="readyblock.show" (choose)="makeChooseReady($event)"></app-ready>
@@ -350,7 +352,7 @@
 <app-popup #drawsigngreetingpopup>
   <!-- <div class="skeletonEditList"> -->
     <div id="skeletonSignGreeting">
-      <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front?.data" [imgback]="edititngGift.back?.data" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
+      <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front" [imgback]="edititngGift.back" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
       <app-draw #drawingobjectsigngreeting [width]="sizeforsigngreeting.w" [height]="0.2*sizeforsigngreeting.h" [color]="sizeforsigngreeting.color" [tool]="sizeforsigngreeting.tool" [style]="{position: 'absolute', 'z-index': '1', 'box-shadow': 'inset 0px 0px 0px 5px #ff9800', 'border': '5px solid #fff'}"></app-draw>
     </div>
     <div class="bottomMenuFrontGreeting">
