@@ -1,0 +1,175 @@
+:host {
+  position: absolute;
+  top: -100vh;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  background-color: #ffffff33;
+  z-index: 30;
+  transition: all ease 0.3s;
+  > .content {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #999;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    .empty {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+      color: #999;
+      flex: 1;
+    }
+    .textaddinfo {
+      margin: 20px;
+      font-size: 14px;
+      color: #999;
+      a {
+        color: #e91e63;
+      }
+    }
+    .display {
+      height: 50%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      > .hint {
+        padding: 0px 10px;
+        font-style: italic;
+        font-size: 14px;
+        color: #fff;
+        background-color: #000000;
+        text-align: center;
+        z-index: 20;
+        border-radius: 10px;
+        animation-name: flusher;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+      > *:nth-child(2) {
+        transform: rotateY(0deg);
+      }
+    }
+    .optionActive {
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      transition: all ease 0.3s;
+      > .title {
+        margin: 10px;
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+      }
+      > .value {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        font-size: 14px;
+        color: #e91e63;
+        text-align: right;
+        > .copy {
+          width: 25px;
+          height: 25px;
+          background-image: url(../../assets/copy.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin: 10px;
+          cursor: pointer;
+          animation-name: none;
+          animation-duration: 0.5s;
+          animation-timing-function: ease;
+          animation-iteration-count: 1;
+          transform: scale(1);
+        }
+      }
+    }
+    .optionActive.pointer {
+      cursor: pointer;
+    }
+    .option {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: pointer;
+      > .ico {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      > .text {
+        padding: 10px;
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+      }
+    }
+    .buttons {
+      margin-top: auto;
+      position: sticky;
+      bottom: 0px;
+      width: 100%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      > * {
+        margin: 10px;
+      }
+    }
+  }
+  > .content.desktop {
+    max-width: 500px;
+    max-height: 800px;
+    border-radius: 10px;
+  }
+  @keyframes flusher {
+    0% {
+      opacity: 0.5;
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes rotateAnim {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

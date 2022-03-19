@@ -33,6 +33,17 @@ import { PaymentComponent } from './payment/payment.component';
 import { ReadyComponent } from './ready/ready.component';
 import { RestoreWindowComponent } from './restore-window/restore-window.component';
 import { LoadingComponent } from './loading/loading.component';
+import { GiftComponent } from './gift/gift.component';
+import { Box2Component } from './box2/box2.component';
+import { BottomButtonsComponent } from './bottom-buttons/bottom-buttons.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { MenuGiftComponent } from './menu-gift/menu-gift.component';
+import { ArchiveButtonComponent } from './archive-button/archive-button.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { DemoComponent } from './demo/demo.component';
+import { DemoMenuComponent } from './demo-menu/demo-menu.component';
+import { ReadyPageComponent } from './ready-page/ready-page.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +76,18 @@ import { LoadingComponent } from './loading/loading.component';
     PaymentComponent,
     ReadyComponent,
     RestoreWindowComponent,
-    LoadingComponent
+    LoadingComponent,
+    GiftComponent,
+    Box2Component,
+    BottomButtonsComponent,
+    WelcomeComponent,
+    MenuGiftComponent,
+    ArchiveButtonComponent,
+    ArchiveComponent,
+    DemoComponent,
+    DemoMenuComponent,
+    ReadyPageComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

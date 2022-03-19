@@ -1,0 +1,56 @@
+<app-loading [show]="loading"></app-loading>
+
+<div [class]="isTouch ? 'content' : 'content desktop'">
+  <app-list2>
+    <div class="title">Your gift is ready !!!</div>
+    <div class="explain">send this link to the recipient</div>
+    <div class="link">
+      <div class="text">https://wowcutegift.com/gift;id={{this.idbox}}</div>
+      <div class="ico" (click)="copylink($event, 'https://wowcutegift.com/gift;id='+idbox)"></div>
+    </div>
+    <div class="explain">how it will look like in chat</div>
+    <div class="chat">
+      <div class="message me">
+        <div class="value">
+          <div class="text">Hey, there i have a 🎁 for u </div>
+          <div class="time">15:24</div>
+        </div>
+      </div>
+      <div class="message">
+        <div class="value">
+          <div class="text">SHOW ME!!! 😲😲😲</div>
+          <div class="time">15:24</div>
+        </div>
+      </div>
+      <div class="message me">
+        <div class="value">
+          <div class="text">
+            <div class="linktext">https://wowcutegift.com/gift;id={{this.idbox}}</div>
+            <div class="linkblock">
+              <div class="leftlinkblock">
+                <div class="linklinkblock">wowcutegift.com</div>
+                <div class="titlelinkblock">
+                  <div *ngIf="!preview.editing" class="texttitlelinkblock">{{preview.title}}</div>
+                  <input *ngIf="preview.editing" class="inputTitle" type="text" [value]="preview.title" />
+                </div>
+                <div class="descrlinkblock">
+                  <div *ngIf="!preview.editing" class="textdescrlinkblock">{{preview.descr}}</div>
+                  <input *ngIf="preview.editing" class="inputdescrlinkblock" type="text" [value]="preview.descr" />
+                </div>
+              </div>
+              <div class="imagelinkblock" [style.backgroundImage]="'url('+preview.img+')'">
+                <input type="file" id="inputimgpreview" accept="image/png, image/jpeg" (change)="loadImg($event)" />
+                <label class="labeltimgpreview" for="inputimgpreview" [style.display]="preview.editing ? 'flex': 'none'" ></label>
+              </div>
+            </div>
+          </div>
+          <div class="time">15:24</div>
+        </div>
+      </div>
+    </div>
+    <div class="editbutton" [style.backgroundColor]="preview.editing ? '#4caf50' : '#ff9800'" (click)="switchSave()">
+      <ng-container *ngIf="!preview.editing">edit</ng-container>
+      <ng-container *ngIf="preview.editing">save</ng-container>
+    </div>
+  </app-list2>
+</div>

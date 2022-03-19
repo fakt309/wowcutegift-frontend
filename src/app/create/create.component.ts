@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router'
+import { DeviceInfoService } from '../device-info.service'
+import { CryptoService } from '../crypto.service'
 
 import { CookieService } from 'ngx-cookie-service'
 import { AsyncService } from '../async.service'
@@ -25,7 +27,14 @@ const getBase64FromUrl = async (url: string) => {
 })
 export class CreateComponent implements AfterViewInit {
 
-  constructor(private host: ElementRef, public router: Router, private cookieService: CookieService,  private databaseService: DatabaseService) { }
+  constructor(
+    private host: ElementRef,
+    public router: Router,
+    private cookieService: CookieService,
+    private databaseService: DatabaseService,
+    private deviceInfo: DeviceInfoService,
+    private crypto: CryptoService
+  ) { }
 
   @ViewChild('nextbutton') nextbutton: any
   @ViewChild('addpopup') addpopup: any
@@ -192,6 +201,10 @@ export class CreateComponent implements AfterViewInit {
       if (this.cookieService.check('idbox')) {
         box.id = this.cookieService.get('idbox')
       }
+
+      let device = this.deviceInfo.getDeviceInfo()
+      box.demo = this.crypto.sha256(device.browser+device.browserMajorVersion+device.mobile+device.os+device.osVersion)
+      console.log(box)
 
       let query = {
         typequery: 'insert',
@@ -1356,7 +1369,7 @@ export class CreateComponent implements AfterViewInit {
       this.workplace.transform = 'scale(1)'
       await AsyncService.delay(300)
     } else if (type == 'demo') {
-      this.router.navigate(['gift', {demo: true}])
+      this.router.navigate(['gift', {demo: '1'}])
     } else if (type == 'payment') {
       this.router.navigate(['payment'])
     }

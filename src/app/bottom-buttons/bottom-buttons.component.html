@@ -1,0 +1,32 @@
+<div class="stage one" [style.display]="style[0].display" [style.transform]="style[0].transform">
+  <div class="left"></div>
+  <div class="right">
+    <div class="button">
+      <div class="text">Next</div>
+      <div class="hint" *ngIf="isTouch">double touch</div>
+      <div class="hint" *ngIf="!isTouch">space/click</div>
+    </div>
+  </div>
+</div>
+
+<div class="stage two" [style.display]="style[1].display" [style.transform]="style[1].transform">
+  <div class="left"></div>
+  <div class="right">
+    <div class="button">
+      <div class="text">Next</div>
+      <div class="hint" *ngIf="isTouch">double touch</div>
+      <div class="hint" *ngIf="!isTouch">space/click</div>
+    </div>
+  </div>
+</div>
+
+<div class="stage three" [style.display]="style[2].display" [style.transform]="style[2].transform">
+  <div class="left"></div>
+  <div class="right">
+    <div class="button">
+      <div class="text">Next</div>
+      <div class="hint" *ngIf="isTouch">double touch</div>
+      <div class="hint" *ngIf="!isTouch">space/click</div>
+    </div>
+  </div>
+</div>

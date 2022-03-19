@@ -1,0 +1,33 @@
+<app-demo-menu [show]="true"></app-demo-menu>
+<app-demo [show]="showdemo"></app-demo>
+
+<app-archive [actionin]="menu.archiveaction" [gifts]="giftsintoarchive" (close)="menu.archiveaction = 'hide'"></app-archive>
+<app-archive-button [show]="menu.showarchive" (click)="menu.archiveaction = 'show'"></app-archive-button>
+
+<app-welcome [stage]="welcome.stage" [bucks]="data.bucks"></app-welcome>
+
+<app-box2
+[w]="box.w"
+[h]="box.h"
+[d]="box.d"
+[style.transform]="box.transform"
+[animate]="box.animate"
+[packed]="box.packed"
+[wrapped]="box.wrapped"
+[tapped]="box.tapped"
+[tape]="data.tape"
+[package]="data.package"
+[inside]="data.insidebox"
+>
+  <div *ngFor="let gift of gifts" [class]="skeleton.animate ? 'skeletonGiftIntoBox animate' : 'skeletonGiftIntoBox'" [attr.idgift]="gift.id"  (mousedown)="startFocusSkeletonGift($event, gift.id)" (touchstart)="startFocusSkeletonGift($event, gift.id)" (mousemove)="moveFocusSkeletonGift($event, gift.id)" (touchmove)="moveFocusSkeletonGift($event, gift.id)" (mouseup)="endFocusSkeletonGift($event, gift.id)" (touchend)="endFocusSkeletonGift($event, gift.id)"
+  [style.width]="widthGift(gift)+20+'px'"
+  [style.height]="heightGift(gift)+20+'px'"
+  [style.transform]="'translateX('+coordXGift(gift)+'px) translateY('+coordYGift(gift)+'px) translateZ('+coordZGift(gift)+'px) rotateX(180deg) rotateY(0deg) rotateZ('+rotateGift(gift)+'deg) scale(1)'">
+    <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="widthGift(gift)" [h]="heightGift(gift)" [img]="gift.front" [imgback]="gift.back" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.textcolor"></app-greeting-card>
+    <app-game *ngIf="gift.type == 'game'" [size]="widthGift(gift)" [color]="gift.color" [img]="gift.img" [wrap]="gift.wrap" [code]="gift.code" [leftimg]="gift.leftimg" [open]="gift.open ? gift.open : false" [scratch]="gift.scratch ? gift.scratch : false"></app-game>
+  </div>
+</app-box2>
+
+<app-bottom-buttons [stage]="menu.stage"></app-bottom-buttons>
+
+<app-menu-gift [type]="menugift" [opentextgame]="skeleton.opentextgame" (action)='actionMenuGift($event)'></app-menu-gift>

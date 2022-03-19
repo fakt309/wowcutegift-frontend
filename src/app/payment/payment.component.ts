@@ -89,7 +89,7 @@ export class PaymentComponent implements OnInit {
     }
     value = arr.join(" ")
     el.value = value
-    this.number = value
+    this.number = value.replace(/ /g, "")
   }
 
   validDate(e: any): void {
@@ -143,6 +143,7 @@ export class PaymentComponent implements OnInit {
   goNext(): void {
 
     if (this.stage == 0) {
+      console.log(this.number)
       if (this.number.length < 8 || this.number.length > 19) {
         let bounding = this.host.nativeElement.querySelector('.content > .cards > .card > .cardnumber').getBoundingClientRect()
         this.showError('Mininmum length 7, maximum 20', bounding.x, bounding.y+30)

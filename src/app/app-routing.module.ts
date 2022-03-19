@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
 import { CreateComponent } from './create/create.component'
+import { GiftComponent } from './gift/gift.component'
+import { PaymentComponent } from './payment/payment.component'
+import { ReadyPageComponent } from './ready-page/ready-page.component'
 
 const routes: Routes = [
   {
@@ -9,12 +12,16 @@ const routes: Routes = [
     path: 'create'
   },
   {
-    component: CreateComponent,
+    component: GiftComponent,
     path: 'gift'
   },
   {
-    component: CreateComponent,
+    component: PaymentComponent,
     path: 'payment'
+  },
+  {
+    component: ReadyPageComponent,
+    path: 'ready'
   }
 ];
 

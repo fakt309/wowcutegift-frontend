@@ -1,0 +1,154 @@
+:host {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all ease 0.3s;
+  > .hint {
+    text-align: center;
+    position: absolute;
+    left: 0px;
+    bottom: 10%;
+    z-index: 20;
+    width: 100%;
+    height: 10%;
+    font-size: 14px;
+    color: #999;
+    opacity: 1;
+    transform: translateY(0vh);
+    transition: all ease 0.3s;
+  }
+  > .hint.hide {
+    opacity: 0;
+    transform: translateY(-10vh);
+  }
+  > .bucks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.3s;
+    > div {
+      margin: 10px;
+      text-align: center;
+    }
+  }
+  > .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.3s;
+    > .left, > .right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      > .text {
+        user-select: none;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        flex-shrink: 0;
+        text-align: center;
+        font-size: 14vw;
+        white-space: nowrap;
+        color: #e91e63;
+        font-weight: bold;
+      }
+    }
+    > .left {
+      > .text {
+        transform: translateX(0%) translateY(0%) skewY(-20deg);
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        animation-iteration-count: 1;
+      }
+    }
+    > .right {
+      background-color: #eee;
+      > .text {
+        transform: translateX(-100%) translateY(-58.5%) skewY(20deg);
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        animation-iteration-count: 1;
+      }
+    }
+  }
+  @keyframes movinginleft {
+    0% {
+      transform: translateX(-200%) translateY(100%) skewY(-20deg);
+    }
+    50% {
+      transform: translateX(-90%) translateY(62%) skewY(-20deg);
+    }
+    100% {
+      transform: translateX(0%) translateY(0%) skewY(-20deg);
+    }
+  }
+  @keyframes movinginright {
+    0% {
+      transform: translateX(-193%) translateY(-101%) skewY(20deg);
+    }
+    50% {
+      transform: translateX(-193%) translateY(-101%) skewY(20deg);
+    }
+    100% {
+      transform: translateX(-100%) translateY(-58.5%) skewY(20deg);
+    }
+  }
+  @keyframes movingoutleft {
+    0% {
+      transform: translateX(0%) translateY(0%) skewY(-20deg);
+    }
+    50% {
+      transform: translateX(100%) translateY(-57%) skewY(-20deg);
+    }
+    100% {
+      transform: translateX(200%) translateY(-100%) skewY(-20deg);
+    }
+  }
+  @keyframes movingoutright {
+    0% {
+      transform: translateX(-100%) translateY(-58.5%) skewY(20deg);
+    }
+    50% {
+      transform: translateX(0%) translateY(1.5%) skewY(20deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) skewY(20deg);
+    }
+  }
+  @keyframes movinginleft2 {
+    0% {
+      transform: translateX(-200%) translateY(100%) skewY(-20deg);
+    }
+    50% {
+      transform: translateX(-100%) translateY(62%) skewY(-20deg);
+    }
+    100% {
+      transform: translateX(0%) translateY(0%) skewY(-20deg);
+    }
+  }
+  @keyframes movinginright2 {
+    0% {
+      transform: translateX(-200%) translateY(-55.5%) skewY(20deg);
+    }
+    50% {
+      transform: translateX(-200%) translateY(-55.5%) skewY(20deg);
+    }
+    100% {
+      transform: translateX(-100%) translateY(-39.5%) skewY(20deg);
+    }
+  }
+}

@@ -1,0 +1,56 @@
+:host {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  height: 100px;
+  width: 100px;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f44336;
+  border-radius: 200px;
+  text-align: center;
+  animation-name: moving;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  > .title {
+    margin: 10px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+  }
+  > .subtitle {
+    font-size: 12px;
+    color: #fff;
+  }
+  @keyframes moving {
+    0% {
+      top: 10%;
+      left: 10%;
+      opacity: 1;
+    }
+    25% {
+      top: 10%;
+      left: calc(90% - 100px);
+      opacity: 0.2;
+    }
+    50% {
+      top: calc(90% - 100px);
+      left: 10%;
+      opacity: 1;
+    }
+    75% {
+      top: calc(90% - 100px);
+      left: calc(90% - 100px);
+      opacity: 0.2;
+    }
+    100% {
+      top: 10%;
+      left: 10%;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+:host {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation-name: none;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  .skeletonGiftIntoBox {
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .skeletonGiftIntoBox.animate {
+    transition: transform ease 0.5s;
+  }
+}
+@keyframes earthshake {
+  0% {
+    transform: translateX(-10%);
+  }
+  30% {
+    transform: translateX(10%);
+  }
+  60% {
+    transform: translateX(-10%);
+  }
+  90% {
+    transform: translateX(10%);
+  }
+}

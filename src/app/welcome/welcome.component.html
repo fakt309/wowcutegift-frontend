@@ -1,0 +1,23 @@
+<div class="container" [style.display]="style[0].display" [style.opacity]="style[0].opacity">
+  <div class="left">
+    <div class="text" [style.animationName]="style[0].animationLeft" [style.transform]="style[0].transformLeft">
+      Wow, there is<br>a gift for you!
+    </div>
+  </div>
+  <div class="right">
+    <div class="text" [style.animationName]="style[0].animationRight" [style.transform]="style[0].transformRight">
+      Wow, there is<br>a gift for you!
+    </div>
+  </div>
+</div>
+
+<div class="bucks" [style.display]="style[1].display" [style.opacity]="style[1].opacity">
+  <div style="font-size:6vw;color:#999"> {{text.left}} </div>
+  <div [style.color]="text.color" [style.fontSize]="text.size+'vw'"> {{text.center}} </div>
+  <div style="font-size:6vw;color:#999"> {{text.right}} </div>
+</div>
+
+<div [class]="showhint ? 'hint' : 'hint hide'">
+  <ng-container *ngIf="isTouch">double tap to continue</ng-container>
+  <ng-container *ngIf="!isTouch">click/space to continue</ng-container>
+</div>

@@ -1,0 +1,49 @@
+<ng-container *ngIf="showing[0]">
+  <div class="part">
+    <div *ngIf="isTouch" class="button">
+      <div class="text" [style.color]="'#00bcd4'" [style.marginBottom]="'0px'">Rotate</div>
+      <div class="subtext">swipe left/right</div>
+    </div>
+    <div *ngIf="!isTouch" class="button" [style.margin]="'10px 20px'">
+      <div class="text" [style.color]="'#00bcd4'" [style.marginBottom]="'0px'">Rotate</div>
+      <div class="subtext">scroll</div>
+    </div>
+  </div>
+  <div class="part">
+    <div class="button" *ngIf="isTouch">
+      <div class="text" [style.color]="'#e91e63'" [style.marginBottom]="'0px'">Hide</div>
+      <div class="subtext">swipe up</div>
+    </div>
+    <div class="button desktop" *ngIf="!isTouch" (click)="action.emit('close')">
+      <div class="text" [style.color]="'#e91e63'">Hide</div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="showing[1]">
+  <div class="part">
+    <div *ngIf="isTouch" class="button">
+      <div class="text" [style.color]="'#00bcd4'" [style.marginBottom]="'0px'">Rotate</div>
+      <div class="subtext">swipe left/right</div>
+    </div>
+    <div *ngIf="isTouch" class="button">
+      <div class="text" [style.color]="'#00bcd4'" [style.marginBottom]="'0px'">{{ opentextgame }}</div>
+      <div class="subtext">double tap</div>
+    </div>
+    <div *ngIf="!isTouch" class="button" [style.margin]="'10px 20px'">
+      <div class="text" [style.color]="'#00bcd4'" [style.marginBottom]="'0px'">Rotate</div>
+      <div class="subtext">scroll</div>
+    </div>
+    <div *ngIf="!isTouch" class="button desktop" (click)="action.emit('opengame')">
+      <div class="text" [style.color]="'#00bcd4'"> {{ opentextgame }}</div>
+    </div>
+  </div>
+  <div class="part">
+    <div class="button" *ngIf="isTouch">
+      <div class="text" [style.color]="'#e91e63'" [style.marginBottom]="'0px'">Hide</div>
+      <div class="subtext">swipe up</div>
+    </div>
+    <div class="button desktop" *ngIf="!isTouch" (click)="action.emit('close')">
+      <div class="text" [style.color]="'#e91e63'">Hide</div>
+    </div>
+  </div>
+</ng-container>

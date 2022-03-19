@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
   @Input('open') open: boolean = false
   @Input('wrap') wrap: string = ''
   @Input('holes') holes: any = []
-  @Input('code') code: any = []
+  @Input('code') code: any = ''
   @Input('leftimg') leftimg: string = ''
   @Input('animate') animate: boolean = false
   @Input('scratch') scratch: boolean = false
