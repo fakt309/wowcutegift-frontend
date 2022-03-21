@@ -1,4 +1,4 @@
-<app-demo-menu [show]="true"></app-demo-menu>
+<app-demo-menu [show]="showdemomenu"></app-demo-menu>
 <app-demo [show]="showdemo"></app-demo>
 
 <app-archive [actionin]="menu.archiveaction" [gifts]="giftsintoarchive" (close)="menu.archiveaction = 'hide'"></app-archive>
@@ -23,7 +23,7 @@
   [style.width]="widthGift(gift)+20+'px'"
   [style.height]="heightGift(gift)+20+'px'"
   [style.transform]="'translateX('+coordXGift(gift)+'px) translateY('+coordYGift(gift)+'px) translateZ('+coordZGift(gift)+'px) rotateX(180deg) rotateY(0deg) rotateZ('+rotateGift(gift)+'deg) scale(1)'">
-    <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="widthGift(gift)" [h]="heightGift(gift)" [img]="gift.front" [imgback]="gift.back" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.textcolor"></app-greeting-card>
+    <app-greeting-card *ngIf="gift.type == 'greetingcard'" [w]="widthGift(gift)" [h]="heightGift(gift)" [img]="gift.front" [imgback]="gift.back" [text]="gift.text" [sign]="gift.sign" [textcolor]="gift.colorText"></app-greeting-card>
     <app-game *ngIf="gift.type == 'game'" [size]="widthGift(gift)" [color]="gift.color" [img]="gift.img" [wrap]="gift.wrap" [code]="gift.code" [leftimg]="gift.leftimg" [open]="gift.open ? gift.open : false" [scratch]="gift.scratch ? gift.scratch : false"></app-game>
   </div>
 </app-box2>

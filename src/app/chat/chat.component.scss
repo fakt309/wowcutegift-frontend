@@ -1,0 +1,161 @@
+:host {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  border-radius: 10px;
+  background-color: #eef1f5;
+  width: 90%;
+  height: 50%;
+  max-height: 500px;
+  max-width: 400px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #999;
+  > .message {
+    flex-shrink: 0;
+    max-height: 0px;
+    overflow: hidden;
+    max-width: 80%;
+    align-self: flex-start;
+    margin: 10px 0px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px #ddd;
+    transition: all ease 0.3s;
+    > .avatar {
+      flex-shrink: 0;
+      margin: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 100px;
+      background-color: #000;
+    }
+    > .value {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      > .text {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        word-break: break-word;
+        font-size: 16px;
+        margin: 10px;
+        margin-bottom: 0px;
+        > .linktext {
+          color: #698ad0;
+        }
+        > .linkblock {
+          margin: 10px 0px;
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: center;
+          border-left: 4px solid #5eb854;
+          > .leftlinkblock {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            flex: 1;
+            > .linklinkblock {
+              margin: 5px 10px;
+              color: #5eb854;
+            }
+            > .titlelinkblock {
+              > .texttitlelinkblock {
+                margin: 5px 10px;
+                color: #000;
+                font-weight: bold;
+                font-size: 16px;
+              }
+              > .inputTitle {
+                background-color: unset;
+                border-radius: 5px;
+                margin: 0px 5px;
+                padding: 5px;
+                font-size: 16px;
+                color: #e91e63;
+                font-weight: bold;
+                border: none;
+                outline: none;
+                box-shadow: 0px 0px 5px #e91e63;
+                font-family: "Comfortaa", cursive;
+              }
+            }
+            > .descrlinkblock {
+              > .textdescrlinkblock {
+                margin: 5px 10px;
+                color: #666;
+                font-size: 16px;
+              }
+              > .inputdescrlinkblock {
+                margin: 0px 5px;
+                margin-top: 10px;
+                background-color: unset;
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 16px;
+                color: #e91e63;
+                border: none;
+                outline: none;
+                box-shadow: 0px 0px 5px #e91e63;
+                font-family: "Comfortaa", cursive;
+              }
+            }
+          }
+          > .imagelinkblock {
+            flex-shrink: 0;
+            margin: 10px;
+            width: 55px;
+            height: 55px;
+            border-radius: 5px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            #inputimgpreview {
+              display: none;
+            }
+            > .labeltimgpreview {
+              cursor: pointer;
+              background-color: #ffffff66;
+              backdrop-filter: blur(2px);
+              width: 100%;
+              height: 100%;
+              display: none;
+              background-image: url(../../assets/download.png);
+              background-position: center;
+              background-size: 30px;
+              background-repeat: no-repeat;
+            }
+          }
+        }
+      }
+      > .time {
+        margin: 5px;
+        font-size: 14px;
+        color: #999;
+        align-self: flex-end;
+      }
+    }
+  }
+  > .message.me {
+    align-self: flex-end;
+    margin-right: 10px;
+    background-color: #e2ffed;
+    > .value {
+      > .time {
+        color: #a0c9b0;
+      }
+    }
+  }
+}

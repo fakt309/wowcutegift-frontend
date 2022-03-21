@@ -22,15 +22,16 @@ export class ReadyComponent implements OnInit {
   marginReady: string = '30vh'
   transformButtons: string = 'translateY(100vh)'
   animationNameReady: string = 'none'
+  opacitybuttons: string = '0'
 
   async doShow(): Promise<void> {
     this.animate = true
     this.display = 'flex'
-    await AsyncService.delay(10)
+    await AsyncService.delay(30)
     this.transform = 'scale(1)'
-    await AsyncService.delay(300)
-    this.animationNameReady = 'dance'
     await AsyncService.delay(1000)
+    this.opacitybuttons = '1'
+    await AsyncService.delay(300)
     this.transformButtons = 'translateY(0vh)'
     this.marginReady = '0vh'
     await AsyncService.delay(300)
@@ -41,12 +42,13 @@ export class ReadyComponent implements OnInit {
   async doHide(): Promise<void> {
     this.animate = true
     await AsyncService.delay(10)
-    this.transformButtons = 'translateY(0vh)'
-    this.marginReady = '0vh'
     this.transform = 'scale(0)'
     await AsyncService.delay(300)
     this.display = 'none'
     this.animate = false
+    this.transformButtons = 'translateY(100vh)'
+    this.marginReady = '30vh'
+    this.opacitybuttons = '0'
     return new Promise(res => res())
   }
 

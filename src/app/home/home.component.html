@@ -1,0 +1,71 @@
+<app-skip [action]="menu.actionskip" (skip)="skipWelcome()"></app-skip>
+<app-continue [action]="menu.actioncontinue" (cntue)="continueWelcome()"></app-continue>
+
+<app-buttons-home [action]="menu.actionbuttons"></app-buttons-home>
+
+<app-title [value]="titlehint"></app-title>
+
+<div class="screen"
+[style.display]="styles.screen1.display"
+[style.opacity]="styles.screen1.opacity"
+>
+  <div class="emoji" [style.backgroundImage]="'url(../../assets/home/firstscreen.png)'" [style.transform]="styles.screen1.transformemoji"></div>
+  <div class="text" [style.transform]="styles.screen1.transformtext">Let's imagine you have a friend, girlfriend, brother someone else ...</div>
+</div>
+
+<div class="screen"
+[style.display]="styles.screen2.display"
+[style.opacity]="'1'"
+>
+  <div class="emoji" [style.backgroundImage]="'url(../../assets/home/secondscreen.png)'" [style.transform]="styles.screen2.transformemoji"></div>
+  <div class="text" [style.transform]="styles.screen2.transformtext" [style.width]="'330px'">You decide to gift smth (birthday, new year, no reason, something else ...)</div>
+</div>
+
+<div class="screen"
+[style.display]="styles.screenlast.display"
+[style.opacity]="'1'"
+>
+  <div class="emoji" [style.backgroundImage]="'url(../../assets/home/lastscreen.png)'" [style.transform]="styles.screenlast.transformemoji"></div>
+  <div class="text" [style.transform]="styles.screenlast.transformtext" [style.width]="'330px'">Cool, right?!</div>
+</div>
+
+<div class="screen" [style.display]="styles.box.display" [style.opacity]="'1'">
+  <app-box2
+  [w]="200"
+  [d]="200"
+  [h]="100"
+  [style.display]="styles.box.display"
+  [style.transform]="styles.box.transform"
+  [style.transition]="'all ease 0.3s'"
+  [package]="'../../assets/box/package/11.jpg'"
+  [tape]="'../../assets/box/tape/10.jpg'"
+  [animate]="box.animate"
+  [packed]="box.packed"
+  [wrapped]="box.wrapped"
+  [tapped]="box.tapped"
+  >
+    <app-game
+    [size]="sizeGame"
+    [color]="'#006FCD'"
+    [leftimg]="'../../assets/game/psleft.png'"
+    [wrap]="'../../assets/game/ps.png'"
+    [img]="'../../assets/game/example.jpg'"
+    [style.transform]="'translateX('+xGame+') translateY('+yGame+') translateZ('+zGame+'px) rotateX(180deg) scale('+scaleGame+')'"
+    [style.transition]="menu.animategifts ? 'all ease 0.3s' : ''"></app-game>
+    <app-greeting-card
+    [w]="widthGreeting"
+    [h]="heightGreeting"
+    [img]="'../../assets/greetingcard/front/17.jpg'"
+    [imgback]="'../../assets/greetingcard/back/5.png'"
+    [text]="greetingcard.text"
+    [sign]="greetingcard.sign"
+    [textcolor]="'#fff'"
+    [style.transform]="'translateX('+xGreeting+') translateY('+yGreeting+') translateZ('+zGreeting+'px) rotateX(180deg) rotateY('+rotateYGreeting+'deg) scale('+scaleGreeting+')'"
+    [style.transition]="menu.animategifts ? 'all ease 0.3s' : ''"></app-greeting-card>
+  </app-box2>
+</div>
+
+<!-- styles.box.display -->
+<div class="screen" [style.display]="chat.display" [style.opacity]="'1'">
+  <app-chat [message]="chat.message" [style.transform]="chat.transform" [style.transition]="'all ease 0.5s'"></app-chat>
+</div>

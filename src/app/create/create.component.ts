@@ -1372,6 +1372,8 @@ export class CreateComponent implements AfterViewInit {
       this.router.navigate(['gift', {demo: '1'}])
     } else if (type == 'payment') {
       this.router.navigate(['payment'])
+    } else if (type == 'accept') {
+      this.router.navigate(['ready'])
     }
     return new Promise(res => res())
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core'
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser'
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { CookieService } from 'ngx-cookie-service'
@@ -21,7 +22,9 @@ export class GiftComponent implements OnInit {
     private databaseService: DatabaseService,
     private cookieService: CookieService,
     private deviceInfo: DeviceInfoService,
-    private crypto: CryptoService
+    private crypto: CryptoService,
+    private meta: Meta,
+    private title: Title,
   ) {}
 
   touch: any = {
@@ -258,6 +261,7 @@ export class GiftComponent implements OnInit {
   activeGift: any = null
 
   showdemo: boolean = false
+  showdemomenu: boolean = false
 
   data: any = {
     _id: "621dbcb6247c26ff35bf7b1b",
@@ -367,7 +371,7 @@ export class GiftComponent implements OnInit {
   menugift: string = 'none'
 
   holding(): void {
-    if (this.menu.archiveaction != 'show') {
+    if (this.menu.archiveaction != 'show' && this.showdemomenu) {
       this.router.navigate(['ready'])
     }
   }
@@ -610,14 +614,76 @@ export class GiftComponent implements OnInit {
     document.querySelector('meta[property="'+title+'"]')!.setAttribute("content", content)
   }
 
+  addMeta(title: string, content: string): void {
+    let meta = document.createElement('meta')
+    meta.setAttribute('property', title)
+    meta.content = content
+    document.getElementsByTagName('head')[0].appendChild(meta)
+  }
+
   ngOnInit(): void {
-    this.processData()
+    // this.processData()
 
     this.isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
     setTimeout(() => { this.welcome.cancontinue = true }, 3000)
 
-    if (this.route.snapshot.params['demo'] === '1') {
+    if (this.route.snapshot.params['demonstration'] === '1') {
+      this.data = {
+        _id: "621dbcb6247c26ff35bf7b1b",
+        gifts: [
+          {
+            id: 1,
+            type: "greetingcard",
+            title: "Greeting card",
+            front: "../assets/greetingcard/front/17.jpg",
+            back: "../assets/greetingcard/back/5.png",
+            text: "May your success double and joys triple, May your sadness halve and your troubles disappear!",
+            sign: "../../assets/greetingcard/sign2.png",
+            colorText: "#fff"
+          }, {
+            id: 2,
+            type: "game",
+            title: "Game",
+            platform: "playstation",
+            color: "#006FCD",
+            img: "../../assets/game/example.jpg",
+            leftimg: "../../assets/game/psleft.png",
+            wrap: "../../assets/game/ps.png",
+            code: "DYR5-42KI-FR9G-POMN"
+          }
+        ],
+        bucks: { value: 20,
+          exact: false,
+          exists: true },
+        insidebox: "",
+        giftsintobox: [
+          {
+           id: 2,
+           w: 100,
+           h: 140,
+           x: 0,
+           y: 0,
+           z: -(100/(135/15))/2,
+           rotate: 0
+          }, {
+            id: 1,
+            w: 80,
+            h: 120,
+            x: 0,
+            y: 0,
+            z: -(100/(135/15))-2,
+            rotate: 0
+          }
+        ],
+        package: "../../assets/box/package/11.jpg",
+        tape: "../../assets/box/tape/10.jpg",
+        createDate: new Date(),
+        updateDate: new Date()
+      }
+      this.processData()
+    } else if (this.route.snapshot.params['demo'] === '1') {
+      this.showdemomenu = true
       this.showdemo = true
       if (this.cookieService.check('idbox')) {
         let query = {
@@ -654,12 +720,20 @@ export class GiftComponent implements OnInit {
           let data: any = d.box
           if (data.demo == "") {
             this.data = data
+
+            this.meta.updateTag({ property: 'og:url', content: window.location.href })
+            this.meta.updateTag({ property: 'og:title', content: data.preview.title })
+            this.meta.updateTag({ property: 'og:description', content: data.preview.descr })
+            this.meta.updateTag({ property: 'og:image', content: data.preview.img })
+            this.title.setTitle(data.preview.title)
+
             this.processData()
 
-            document.title = data.preview.title
-            this.setMeta('og:title', data.preview.title)
-            this.setMeta('og:description', data.preview.descr)
-            this.setMeta('og:image', data.preview.img)
+            // document.title = data.preview.title
+            // this.addMeta('og:title', data.preview.title)
+            // this.addMeta('og:description', data.preview.descr)
+            // this.addMeta('og:image', data.preview.img)
+
           } else {
             this.router.navigate([''])
           }

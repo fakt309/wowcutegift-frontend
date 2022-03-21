@@ -113,7 +113,7 @@ export class GreetingCardComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setDefault()
+    // this.setDefault()
     this.setSize(this.w, this.h, 2)
     this.demoAnimate(this.animate)
     this.setText()

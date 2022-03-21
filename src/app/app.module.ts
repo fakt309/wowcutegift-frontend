@@ -44,6 +44,12 @@ import { DemoComponent } from './demo/demo.component';
 import { DemoMenuComponent } from './demo-menu/demo-menu.component';
 import { ReadyPageComponent } from './ready-page/ready-page.component';
 import { MessageComponent } from './message/message.component';
+import { HomeComponent } from './home/home.component';
+import { SkipComponent } from './skip/skip.component';
+import { ContinueComponent } from './continue/continue.component';
+import { TitleComponent } from './title/title.component';
+import { ChatComponent } from './chat/chat.component';
+import { ButtonsHomeComponent } from './buttons-home/buttons-home.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +93,13 @@ import { MessageComponent } from './message/message.component';
     DemoComponent,
     DemoMenuComponent,
     ReadyPageComponent,
-    MessageComponent
+    MessageComponent,
+    HomeComponent,
+    SkipComponent,
+    ContinueComponent,
+    TitleComponent,
+    ChatComponent,
+    ButtonsHomeComponent
   ],
   imports: [
     BrowserModule,

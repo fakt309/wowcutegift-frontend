@@ -96,6 +96,7 @@ export class ReadyPageComponent implements OnInit {
               this.preview.descr = d.box.preview.descr
               this.preview.img = d.box.preview.img
               this.loading = false
+              this.cookieService.delete('idbox')
             })
           } else if (d.box.demo == "") {
             this.idbox = this.cookieService.get('idbox')
@@ -103,6 +104,7 @@ export class ReadyPageComponent implements OnInit {
             this.preview.descr = d.box.preview.descr
             this.preview.img = d.box.preview.img
             this.loading = false
+            this.cookieService.delete('idbox')
           } else {
             this.router.navigate([''])
           }

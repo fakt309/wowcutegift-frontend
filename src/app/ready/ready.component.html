@@ -2,7 +2,7 @@
 [style.animationName]="animationNameReady"
 [style.marginTop]="marginReady"
 >Ready to send</div>
-<div class="buttons" [style.transform]="transformButtons">
+<div class="buttons" [style.transform]="transformButtons" [style.opacity]="opacitybuttons">
   <div class="button back" (click)="push('back')">
     <div class="ico" [style.backgroundImage]="'url(../../assets/arrowback.png)'"></div>
     <div class="text">Back</div>
@@ -11,8 +11,12 @@
     <div class="ico" [style.backgroundImage]="'url(../../assets/desktop.png)'"></div>
     <div class="text">Demo</div>
   </div>
-  <div class="button payment" (click)="push('payment')">
+  <!-- <div class="button payment" (click)="push('payment')">
     <div class="ico" [style.backgroundImage]="'url(../../assets/payment.png)'"></div>
     <div class="text">Payment</div>
+  </div> -->
+  <div class="button accept" (click)="push('accept')">
+    <div class="ico" [style.backgroundImage]="'url(../../assets/accept.png)'"></div>
+    <div class="text">Accept</div>
   </div>
 </div>
