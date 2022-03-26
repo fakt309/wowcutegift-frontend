@@ -9,6 +9,7 @@ import { TranslateComponent } from '../translate/translate.component'
 
 import { DeviceInfoService } from '../device-info.service'
 import { CryptoService } from '../crypto.service'
+import { AnalyticService } from '../analytic.service'
 
 @Component({
   selector: 'app-gift',
@@ -27,7 +28,8 @@ export class GiftComponent implements OnInit {
     private crypto: CryptoService,
     private meta: Meta,
     private title: Title,
-    public trnl: TranslateComponent
+    public trnl: TranslateComponent,
+    private analytic: AnalyticService
   ) {}
 
   touch: any = {
@@ -756,6 +758,8 @@ export class GiftComponent implements OnInit {
     } else {
       this.router.navigate([''])
     }
+
+    this.analytic.visit()
   }
 
 }

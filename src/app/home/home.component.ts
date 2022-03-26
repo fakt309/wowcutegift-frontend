@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { AsyncService } from '../async.service'
 import { TranslateComponent } from '../translate/translate.component'
+import { AnalyticService } from '../analytic.service'
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,10 @@ import { TranslateComponent } from '../translate/translate.component'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public trnl: TranslateComponent) { }
+  constructor(
+    public trnl: TranslateComponent,
+    private analytic: AnalyticService
+  ) { }
 
   isTouch: boolean = false
   menu: any = {
@@ -470,6 +474,8 @@ export class HomeComponent implements OnInit {
     this.isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
     this.init()
+
+    this.analytic.visit()
   }
 
 }

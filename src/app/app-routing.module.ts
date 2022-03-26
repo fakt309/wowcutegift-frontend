@@ -6,6 +6,7 @@ import { CreateComponent } from './create/create.component'
 import { GiftComponent } from './gift/gift.component'
 import { PaymentComponent } from './payment/payment.component'
 import { ReadyPageComponent } from './ready-page/ready-page.component'
+import { AnalyticComponent } from './analytic/analytic.component'
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     component: ReadyPageComponent,
     path: 'ready'
+  },
+  {
+    component: AnalyticComponent,
+    path: 'analytic'
   }
 ];
 

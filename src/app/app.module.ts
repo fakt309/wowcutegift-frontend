@@ -51,6 +51,7 @@ import { TitleComponent } from './title/title.component';
 import { ChatComponent } from './chat/chat.component';
 import { ButtonsHomeComponent } from './buttons-home/buttons-home.component';
 import { TranslateComponent } from './translate/translate.component';
+import { AnalyticComponent } from './analytic/analytic.component';
 
 @NgModule({
   declarations: [
@@ -101,14 +102,15 @@ import { TranslateComponent } from './translate/translate.component';
     TitleComponent,
     ChatComponent,
     ButtonsHomeComponent,
-    TranslateComponent
+    TranslateComponent,
+    AnalyticComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [TranslateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

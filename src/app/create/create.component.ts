@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { AsyncService } from '../async.service'
 import { DatabaseService } from '../database.service'
 import { TranslateComponent } from '../translate/translate.component'
+import { AnalyticService } from '../analytic.service'
 
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url);
@@ -36,7 +37,8 @@ export class CreateComponent implements AfterViewInit {
     private databaseService: DatabaseService,
     private deviceInfo: DeviceInfoService,
     private crypto: CryptoService,
-    public trnl: TranslateComponent
+    public trnl: TranslateComponent,
+    private analytic: AnalyticService
   ) { }
 
   @ViewChild('nextbutton') nextbutton: any
@@ -1463,6 +1465,8 @@ export class CreateComponent implements AfterViewInit {
     if (!this.cookieService.check('idbox')) {
       this.showRestore = false
     }
+
+    this.analytic.visit()
   }
 
 }

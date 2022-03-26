@@ -94,7 +94,8 @@ export class TranslateComponent implements OnInit {
   }
 
   setlang(lang: string): void {
-    let path = this.route.snapshot.url[0] ? this.route.snapshot.url[0].path : '/'
+    // let path = this.route.snapshot.url[0] ? this.route.snapshot.url[0].path : '/'
+    let path = window.location.pathname
     let query: any = {}
     this.route.queryParams.subscribe(params => { query = {...params} })
     query.lang = lang
