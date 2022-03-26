@@ -50,6 +50,7 @@ import { ContinueComponent } from './continue/continue.component';
 import { TitleComponent } from './title/title.component';
 import { ChatComponent } from './chat/chat.component';
 import { ButtonsHomeComponent } from './buttons-home/buttons-home.component';
+import { TranslateComponent } from './translate/translate.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { ButtonsHomeComponent } from './buttons-home/buttons-home.component';
     ContinueComponent,
     TitleComponent,
     ChatComponent,
-    ButtonsHomeComponent
+    ButtonsHomeComponent,
+    TranslateComponent
   ],
   imports: [
     BrowserModule,

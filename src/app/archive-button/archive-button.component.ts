@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding, Input, SimpleChanges } from '@angular/core'
-
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-archive-button',
@@ -9,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class ArchiveButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   isTouch: boolean = true
 

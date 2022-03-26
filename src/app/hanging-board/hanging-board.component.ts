@@ -1,5 +1,6 @@
-import { Component, OnInit, HostListener, HostBinding, Input, Output, EventEmitter } from '@angular/core';
-import { AsyncService } from '../async.service';
+import { Component, OnInit, HostListener, HostBinding, Input, Output, EventEmitter } from '@angular/core'
+import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-hanging-board',
@@ -8,15 +9,17 @@ import { AsyncService } from '../async.service';
 })
 export class HangingBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public trnl: TranslateComponent
+  ) { }
   start: number = 0
   translateStatic: number = 0
   translateMove: number = 0
   exact: boolean = true
   example: any = {
-    left: 'The gift is',
-    center: 'priceless',
-    right: '(real value $0)',
+    left: this.trnl.trnl(['The gift is', 'Подарок просто']),
+    center: this.trnl.trnl(['priceless', 'бесценный']),
+    right:  this.trnl.trnl(['(real value 0$)', '(реальная стоимость 0₽)']),
     color: '#322525',
     size: 14
   }
@@ -102,102 +105,134 @@ export class HangingBoardComponent implements OnInit {
   setExample(): void {
     let val = this.cost
     if (val || val === 0) {
-      if (this.exact) {
+
+      let category: any = 0
+      if (this.trnl.getlang() == 'en') {
         if (val === 0) {
+          category = 0
+        } else if (val > 0 && val <= 10) {
+          category = 1
+        } else if (val > 10 && val <= 100) {
+          category = 2
+        } else if (val > 100 && val <= 1000) {
+          category = 3
+        } else if (val > 1000 && val <= 3000) {
+          category = 4
+        } else if (val > 3000) {
+          category = 5
+        }
+      } else if (this.trnl.getlang() == 'ru') {
+        if (val === 0) {
+          category = 0
+        } else if (val > 0 && val <= 500) {
+          category = 1
+        } else if (val > 500 && val <= 3000) {
+          category = 2
+        } else if (val > 3000 && val <= 10000) {
+          category = 3
+        } else if (val > 10000 && val <= 50000) {
+          category = 4
+        } else if (val > 50000) {
+          category = 5
+        }
+      }
+
+      if (this.exact) {
+        if (category == 0) {
           this.example = {
-            left: 'The gift is',
-            center: 'priceless',
-            right: '(real value $0)',
+            left: this.trnl.trnl(['The gift is', 'Подарок просто']),
+            center: this.trnl.trnl(['priceless', 'бесценный']),
+            right: this.trnl.trnl(['(real value 0$)', '(реальная стоимость 0₽)']),
             color: '#322525',
             size: 14
           }
-        } else if (val > 0 && val <= 10) {
+        } else if (category == 1) {
           this.example = {
-            left: 'The sender didn\'t spare',
-            center: '$'+val,
-            right: 'for you',
+            left: this.trnl.trnl(['The sender didn\'t spare', 'Отправитель не пожалел']),
+            center: this.trnl.trnl(['$'+val, val+'₽']),
+            right: this.trnl.trnl(['for you', 'для вас']),
             color: '#c2ff7b',
             size: 16
           }
-        } else if (val > 10 && val <= 50) {
+        } else if (category == 2) {
           this.example = {
-            left: 'This is a really worthwhile',
-            center: '$'+val,
-            right: 'gift',
+            left: this.trnl.trnl(['This is a really worthwhile', 'Это реально стоющий']),
+            center: this.trnl.trnl(['$'+val, val+'₽']),
+            right: this.trnl.trnl(['gift', 'подарок']),
             color: '#673ab7',
             size: 20
           }
-        } else if (val > 50 && val <= 100) {
+        } else if (category == 3) {
           this.example = {
-            left: 'Such a cool big gift for',
-            center: '$'+val,
+            left: this.trnl.trnl(['Such a cool big gift for', 'Очень хороший подарок за']),
+            center: this.trnl.trnl(['$'+val, val+'₽']),
             right: '',
             color: '#ff5722',
             size: 24
           }
-        } else if (val > 100 && val <= 2000) {
+        } else if (category == 4) {
           this.example = {
-            left: 'WOW! WOW! WOW! It\'s too expensive a gift for',
-            center: '$'+val,
+            left: this.trnl.trnl(['WOW! WOW! WOW! It\'s too expensive a gift for', 'ВОУ! ВОУ! ВОУ! Это очень дорогой подарок за']),
+            center: this.trnl.trnl(['$'+val, val+'₽']),
             right: '!',
             color: '#ffeb3b',
             size: 28
           }
-        }  else if (val > 2000) {
+        } else if (category == 5) {
           this.example = {
-            left: 'It is impossible that the cost of',
-            center: '$'+val,
-            right: 'is real',
+            left: this.trnl.trnl(['It is impossible that the cost of', 'Это невозможно, чтобы стоимость']),
+            center: this.trnl.trnl(['$'+val, val+'₽']),
+            right: this.trnl.trnl(['is real', 'была реальной']),
             color: '#58ecff',
             size: 32
           }
         }
       } else if (!this.exact) {
-        if (val === 0) {
+        if (category == 0) {
           this.example = {
-            left: 'Price is not as important as attention',
+            left: this.trnl.trnl(['Price is not as important as attention', 'Цена подарка не так важна как внимание']),
             center: '',
             right: '',
             color: '#322525',
             size: 14
           }
-        } else if (val > 0 && val <= 10) {
+        } else if (category == 1) {
           this.example = {
-            left: 'Seems like a',
-            center: 'cool',
-            right: 'stuff for the money',
+            left: this.trnl.trnl(['Seems like a', 'Кажется это']),
+            center: this.trnl.trnl(['cool', 'отличная']),
+            right: this.trnl.trnl(['stuff for the money', 'вещь за свои деньги']),
             color: '#c2ff7b',
             size: 16
           }
-        } else if (val > 10 && val <= 50) {
+        } else if (category == 2) {
           this.example = {
-            left: 'Wow, this is pretty',
-            center: 'pricey',
-            right: 'stuff',
+            left: this.trnl.trnl(['Wow, this is pretty', 'Воу, это довольно']),
+            center: this.trnl.trnl(['pricey', 'дорогой']),
+            right: this.trnl.trnl(['stuff', 'подарок']),
             color: '#673ab7',
             size: 20
           }
-        } else if (val > 50 && val <= 100) {
+        } else if (category == 3) {
           this.example = {
-            left: 'Wait, it\'s really',
-            center: 'expensive',
-            right: 'stuff',
+            left: this.trnl.trnl(['Wait, it\'s really', 'Подождите, так это реально']),
+            center: this.trnl.trnl(['expensive', 'дорогой']),
+            right: this.trnl.trnl(['stuff', 'подарок']),
             color: '#ff5722',
             size: 24
           }
-        } else if (val > 100 && val <= 2000) {
+        } else if (category == 4) {
           this.example = {
-            left: 'Unbelievable, the cost of this gift is',
-            center: 'too',
-            right: 'high',
+            left: this.trnl.trnl(['Unbelievable, the cost of this gift is', 'Невероятно, стоимость данного подарко']),
+            center: this.trnl.trnl(['too', 'слишком']),
+            right: this.trnl.trnl(['high', 'высока']),
             color: '#ffeb3b',
             size: 28
           }
-        }  else if (val > 2000) {
+        }  else if (category == 5) {
           this.example = {
-            left: 'I don\'t have enough words to describe how precious',
-            center: 'precious',
-            right: 'this gift is',
+            left: this.trnl.trnl(['I don\'t have enough words to describe how precious', 'Я не могу подобрать слов, чтобы описать как']),
+            center: this.trnl.trnl(['precious', 'драгоценен']),
+            right: this.trnl.trnl(['this gift is', 'данный подарок']),
             color: '#58ecff',
             size: 32
           }
@@ -205,9 +240,9 @@ export class HangingBoardComponent implements OnInit {
       }
     } else {
       this.example = {
-        left: 'Price information was',
-        center: 'abducted',
-        right: 'by aliens',
+        left:  this.trnl.trnl(['Price information was', 'Информация о ценне подарка была']),
+        center:  this.trnl.trnl(['abducted', 'похищенна']),
+        right:  this.trnl.trnl(['by aliens', 'инопланетянами']),
         color: '#f44336',
         size: 20
       }

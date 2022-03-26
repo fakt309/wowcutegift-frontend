@@ -1,14 +1,14 @@
 <input type="color" [value]="color" (input)="changeColor($event)" />
 <div class="content" (click)="onClick($event)" [style.transform]="transform">
   <div class="rect" [style.background-color]="color">
-    <div class="text" [style.color]="mode == 'dark' ? '#000' : '#fff'">Push to change color</div>
+    <div class="text" [style.color]="mode == 'dark' ? '#000' : '#fff'">{{ trnl.trnl(['Push to change color', 'нажмите, чтобы изменить цвет']) }}</div>
   </div>
   <div *ngIf="isTouch" class="close touch">
     <div class="ico"></div>
-    <div class="text">swipe up to close</div>
+    <div class="text">{{ trnl.trnl(['swipe up to close', 'свайп навверх, чтобы закрыть']) }}</div>
   </div>
   <div *ngIf="!isTouch" class="close desktop">
     <div class="ico"></div>
-    <div class="text">close</div>
+    <div class="text">{{ trnl.trnl(['close', 'закрыть']) }}</div>
   </div>
 </div>

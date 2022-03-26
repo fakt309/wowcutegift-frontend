@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, HostBinding } from '@angular/core'
-
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-menu-gift',
@@ -9,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class MenuGiftComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   isTouch: boolean = false
 

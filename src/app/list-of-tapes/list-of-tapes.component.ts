@@ -1,6 +1,6 @@
-import { Component, OnInit, HostListener, HostBinding, Input, SimpleChanges, EventEmitter, Output, ElementRef } from '@angular/core';
-
+import { Component, OnInit, HostListener, HostBinding, Input, SimpleChanges, EventEmitter, Output, ElementRef } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-list-of-tapes',
@@ -9,7 +9,10 @@ import { AsyncService } from '../async.service'
 })
 export class ListOfTapesComponent implements OnInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
 
   @HostBinding('class.phone') phone: boolean = false
   @HostBinding('class.animate') animate: boolean = false
@@ -78,13 +81,13 @@ export class ListOfTapesComponent implements OnInit {
     let meta = await AsyncService.loadImg(img)
     let err = ''
     if (e.srcElement.files[0].type != 'image/jpeg' && e.srcElement.files[0].type != 'image/png') {
-      err += 'jpg/png format. '
+      err += this.trnl.trnl(['jpg/png format. ', 'jpg/png формат. '])
     }
     if (e.srcElement.files[0].size/(1024**2) > 5) {
-      err += 'Maximum size 5MB. '
+      err += this.trnl.trnl(['Maximum size 5MB. ', 'Максимальный размер 5МБ. '])
     }
     if (meta.naturalWidth < 20 || meta.naturalHeight < 20 || meta.naturalWidth > 500 || meta.naturalHeight > 500) {
-      err += 'Minimum resolution 20x20 and less then 500x500. '
+      err += this.trnl.trnl(['Minimum resolution 20x20 and less then 500x500. ', 'Минимальное разрешение 20х20 и максимальное 500х500. '])
     }
     if (err != '') {
       this.error = err

@@ -1,6 +1,6 @@
-import { Component, OnInit, SimpleChanges, Input, HostBinding, Output, EventEmitter } from '@angular/core';
-
+import { Component, OnInit, SimpleChanges, Input, HostBinding, Output, EventEmitter } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-ready',
@@ -9,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class ReadyComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   @Input('show') show: boolean = false
 

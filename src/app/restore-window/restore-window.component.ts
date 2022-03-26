@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, SimpleChanges, HostBinding, Output, EventEmitter } from '@angular/core';
-
+import { Component, OnInit, Input, SimpleChanges, HostBinding, Output, EventEmitter } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-restore-window',
@@ -9,7 +9,9 @@ import { AsyncService } from '../async.service'
 })
 export class RestoreWindowComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public trnl: TranslateComponent
+  ) { }
 
   isTouch: boolean = false
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding, Input, SimpleChanges } from '@angular/core'
 import { Router } from '@angular/router'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-demo-menu',
@@ -8,7 +9,10 @@ import { Router } from '@angular/router'
 })
 export class DemoMenuComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(
+    public router: Router,
+    public trnl: TranslateComponent
+  ) { }
 
   isTouch: boolean = false
 

@@ -2,8 +2,8 @@
 <div class="content" [style.transform]="transform">
   <app-cropping *ngIf="cropping.show" [rSize]="cropping.refresh" [sRatio]="100/100" [sImage]="cropping.image" (output)="getImage($event)" class="cropping" (mousedown)="loading = true" (touchstart)="loading = true" ></app-cropping>
   <div class="buttons" *ngIf="cropping.show">
-    <app-button [color]="'#795548'" (click)="cancelCropping()">Back</app-button>
-    <app-button [color]="'#4caf50'" (click)="acceptCropping()">Accept</app-button>
+    <app-button [color]="'#795548'" (click)="cancelCropping()">{{ trnl.trnl(['Back', 'Назад']) }}</app-button>
+    <app-button [color]="'#4caf50'" (click)="acceptCropping()">{{ trnl.trnl(['Accept', 'Готово']) }}</app-button>
   </div>
   <app-list2 *ngIf="!cropping.show">
     <input style="display:none" type="file" accept="image/png, image/jpeg" (change)="loadImage($event)" >
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="buttons">
-      <app-button [color]="'#795548'" (click)="this.cancel.emit()">Back</app-button>
+      <app-button [color]="'#795548'" (click)="this.cancel.emit()">{{ trnl.trnl(['Back', 'Назад']) }}</app-button>
     </div>
   </app-list2>
 </div>

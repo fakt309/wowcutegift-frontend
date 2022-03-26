@@ -1,0 +1,25 @@
+<div class="popup"
+[style.display]="display"
+[style.opacity]="opacity">
+  <div [class]="isTouch ? 'content' : 'content desktop'" [style.transform]="transform">
+    <app-list2 [scroll]="scroll">
+      <div class="option" [style.marginTop]="'auto'" (click)="lang == 'en' ? hide() : setlang('en')">
+        <div class="ico" [style.backgroundImage]="'url(../../assets/flags/en.png)'"></div>
+        <div class="title">en</div>
+      </div>
+      <div class="option" [style.marginBottom]="'auto'" (click)="lang == 'ru' ? hide() : setlang('ru')">
+        <div class="ico" [style.backgroundImage]="'url(../../assets/flags/ru.png)'"></div>
+        <div class="title">ru</div>
+      </div>
+    </app-list2>
+  </div>
+</div>
+<div *ngIf="!isTouch" class="display desktop" (click)="show()">
+  <div class="ico" [style.backgroundImage]="'url(../../assets/flags/'+lang+'.png)'"></div>
+  <div class="title">{{ lang }}</div>
+</div>
+<div *ngIf="isTouch" class="display">
+  <div class="ico" [style.backgroundImage]="'url(../../assets/flags/'+lang+'.png)'"></div>
+  <div class="title">{{ lang }}</div>
+</div>
+<div *ngIf="isTouch" class="dblclick">double tap</div>

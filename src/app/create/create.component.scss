@@ -15,7 +15,7 @@
     transition: transform ease 0.3s;
     .explanation {
       position: absolute;
-      top: 0px;
+      top: 15px;
       left: 5%;
       width: 90%;
       height: 10%;
@@ -326,6 +326,7 @@
     position: sticky;
     bottom: 0px;
     background-color: #fff;
+    flex-wrap: wrap;
     * {
       margin: 10px;
     }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-chat',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   @Input('message') message: number = 0
 

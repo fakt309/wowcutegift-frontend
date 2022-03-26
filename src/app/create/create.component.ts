@@ -6,6 +6,7 @@ import { CryptoService } from '../crypto.service'
 import { CookieService } from 'ngx-cookie-service'
 import { AsyncService } from '../async.service'
 import { DatabaseService } from '../database.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url);
@@ -23,7 +24,8 @@ const getBase64FromUrl = async (url: string) => {
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
+  providers: [TranslateComponent]
 })
 export class CreateComponent implements AfterViewInit {
 
@@ -33,7 +35,8 @@ export class CreateComponent implements AfterViewInit {
     private cookieService: CookieService,
     private databaseService: DatabaseService,
     private deviceInfo: DeviceInfoService,
-    private crypto: CryptoService
+    private crypto: CryptoService,
+    public trnl: TranslateComponent
   ) { }
 
   @ViewChild('nextbutton') nextbutton: any
@@ -448,9 +451,10 @@ export class CreateComponent implements AfterViewInit {
   }
 
   async forwardToReady(): Promise<void> {
-    this.workplace.transform = 'scale(0)'
-    await AsyncService.delay(1000)
+    this.workplace.transform = 'scale(0.1)'
+    await AsyncService.delay(300)
     this.workplace.display = 'none'
+    await AsyncService.delay(100)
     this.readyblock.show = true
     await AsyncService.delay(300)
     return new Promise(res => res())
@@ -1369,7 +1373,7 @@ export class CreateComponent implements AfterViewInit {
       this.workplace.transform = 'scale(1)'
       await AsyncService.delay(300)
     } else if (type == 'demo') {
-      this.router.navigate(['gift', {demo: '1'}])
+      this.router.navigate(['gift'], { queryParams: { demo: '1' } })
     } else if (type == 'payment') {
       this.router.navigate(['payment'])
     } else if (type == 'accept') {
@@ -1399,14 +1403,14 @@ export class CreateComponent implements AfterViewInit {
     if (type == 'greetingcard') {
       this.editgreetingcard.setFront('../assets/greetingcard/front/1.jpg')
       this.editgreetingcard.setBack('../assets/greetingcard/back/1.png')
-      this.editgreetingcard.setText('May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.')
+      this.editgreetingcard.setText(this.trnl.trnl(['May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.', "Пусть будет все, что в жизни нужно,<br>Чем жизнь бывает хороша:<br>Любовь, здоровье, верность, дружба<br>И вечно юная душа."]))
       this.editgreetingcard.setSign()
       this.drawingobjectsigngreeting.clear()
 
       gift.title = 'Greeting card'
       gift.front = '../assets/greetingcard/front/1.jpg'
       gift.back = '../assets/greetingcard/back/1.png'
-      gift.text = "May you be gifted with life’s biggest joys and never-ending bliss.<br>After all, you yourself are a gift to earth, so you deserve the best.<br>Happy birthday."
+      gift.text = this.trnl.trnl(['May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.', "Пусть будет все, что в жизни нужно,<br>Чем жизнь бывает хороша:<br>Любовь, здоровье, верность, дружба<br>И вечно юная душа."])
       gift.sign = ""
       gift.colorText = "#000"
       this.editgreetingpopup.showNoAnim()

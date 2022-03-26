@@ -1,6 +1,6 @@
-import { Component, OnInit, HostListener, Input, HostBinding, SimpleChanges, Output, EventEmitter } from '@angular/core';
-
+import { Component, OnInit, HostListener, Input, HostBinding, SimpleChanges, Output, EventEmitter } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-navigation',
@@ -9,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   @Output() choose = new EventEmitter<string>()
 

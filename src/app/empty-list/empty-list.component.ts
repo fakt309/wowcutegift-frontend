@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-empty-list',
@@ -7,7 +8,10 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class EmptyListComponent implements OnInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
   el: any = this.host.nativeElement
 
   ngOnInit(): void {

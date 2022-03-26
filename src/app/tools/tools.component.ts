@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-tools',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ToolsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
   @Input('type') type: string = 'pen'
   isTouch: boolean = false
   url: string = '../../assets/pen.png'

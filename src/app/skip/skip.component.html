@@ -1,6 +1,6 @@
 <div class="ico"
 [style.backgroundImage]="isTouch ? 'url(../../assets/tapholding.png)' : 'url(../../assets/esc.png)'"></div>
 <div class="text">
-  <ng-container *ngIf="!isTouch">to skip</ng-container>
-  <ng-container *ngIf="isTouch">holding to skip</ng-container>
+  <ng-container *ngIf="!isTouch">{{ trnl.trnl(['to skip', 'пропустить']) }}</ng-container>
+  <ng-container *ngIf="isTouch"> {{ trnl.trnl(['holding to skip', 'удерживайте, чтобы пропустить']) }}</ng-container>
 </div>

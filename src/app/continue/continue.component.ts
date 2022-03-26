@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, HostBinding } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-continue',
@@ -8,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class ContinueComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   isTouch: boolean = false
   @Input('action') action: string = 'none'

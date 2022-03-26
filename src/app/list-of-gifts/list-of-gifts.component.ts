@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ElementRef, EventEmitter, Output, HostBinding } from '@angular/core';
-
+import { Component, OnInit, Input, ElementRef, EventEmitter, Output, HostBinding } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-list-of-gifts',
@@ -9,7 +9,10 @@ import { AsyncService } from '../async.service'
 })
 export class ListOfGiftsComponent implements OnInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
 
   @Input('arr') arr: Array<any> = []
   @Input('added') added: Array<any> = []

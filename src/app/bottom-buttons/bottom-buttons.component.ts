@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core'
-
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-bottom-buttons',
@@ -9,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class BottomButtonsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   @Input('stage') stage: number = 0
 

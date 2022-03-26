@@ -4,30 +4,30 @@
   <div class="block" [style.display]="displayBlock1" [style.transform]="transformBlock1">
     <div class="option" (click)="showPrice(true);setExample()">
       <div class="ico"></div>
-      <div class="text">Show the exact price of gifts to the recipient</div>
+      <div class="text">{{ trnl.trnl(['Show the exact price of gifts to the recipient', 'Показать точную цену подарков получателю']) }}</div>
     </div>
     <div class="option" (click)="showPrice(false);setExample()">
       <div class="ico"></div>
-      <div class="text">Hint the price of gifts to the receiver</div>
+      <div class="text">{{ trnl.trnl(['Hint the price of gifts to the receiver', 'Намекнуть цену подарков получателю']) }}</div>
     </div>
     <div class="option" (click)="hide();accept.emit(false)">
       <div class="ico"></div>
-      <div class="text">Don't show the price of gifts at all</div>
+      <div class="text">{{ trnl.trnl(["Don't show the price of gifts at all", "Не показывать цену подарков вообще"]) }}</div>
     </div>
-    <app-button class="back" color="#13181c" (click)="hide();close.emit()">Back</app-button>
+    <app-button class="back" color="#13181c" (click)="hide();close.emit()">{{ trnl.trnl(["Back", "Назад"]) }}</app-button>
   </div>
 
   <div class="block" [style.display]="displayBlock2" [style.transform]="transformBlock2">
-    <div class="text">Enter the total value of all gifts:<span *ngIf="!exact" class="texthint"><br>(the recipient will not see the exact cost, only a rough estimate)</span></div>
+    <div class="text">{{ trnl.trnl(["Enter the total value of all gifts:", "Введите полную сумму всех подарков:"]) }}<span *ngIf="!exact" class="texthint"><br>{{ trnl.trnl(["(the recipient will not see the exact cost, only a rough estimate)", "(получатель не увидит точную стоимость, только примерную оценку)"]) }}</span></div>
     <div class="inputwrap">
       <input class="input" type="text" value="0" (input)="inputBucks($event)">
-      <div class="dollarsign">$</div>
+      <div class="dollarsign">{{ trnl.trnl(["$", "₽"]) }}</div>
     </div>
-    <div class="text" style="margin-top:20px;">How the receiver will see it:</div>
+    <div class="text" style="margin-top:20px;">{{ trnl.trnl(["How the receiver will see it:", "Как получатель увидит это:"]) }}</div>
     <div class="example">{{example.left}} <span [style.color]="example.color" [style.font-size]="example.size+'px'" style="font-weight: bold;">{{example.center}}</span> {{example.right}}</div>
     <div class="buttons">
-      <app-button color="#13181c" (click)="backPrice()">Back</app-button>
-      <app-button color="#4caf50" (click)="hide();accept.emit([exact, cost])">Accept</app-button>
+      <app-button color="#13181c" (click)="backPrice()">{{ trnl.trnl(["Back", "Назад"]) }}</app-button>
+      <app-button color="#4caf50" (click)="hide();accept.emit([exact, cost])">{{ trnl.trnl(["Accept", "Готово"]) }}</app-button>
     </div>
 
   </div>

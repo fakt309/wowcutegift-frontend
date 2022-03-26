@@ -1,9 +1,9 @@
 <div class="button">
-  <div class="title">Edit</div>
-  <div class="hint">back to prev. page</div>
+  <div class="title">{{ trnl.trnl(['Edit', 'Изменить']) }}</div>
+  <div class="hint">{{ trnl.trnl(['back to prev. page', 'к пред. странице']) }}</div>
 </div>
 <div [class]="isTouch ? 'button' : 'button desktop'">
-  <div *ngIf="isTouch" class="title" [style.color]="'#4caf50'">Accept</div>
-  <div *ngIf="!isTouch" class="title" [style.color]="'#4caf50'" (click)="router.navigate(['ready'])">Accept</div>
-  <div *ngIf="isTouch" class="hint">press and hold</div>
+  <div *ngIf="isTouch" class="title" [style.color]="'#4caf50'">{{ trnl.trnl(['Accept', 'Готово']) }}</div>
+  <div *ngIf="!isTouch" class="title" [style.color]="'#4caf50'" (click)="router.navigate(['ready'])">{{ trnl.trnl(['Accept', 'Готово']) }}</div>
+  <div *ngIf="isTouch" class="hint">{{ trnl.trnl(['press and hold', 'нажать и удерживать']) }}</div>
 </div>

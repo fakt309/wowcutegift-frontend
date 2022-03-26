@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [ TranslateComponent ]
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   isTouch: boolean = false
   menu: any = {
@@ -181,7 +183,7 @@ export class HomeComponent implements OnInit {
     await AsyncService.delay(10)
     this.menu.gameposition = 'center'
     await AsyncService.delay(300)
-    this.titlehint = "Buy the game"
+    this.titlehint = this.trnl.trnl(["Buy the game", "Покупаем игру"])
     await AsyncService.delay(300)
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
     return new Promise(res => res())
@@ -194,7 +196,7 @@ export class HomeComponent implements OnInit {
     this.menu.greetingposition = 'center'
     this.menu.gamezoom = false
     await AsyncService.delay(500)
-    this.titlehint = "Take a greeting card"
+    this.titlehint = this.trnl.trnl(["Take a greeting card", "Берем открытку"])
     await AsyncService.delay(500)
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
     return new Promise(res => res())
@@ -205,9 +207,9 @@ export class HomeComponent implements OnInit {
     this.menu.actioncontinue = 'hide'
     this.titlehint = ""
     this.menu.greetingflip = true
-    await AsyncService.delay(500)
-    this.titlehint = "Write a text with wishes"
-    this.greetingcard.text = "May your success double and joys triple, May your sadness halve and your troubles disappear!"
+    await AsyncService.delay(600)
+    this.titlehint =  this.trnl.trnl(["Write a text with wishes", "Пишем текст с нашими пожеланиями"])
+    this.greetingcard.text = this.trnl.trnl(["May your success double and joys triple, May your sadness halve and your troubles disappear!", "Пусть будет все, что в жизни нужно,<br>Чем жизнь бывает хороша:<br>Любовь, здоровье, верность, дружба<br>И вечно юная душа."])
     await AsyncService.delay(500)
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
     return new Promise(res => res())
@@ -217,7 +219,7 @@ export class HomeComponent implements OnInit {
     this.menu.actioncontinue = 'hide'
     this.titlehint = ""
     await AsyncService.delay(500)
-    this.titlehint = "Sign it by your hand"
+    this.titlehint = this.trnl.trnl(["Sign it by your hand", "Подписываем своей рукой"])
     this.greetingcard.sign = "../../assets/greetingcard/sign2.png"
     await AsyncService.delay(500)
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
@@ -240,7 +242,7 @@ export class HomeComponent implements OnInit {
     await AsyncService.delay(500)
     this.menu.animategifts = false
     await AsyncService.delay(10)
-    this.titlehint = "Put gifts into the box"
+    this.titlehint = this.trnl.trnl(["Put gifts into the box", "Складываем все в коробку"])
     await AsyncService.delay(500)
     this.menu.allinto = true
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
@@ -256,10 +258,10 @@ export class HomeComponent implements OnInit {
     this.box.packed = true
     await AsyncService.delay(1500)
     this.box.wrapped = true
-    await AsyncService.delay(6000)
+    await AsyncService.delay(6100)
     this.box.tapped = true
     await AsyncService.delay(4000)
-    this.titlehint = "Pack the box"
+    this.titlehint = this.trnl.trnl(["Pack the box", "Упаковываем"])
     await AsyncService.delay(500)
     if (!this.menu.skipped) this.menu.actioncontinue = 'show'
     return new Promise(res => res())
@@ -273,7 +275,7 @@ export class HomeComponent implements OnInit {
     await AsyncService.delay(500)
     this.chat.transform = 'translateX(0vw)'
     await AsyncService.delay(1500)
-    this.titlehint = "Send a link to the recipient"
+    this.titlehint = this.trnl.trnl(["Send a link to the recipient", "Отправляем ссылку в чат"])
     this.chat.message = 1
     await AsyncService.delay(1500)
     this.chat.message = 2
@@ -299,7 +301,7 @@ export class HomeComponent implements OnInit {
 
   async showOther(): Promise<void> {
     this.menu.actioncontinue = 'hide'
-    this.titlehint = "There are also many other options for decorating your gift."
+    this.titlehint = this.trnl.trnl(["There are also many other options for decorating your gift.", "Также есть много других возможностей оформления вашего подарка"])
     await AsyncService.delay(300)
     this.styles.screenlast.transformemoji = "scale(0)"
     this.styles.screenlast.transformtext = "translateY(-130px) scale(0)"
@@ -458,6 +460,10 @@ export class HomeComponent implements OnInit {
       return 100/this.sizeGame
     }
     return 1
+  }
+
+  testmethod(arg: string): string {
+    return arg
   }
 
   ngOnInit(): void {

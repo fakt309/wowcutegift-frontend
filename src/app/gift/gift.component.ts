@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { DatabaseService } from '../database.service'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 import { DeviceInfoService } from '../device-info.service'
 import { CryptoService } from '../crypto.service'
@@ -12,7 +13,8 @@ import { CryptoService } from '../crypto.service'
 @Component({
   selector: 'app-gift',
   templateUrl: './gift.component.html',
-  styleUrls: ['./gift.component.scss']
+  styleUrls: ['./gift.component.scss'],
+  providers: [TranslateComponent]
 })
 export class GiftComponent implements OnInit {
 
@@ -25,6 +27,7 @@ export class GiftComponent implements OnInit {
     private crypto: CryptoService,
     private meta: Meta,
     private title: Title,
+    public trnl: TranslateComponent
   ) {}
 
   touch: any = {
@@ -432,11 +435,11 @@ export class GiftComponent implements OnInit {
       this.activeGift.scratch = true
       let skeleton = this.getDivGift(this.activeGift)
       skeleton.style.transform = `translateX(0px) translateY(0px) translateZ(-1000px) rotateX(180deg) rotateY(0deg) rotateZ(0deg) scale(1)`
-      this.skeleton.opentextgame = 'Close'
+      this.skeleton.opentextgame = this.trnl.trnl(['Close', 'Закрыть'])
     } else {
       this.activeGift.open = !this.activeGift.open
       this.activeGift.scratch = !this.activeGift.scratch
-      this.skeleton.opentextgame = 'Open'
+      this.skeleton.opentextgame = this.trnl.trnl(['Open', 'Открыть'])
     }
   }
 
@@ -510,7 +513,7 @@ export class GiftComponent implements OnInit {
   }
 
   async showGift(gift: any) {
-    this.skeleton.opentextgame = 'Open'
+    this.skeleton.opentextgame = this.trnl.trnl(['Open', 'Открыть'])
     this.skeleton.oldrotate = 0
     this.box.animate = true
     await AsyncService.delay(10)
@@ -628,7 +631,16 @@ export class GiftComponent implements OnInit {
 
     setTimeout(() => { this.welcome.cancontinue = true }, 3000)
 
-    if (this.route.snapshot.params['demonstration'] === '1') {
+    let demonstration: any = false
+    let demo: any = false
+    let id: any = false
+    this.route.queryParams.subscribe(params => {
+      if (params['demonstration'] == '1') demonstration = true
+      if (params['demo'] == '1') demo = true
+      if (params['id']) id = params['id']
+    })
+
+    if (demonstration) {
       this.data = {
         _id: "621dbcb6247c26ff35bf7b1b",
         gifts: [
@@ -682,7 +694,7 @@ export class GiftComponent implements OnInit {
         updateDate: new Date()
       }
       this.processData()
-    } else if (this.route.snapshot.params['demo'] === '1') {
+    } else if (demo) {
       this.showdemomenu = true
       this.showdemo = true
       if (this.cookieService.check('idbox')) {
@@ -710,10 +722,10 @@ export class GiftComponent implements OnInit {
       } else {
         this.router.navigate([''])
       }
-    } else if (this.route.snapshot.params['id']) {
+    } else if (id) {
       let query = {
         typequery: 'get',
-        id: this.route.snapshot.params['id']
+        id: id
       }
       this.databaseService.setBox(query).subscribe((d: any) => {
         if (d.success) {

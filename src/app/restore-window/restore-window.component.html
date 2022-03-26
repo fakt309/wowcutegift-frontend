@@ -4,15 +4,15 @@
 [style.transform]="transform">
   <app-list2>
     <div class="content2">
-      <div class="text">You have an unfinished box, would you like to continue?</div>
+      <div class="text">{{ trnl.trnl(['You have an unfinished box, would you like to continue?', 'У вас есть незаконченный проект, продолжить?']) }}</div>
       <div class="buttons">
         <div class="button" (click)="this.choose.emit('new')">
           <div class="ico" [style.backgroundImage]="'url(../../assets/new.png)'"></div>
-          <div class="text" [style.color]="'#00bcd4'">New</div>
+          <div class="text" [style.color]="'#00bcd4'">{{ trnl.trnl(['New', 'Новый']) }}</div>
         </div>
         <div class="button" (click)="this.choose.emit('continue')">
           <div class="ico" [style.backgroundImage]="'url(../../assets/continue.png)'"></div>
-          <div class="text" [style.color]="'#ff9800'">Continue</div>
+          <div class="text" [style.color]="'#ff9800'">{{ trnl.trnl(['Continue', 'Продолжить']) }}</div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <div class="icoTools" [style.background-image]="'url('+url+')'"></div>
 <div class="hintTools">
-  <ng-container *ngIf="isTouch">double tap</ng-container>
-  <ng-container *ngIf="!isTouch">double click</ng-container>
+  <ng-container *ngIf="isTouch">{{ trnl.trnl(["double tap", "двойное нажатие"]) }}</ng-container>
+  <ng-container *ngIf="!isTouch">{{ trnl.trnl(["double click", "двойной клик"]) }}</ng-container>
 </div>

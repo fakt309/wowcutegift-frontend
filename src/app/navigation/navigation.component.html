@@ -2,7 +2,7 @@
   <div class="left">
     <div class="title back">
       <div class="ico arrow" [style.backgroundImage]="'url(../../assets/arrleft.png)'"></div>
-      <div class="text">Back</div>
+      <div class="text">{{ trnl.trnl(['Back', 'Назад']) }}</div>
     </div>
     <!-- <div class="tip">
       <div class="ico swipe" [style.backgroundImage]="'url(../../assets/swipeleft.png)'"></div>
@@ -11,7 +11,7 @@
   </div>
   <div class="right">
     <div class="title right">
-      <div [class]="bannext == '' ? 'text' : 'text textban'">Next</div>
+      <div [class]="bannext == '' ? 'text' : 'text textban'">{{ trnl.trnl(['Next', 'Далее']) }}</div>
       <div *ngIf="bannext == ''" class="ico arrow" [style.backgroundImage]="'url(../../assets/arrright.png)'"></div>
     </div>
     <div class="ban" *ngIf="bannext != ''"> {{ bannext }}</div>
@@ -25,7 +25,7 @@
 <div class="close">
   <div class="title close">
     <div class="ico arrow" [style.backgroundImage]="'url(../../assets/arrup.png)'"></div>
-    <div class="text">Close</div>
+    <div class="text">{{ trnl.trnl(['Close', 'Закрыть']) }}</div>
   </div>
   <!-- <div class="tip">
     <div class="ico arrow"></div>

@@ -11,8 +11,8 @@
     <app-slider-gifts #slideradd></app-slider-gifts>
   </div>
   <div class="bottomMenuAdd">
-    <app-button color='#f44336' (click)='addpopup.hide();slideradd.activate(false);'>Cancel</app-button>
-    <app-button color='#8bc34a' (click)='addGift(slideradd.getValue());setSizesListGifts();setSizesEditDemo();'>Add</app-button>
+    <app-button color='#f44336' (click)='addpopup.hide();slideradd.activate(false);'>{{ trnl.trnl(["Cancel", "Отменить"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='addGift(slideradd.getValue());setSizesListGifts();setSizesEditDemo();'>{{ trnl.trnl(["Add", "Добавить"]) }}</app-button>
   </div>
 </app-popup>
 
@@ -21,14 +21,14 @@
     <div class="displayEditGreetingCard">
       <app-game [size]="200" [animate]="true" [color]="edititngGift.color" [img]="edititngGift.img" [leftimg]="edititngGift.leftimg" [wrap]="edititngGift.wrap" [open]="true" [code]="edititngGift.code"  [holes]="[[0.6379845668944385,0.6936383928571429],[0.6668252466295775,0.6936383928571429],[0.7030157159830103,0.6936383928571429],[0.7271426955519655,0.6936383928571429],[0.7603002375952844,0.6936383928571429],[0.7960734078094417,0.6936383928571429],[0.8495790842577221,0.6936383928571429],[0.8966416228346861,0.6579241071428571],[0.9324084091561686,0.6579241071428571],[0.972126525722796,0.6579241071428571],[1.0418688127233766,0.7293526785714286],[0.884748084736072,0.6579241071428571],[0.826836635859369,0.6579241071428571],[0.7548114155989715,0.6579241071428571],[0.7173545887413475,0.6579241071428571],[0.6798977618837235,0.6579241071428571],[0.589773574891973,0.6579241071428571],[0.4283785717736562,0.6579241071428571],[0.28138961428922393,0.6222098214285714],[0.6265853248760092,0.47935267857142855],[0.6043865425301653,0.47935267857142855],[0.5811027859931754,0.47935267857142855],[0.5518857904183448,0.47935267857142855],[0.5223640762185067,0.47935267857142855],[0.4935062661905762,0.47935267857142855],[0.45790666124147056,0.47935267857142855],[0.4365168826591004,0.47935267857142855],[0.4089971328641161,0.47935267857142855],[0.3878458870623223,0.47935267857142855],[0.36808160834118686,0.47935267857142855],[0.3541302418476705,0.47935267857142855],[0.3295627365711497,0.47935267857142855],[0.322723020295806,0.47935267857142855],[0.31751582748642254,0.47935267857142855],[0.3137939056895788,0.47935267857142855],[0.30712711559397765,0.47935267857142855],[0.3019304890663169,0.47935267857142855],[0.26029211655556495,0.47935267857142855],[0.24731611046514218,0.47935267857142855],[0.24224907509682195,0.47935267857142855],[0.23579729705783328,0.47935267857142855],[0.23070475451710468,0.47935267857142855],[0.22428599971792582,0.47935267857142855],[0.2191553171606325,0.47935267857142855],[0.21394721519333867,0.47935267857142855],[0.20865534612970518,0.47935267857142855],[0.2057575415613239,0.47935267857142855],[0.22263611932079924,0.44363839285714285],[0.2462133193576364,0.44363839285714285],[0.26523141057227423,0.44363839285714285],[0.2897694888540935,0.44363839285714285],[0.3152229870691522,0.44363839285714285],[0.35914517931699297,0.40792410714285715],[0.37831632150588945,0.37220982142857145],[0.3969789534837015,0.3364955357142857],[0.40339939984658174,0.3364955357142857],[0.40932737823846443,0.3364955357142857],[0.42223465739166055,0.3364955357142857],[0.4282598443880017,0.3364955357142857],[0.4347498835405572,0.3364955357142857],[0.44085430118743946,0.3364955357142857],[0.447384032407936,0.3364955357142857],[0.45358337420279476,0.3364955357142857],[0.46015618653323664,0.3364955357142857],[0.479705749503162,0.3364955357142857],[0.4929445270655996,0.3364955357142857],[0.5128735061104032,0.3364955357142857],[0.5328822359120511,0.3364955357142857],[0.5600157869326302,0.3364955357142857],[0.5936332946286059,0.30078125],[0.6418811934667024,0.30078125],[0.6705211356669784,0.30078125],[0.6978936903538225,0.30078125],[0.7205042840188927,0.30078125],[0.7343226183398874,0.30078125],[0.7436637910285373,0.30078125],[0.7732389188716924,0.30078125],[0.7850430137325543,0.2650669642857143],[0.7973398409165171,0.2650669642857143],[0.8021889338087415,0.22935267857142858],[0.8210649741732243,0.22935267857142858],[0.8293251058039474,0.19363839285714285],[0.8505246026393025,0.19363839285714285],[0.8591026434255723,0.19363839285714285],[0.8751217715473956,0.22935267857142858],[0.8838740316119571,0.22935267857142858],[0.8919812272188143,0.2650669642857143],[0.9009189323577357,0.2650669642857143],[0.9388115925922221,0.30078125]]"></app-game>
     </div>
-    <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgamepopup.hideNoAnim();editingtitlegame.showNoAnim();listEditingTitleGame.scrollToStart()"></app-edit-option>
-    <app-edit-option [title]='"Platform"' [val]='edititngGift.platform' (click)="editgamepopup.hideNoAnim();editingplatformgame.showNoAnim();listEditingPlatformGame.scrollToStart()"></app-edit-option>
-    <app-edit-option [title]='"Activation code"' [val]='edititngGift.code == "" ? "empty" : edititngGift.code' (click)="editgamepopup.hideNoAnim();editingcodegame.showNoAnim();listEditingCodeGame.scrollToStart()"></app-edit-option>
-    <app-edit-option [title]='"Front image"' [val]='edititngGift.img == "../../assets/game/anygame.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();croppingobjectfrontgame.setSize();refreshable(false)"></app-edit-option>
-    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='"Color"' [val]='edititngGift.color' (click)="editgamepopup.hideNoAnim();editingcolorgame.showNoAnim()"></app-edit-option>
-    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='"Inside wrapping"' [val]='edititngGift.wrap == "../../assets/game/ps.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();croppingobjectwrapgame.setSize();refreshable(false)"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Title", "Название"])' [val]='edititngGift.title' (click)="editgamepopup.hideNoAnim();editingtitlegame.showNoAnim();listEditingTitleGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Platform", "Платформа"])' [val]='edititngGift.platform' (click)="editgamepopup.hideNoAnim();editingplatformgame.showNoAnim();listEditingPlatformGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Activation code", "Код активации"])' [val]='edititngGift.code == "" ? "empty" : edititngGift.code' (click)="editgamepopup.hideNoAnim();editingcodegame.showNoAnim();listEditingCodeGame.scrollToStart()"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Front image", "Обложка"])' [val]='edititngGift.img == "../../assets/game/anygame.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();croppingobjectfrontgame.setSize();refreshable(false)"></app-edit-option>
+    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='trnl.trnl(["Color", "Цвет"])' [val]='edititngGift.color' (click)="editgamepopup.hideNoAnim();editingcolorgame.showNoAnim()"></app-edit-option>
+    <app-edit-option *ngIf="edititngGift.platform == 'custom'" [title]='trnl.trnl(["Inside wrapping", "Внутреняя обёртка"])' [val]='edititngGift.wrap == "../../assets/game/ps.png" ? "default" : "custom"' (click)="editgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();croppingobjectwrapgame.setSize();refreshable(false)"></app-edit-option>
     <div class="bottomMenu">
-      <app-button color='#795548' (click)='editgamepopup.hide()'>Back</app-button>
+      <app-button color='#795548' (click)='editgamepopup.hide()'>{{ trnl.trnl(["Back", "Назад"]) }}</app-button>
     </div>
   </app-list2>
 </app-popup>
@@ -41,8 +41,8 @@
       </div>
     </div>
     <div class="bottomMenu">
-      <app-button color='#f44336' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
-      <app-button color='#8bc34a' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setTitleGiftGame();'>Save</app-button>
+      <app-button color='#f44336' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='editingtitlegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setTitleGiftGame();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
     </div>
   </app-list2>
 </app-popup>
@@ -50,11 +50,11 @@
 <app-popup #editingplatformgame>
   <app-list2 #listEditingPlatformGame>
     <div class="optionPlatformGame checked" style="background-image: linear-gradient(90deg, #006FCD, #004ba1);" (click)="setOptionPlatformGame($event)" value="playstation">
-      <div class="textOptionPlatformGame">Playstation</div>
+      <div class="textOptionPlatformGame">{{ trnl.trnl(["Playstation", "Playstation"]) }}</div>
       <div class="checkmarkOptionPlatformGame"></div>
     </div>
     <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #107C10, #16a116);" (click)="setOptionPlatformGame($event)" value="xbox">
-      <div class="textOptionPlatformGame">Xbox</div>
+      <div class="textOptionPlatformGame">{{ trnl.trnl(["Xbox", "Xbox"]) }}</div>
       <div class="checkmarkOptionPlatformGame"></div>
     </div>
     <!-- <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #30537e, #1b2838);" (click)="setOptionPlatformGame($event)" value="steam">
@@ -62,16 +62,16 @@
       <div class="checkmarkOptionPlatformGame"></div>
     </div> -->
     <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #ff9800, #ffeb3b);" (click)="setOptionPlatformGame($event)" value="other">
-      <div class="textOptionPlatformGame">Other</div>
+      <div class="textOptionPlatformGame">{{ trnl.trnl(["Other", "Другая платформа"]) }}</div>
       <div class="checkmarkOptionPlatformGame"></div>
     </div>
     <div class="optionPlatformGame" style="background-image: linear-gradient(90deg, #e91e63, #9c27b0);" (click)="setOptionPlatformGame($event)" value="custom">
-      <div class="textOptionPlatformGame">Custom</div>
+      <div class="textOptionPlatformGame">{{ trnl.trnl(["Custom", "Настроить вручную"]) }}</div>
       <div class="checkmarkOptionPlatformGame"></div>
     </div>
     <div class="bottomMenu">
-      <app-button color='#f44336' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
-      <app-button color='#8bc34a' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();saveOptionPlatformGame()'>Save</app-button>
+      <app-button color='#f44336' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='editingplatformgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();saveOptionPlatformGame()'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
     </div>
   </app-list2>
 </app-popup>
@@ -84,8 +84,8 @@
       </div>
     </div>
     <div class="bottomMenu">
-      <app-button color='#f44336' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>Cancel</app-button>
-      <app-button color='#8bc34a' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setCodeGiftGame();'>Save</app-button>
+      <app-button color='#f44336' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='editingcodegame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();setCodeGiftGame();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
     </div>
   </app-list2>
 </app-popup>
@@ -95,10 +95,10 @@
     <app-cropping #croppingobjectfrontgame></app-cropping>
   </div>
   <div class="bottomMenuFrontGreeting">
-    <app-button color='#f44336' (click)='croppingfrontgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();refreshable(true)'>Cancel</app-button>
-    <app-button color='#ff9800' (click)='croppingfrontgame.hideNoAnim();uploadfrontgamepopup.showNoAnim();uploadfrontgamelist.scrollToStart();refreshable(true)'>Upload</app-button>
-    <app-button color='#2196f3' (click)='saveCroppingFrontGameDefault();refreshable(true)'>Default</app-button>
-    <app-button color='#8bc34a' (click)='saveCroppingFrontGame();refreshable(true)'>Save</app-button>
+    <app-button color='#f44336' (click)='croppingfrontgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#ff9800' (click)='croppingfrontgame.hideNoAnim();uploadfrontgamepopup.showNoAnim();uploadfrontgamelist.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Upload", "Загрузить"]) }}</app-button>
+    <app-button color='#2196f3' (click)='saveCroppingFrontGameDefault();refreshable(true)'>{{ trnl.trnl(["Default", "По умолч."]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingFrontGame();refreshable(true)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
   </div>
 </app-popup>
 
@@ -107,20 +107,20 @@
     <div class="skeletonTextareaTitle">
       <div class="errorTextUpload"></div>
       <input type="file" id="fileUploadFrontGameid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 3)" />
-      <label class="labelFileUpload" for="fileUploadFrontGameid">Upload</label>
-      <div class="cancelUpload" (click)="uploadfrontgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();refreshable(false)">Cancel</div>
+      <label class="labelFileUpload" for="fileUploadFrontGameid">{{ trnl.trnl(["Upload", "Загрузить"]) }}</label>
+      <div class="cancelUpload" (click)="uploadfrontgamepopup.hideNoAnim();croppingfrontgame.showNoAnim();refreshable(false)">{{ trnl.trnl(["Cancel", "Отмена"]) }}</div>
     </div>
   </app-list2>
 </app-popup>
 
 <app-popup #editingcolorgame>
   <div class="skeletonColorpickerDrawSignGreeting">
-    <label class="labelcolorpickersigngreeting" for="colorpickercolorgame" [style]="{'background-color': this.edititngGift.color}" >Push to change</label>
+    <label class="labelcolorpickersigngreeting" for="colorpickercolorgame" [style]="{'background-color': this.edititngGift.color}" >{{ trnl.trnl(["Push to change", "Нажмите, чтобы изменить"]) }}</label>
     <input id="colorpickercolorgame" type="color" name="" [value]="" style='width:1px;height:1px;overflow:hidden;position:absolute;' (input)="setColorGame($event)" />
   </div>
   <div class="bottomMenuFrontGreeting">
-    <app-button color='#f44336' (click)='cancelColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>Cancel</app-button>
-    <app-button color='#8bc34a' (click)='saveColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>Save</app-button>
+    <app-button color='#f44336' (click)='cancelColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveColorGame();editingcolorgame.hideNoAnim();editgamepopup.showNoAnim();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
   </div>
 </app-popup>
 
@@ -129,10 +129,10 @@
     <app-cropping #croppingobjectwrapgame></app-cropping>
   </div>
   <div class="bottomMenuFrontGreeting">
-    <app-button color='#f44336' (click)='croppingwrapgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();refreshable(true)'>Cancel</app-button>
-    <app-button color='#ff9800' (click)='croppingwrapgame.hideNoAnim();uploadwrapgamepopup.showNoAnim();uploadwrapgamelist.scrollToStart();refreshable(true)'>Upload</app-button>
-    <app-button color='#2196f3' (click)='saveCroppingWrapGameDefault();refreshable(true)'>Default</app-button>
-    <app-button color='#8bc34a' (click)='saveCroppingWrapGame();refreshable(true)'>Save</app-button>
+    <app-button color='#f44336' (click)='croppingwrapgame.hideNoAnim();editgamepopup.showNoAnim();listEditGame.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#ff9800' (click)='croppingwrapgame.hideNoAnim();uploadwrapgamepopup.showNoAnim();uploadwrapgamelist.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Upload", "Загрузить"]) }}</app-button>
+    <app-button color='#2196f3' (click)='saveCroppingWrapGameDefault();refreshable(true)'>{{ trnl.trnl(["Default", "По умолч."]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingWrapGame();refreshable(true)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
   </div>
 </app-popup>
 
@@ -141,8 +141,8 @@
     <div class="skeletonTextareaTitle">
       <div class="errorTextUpload"></div>
       <input type="file" id="fileUploadWrapGameid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 4)" />
-      <label class="labelFileUpload" for="fileUploadWrapGameid">Upload</label>
-      <div class="cancelUpload" (click)="uploadwrapgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();refreshable(false)">Cancel</div>
+      <label class="labelFileUpload" for="fileUploadWrapGameid">{{ trnl.trnl(["Upload", "Загрузить"]) }}</label>
+      <div class="cancelUpload" (click)="uploadwrapgamepopup.hideNoAnim();croppingwrapgame.showNoAnim();refreshable(false)">{{ trnl.trnl(["Cancel", "Отмена"]) }}</div>
     </div>
   </app-list2>
 </app-popup>
@@ -152,229 +152,207 @@
     <div class="displayEditGreetingCard">
       <app-greeting-card #editgreetingcard></app-greeting-card>
     </div>
-    <app-edit-option [title]='"Title"' [val]='edititngGift.title' (click)="editgreetingpopup.hideNoAnim();editingtitle.showNoAnim();listEditingTitle.scrollToStart()"></app-edit-option>
-    <app-edit-option #editoptionfront [title]='"Front"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingfrontgreeting.showNoAnim();croppingobjectfrontgreeting.setSize();refreshable(false)"></app-edit-option>
-    <app-edit-option #editoptionback [title]='"Back"' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize();refreshable(false)"></app-edit-option>
-    <app-edit-option [title]='"Text"' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
-    <app-edit-option [title]='"Sign"' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign();refreshable(false)"></app-edit-option>
-    <app-edit-option [title]='"Text color"' [val]='edititngGift.colorText ? edititngGift.colorText : "#000"' (click)="editgreetingpopup.hideNoAnim();editingtextcolor.showNoAnim();"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Title", "Название"])' [val]='edititngGift.title' (click)="editgreetingpopup.hideNoAnim();editingtitle.showNoAnim();listEditingTitle.scrollToStart()"></app-edit-option>
+    <app-edit-option #editoptionfront [title]='trnl.trnl(["Front", "Передная картинка"])' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingfrontgreeting.showNoAnim();croppingobjectfrontgreeting.setSize();refreshable(false)"></app-edit-option>
+    <app-edit-option #editoptionback [title]='trnl.trnl(["Back", "Задняя картинка"])' [val]='"default"' (click)="editgreetingpopup.hideNoAnim();croppingbackgreeting.showNoAnim();croppingobjectbackgreeting.setSize();refreshable(false)"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Text", "Текст"])' [val]='(edititngGift.text && edititngGift.text != "") ? edititngGift.text : "default"' (click)="editgreetingpopup.hideNoAnim();editingtextgreeting.showNoAnim();listEditingTextGreeting.scrollToStart()" ></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Sign", "Подпись"])' [val]='edititngGift.sign === "" ? "default" : "custom"' (click)="editgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();setSizeGreetingForSign();refreshable(false)"></app-edit-option>
+    <app-edit-option [title]='trnl.trnl(["Text color", "Цвет текста"])' [val]='edititngGift.colorText ? edititngGift.colorText : "#000"' (click)="editgreetingpopup.hideNoAnim();editingtextcolor.showNoAnim();"></app-edit-option>
     <div class="bottomMenu">
-      <app-button color='#795548' (click)='editgreetingpopup.hide()'>Back</app-button>
+      <app-button color='#795548' (click)='editgreetingpopup.hide()'>{{ trnl.trnl(["Back", "Назад"]) }}</app-button>
     </div>
   </app-list2>
 </app-popup>
 
 <app-popup #editingtitle>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #listEditingTitle>
-      <div class="skeletonTextareaTitle">
-        <div class="skeleton2TextareaTitle">
-          <app-textarea #texttitle limit="100" [value]="edititngGift.title" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea>
-        </div>
+  <app-list2 #listEditingTitle>
+    <div class="skeletonTextareaTitle">
+      <div class="skeleton2TextareaTitle">
+        <app-textarea #texttitle limit="100" [value]="edititngGift.title" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea>
       </div>
-      <div class="bottomMenu">
-        <app-button color='#f44336' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
-        <app-button color='#8bc34a' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTitleGift();'>Save</app-button>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+    </div>
+    <div class="bottomMenu">
+      <app-button color='#f44336' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='editingtitle.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTitleGift();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #croppingfrontgreeting>
-  <!-- <div class="skeletonEditList"> -->
-    <div class="skeletonCroppingGreeting">
-      <app-cropping #croppingobjectfrontgreeting></app-cropping>
-    </div>
-    <div class="bottomMenuFrontGreeting">
-      <app-button color='#f44336' (click)='croppingfrontgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>Cancel</app-button>
-      <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();refreshable(true)'>Change</app-button>
-      <app-button color='#8bc34a' (click)='saveCroppingFront();refreshable(true)'>Save</app-button>
-    </div>
-  <!-- </div> -->
+  <div class="skeletonCroppingGreeting">
+    <app-cropping #croppingobjectfrontgreeting></app-cropping>
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='croppingfrontgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Change", "Изменить"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingFront();refreshable(true)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+  </div>
 </app-popup>
 
 <app-popup #uploadfrontgreetingpopup>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #uploadfrontgreetinglist>
-      <div class="skeletonTextareaTitle">
-        <div class="errorTextUpload"></div>
-        <input type="file" id="fileUploadFrontGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 1)" />
-        <label class="labelFileUpload" for="fileUploadFrontGreetingid">Upload</label>
-        <div class="cancelUpload" (click)="uploadfrontgreetingpopup.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();">Cancel</div>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+  <app-list2 #uploadfrontgreetinglist>
+    <div class="skeletonTextareaTitle">
+      <div class="errorTextUpload"></div>
+      <input type="file" id="fileUploadFrontGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 1)" />
+      <label class="labelFileUpload" for="fileUploadFrontGreetingid">{{ trnl.trnl(["Upload", "Загрузить"]) }}</label>
+      <div class="cancelUpload" (click)="uploadfrontgreetingpopup.hideNoAnim();arrayfrontimages.showNoAnim();listarrayfrontimages.scrollToStart();">{{ trnl.trnl(["Cancel", "Отмена"]) }}</div>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #arrayfrontimages>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #listarrayfrontimages>
-      <div #skeletonArrayFrontImages class="skeletonListImages">
-        <div class="uploadArrayImages" (click)="arrayfrontimages.hideNoAnim();uploadfrontgreetingpopup.showNoAnim();uploadfrontgreetinglist.scrollToStart()"></div>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/1.jpg'" [checked]="true" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/2.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/3.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/4.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/5.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/6.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/7.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/8.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/9.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/10.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/11.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/12.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/13.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/14.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/15.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/16.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/17.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/18.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/19.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/20.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/21.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/22.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/23.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/24.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/25.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/26.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/27.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/28.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/29.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/30.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/31.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/32.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/33.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/34.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/35.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/36.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/37.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/38.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/39.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/front/40.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
-      </div>
-      <div class="bottomMenuFrontGreeting">
-        <app-button color='#f44336' (click)='arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();refreshable(false)'>Cancel</app-button>
-        <app-button color='#8bc34a' (click)='setDefaultCropping();arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();'>Save</app-button>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+  <app-list2 #listarrayfrontimages>
+    <div #skeletonArrayFrontImages class="skeletonListImages">
+      <div class="uploadArrayImages" (click)="arrayfrontimages.hideNoAnim();uploadfrontgreetingpopup.showNoAnim();uploadfrontgreetinglist.scrollToStart()"></div>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/1.jpg'" [checked]="true" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/2.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/3.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/4.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/5.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/6.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/7.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/8.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/9.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/10.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/11.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/12.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/13.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/14.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/15.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/16.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/17.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/18.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/19.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/20.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/21.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/22.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/23.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/24.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/25.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/26.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/27.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/28.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/29.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/30.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/31.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/32.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/33.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/34.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/35.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/36.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/37.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/38.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/39.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/front/40.jpg'" [checked]="false" (click)="chooseFrontImage()"></app-image-list-array>
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();refreshable(false)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='setDefaultCropping();arrayfrontimages.hideNoAnim();croppingfrontgreeting.showNoAnim();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #croppingbackgreeting>
-  <!-- <div class="skeletonEditList"> -->
-    <div class="skeletonCroppingGreeting">
-      <app-cropping #croppingobjectbackgreeting></app-cropping>
-    </div>
-    <div class="bottomMenuFrontGreeting">
-      <app-button color='#f44336' (click)='croppingbackgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>Cancel</app-button>
-      <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();refreshable(true)'>Change</app-button>
-      <app-button color='#8bc34a' (click)='saveCroppingBack();refreshable(true)'>Save</app-button>
-    </div>
-  <!-- </div> -->
+  <div class="skeletonCroppingGreeting">
+    <app-cropping #croppingobjectbackgreeting></app-cropping>
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='croppingbackgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#ff9800' (click)='croppingfrontgreeting.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Change", "Изменить"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveCroppingBack();refreshable(true)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+  </div>
 </app-popup>
 
 <app-popup #arraybackimages>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #listarraybackimages>
-      <div #skeletonArrayBackImages class="skeletonListImages">
-        <div class="uploadArrayImages" (click)="arraybackimages.hideNoAnim();uploadbackgreetingpopup.showNoAnim();uploadbackgreetinglist.scrollToStart()"></div>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/1.png'" [checked]="true" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/2.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/3.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/4.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/5.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/6.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/7.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/8.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/9.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/10.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/11.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/12.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/13.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/14.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/15.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/16.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/17.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/18.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/19.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-        <app-image-list-array [img]="'../../assets/greetingcard/back/20.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
-      </div>
-      <div class="bottomMenuFrontGreeting">
-        <app-button color='#f44336' (click)='arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();refreshable(false)'>Cancel</app-button>
-        <app-button color='#8bc34a' (click)='setDefaultBackCropping();arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();'>Save</app-button>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+  <app-list2 #listarraybackimages>
+    <div #skeletonArrayBackImages class="skeletonListImages">
+      <div class="uploadArrayImages" (click)="arraybackimages.hideNoAnim();uploadbackgreetingpopup.showNoAnim();uploadbackgreetinglist.scrollToStart()"></div>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/1.png'" [checked]="true" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/2.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/3.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/4.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/5.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/6.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/7.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/8.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/9.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/10.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/11.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/12.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/13.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/14.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/15.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/16.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/17.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/18.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/19.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+      <app-image-list-array [img]="'../../assets/greetingcard/back/20.png'" [checked]="false" (click)="chooseBackImage()" [sizeimage]="0.5" ></app-image-list-array>
+    </div>
+    <div class="bottomMenuFrontGreeting">
+      <app-button color='#f44336' (click)='arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();refreshable(false)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='setDefaultBackCropping();arraybackimages.hideNoAnim();croppingbackgreeting.showNoAnim();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #uploadbackgreetingpopup>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #uploadbackgreetinglist>
-      <div class="skeletonTextareaTitle">
-        <div class="errorTextUpload"></div>
-        <input type="file" id="fileUploadBackGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 2)" />
-        <label class="labelFileUpload" for="fileUploadBackGreetingid">Upload</label>
-        <div class="cancelUpload" (click)="uploadbackgreetingpopup.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();">Cancel</div>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+  <app-list2 #uploadbackgreetinglist>
+    <div class="skeletonTextareaTitle">
+      <div class="errorTextUpload"></div>
+      <input type="file" id="fileUploadBackGreetingid" accept="image/png, image/jpeg" class="fileUpload" (change)="localUpload($event, 2)" />
+      <label class="labelFileUpload" for="fileUploadBackGreetingid">{{ trnl.trnl(["Upload", "Загрузить"]) }}</label>
+      <div class="cancelUpload" (click)="uploadbackgreetingpopup.hideNoAnim();arraybackimages.showNoAnim();listarraybackimages.scrollToStart();">{{ trnl.trnl(["Cancel", "Отмена"]) }}</div>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #editingtextgreeting>
-  <!-- <div class="skeletonEditList"> -->
-    <app-list2 #listEditingTextGreeting>
-      <div class="skeletonTextareaTitle">
-        <div class="skeleton3TextareaTitle">
-          <app-textarea2 #textareaTextGreeting limit="300" [value]="edititngGift.text" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea2>
-        </div>
+  <app-list2 #listEditingTextGreeting>
+    <div class="skeletonTextareaTitle">
+      <div class="skeleton3TextareaTitle">
+        <app-textarea2 #textareaTextGreeting limit="300" [value]="edititngGift.text" (click)="listEditGreeting.scrollToStart()" [low]="0"></app-textarea2>
       </div>
-      <div class="bottomMenu">
-        <app-button color='#f44336' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>Cancel</app-button>
-        <app-button color='#8bc34a' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTextGreeting();'>Save</app-button>
-      </div>
-    </app-list2>
-  <!-- </div> -->
+    </div>
+    <div class="bottomMenu">
+      <app-button color='#f44336' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+      <app-button color='#8bc34a' (click)='editingtextgreeting.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();setTextGreeting();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+    </div>
+  </app-list2>
 </app-popup>
 
 <app-popup #editingtextcolor>
-  <!-- <div class="skeletonEditList"> -->
-    <div class="skeletonColorpickerDrawSignGreeting">
-      <label class="labelcolorpickersigngreeting" for="colorpickertextgreeting" [style]="{'background-color': this.edititngGift.colorText}" >Push to change</label>
-      <input id="colorpickertextgreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorTitleGreeting($event)" />
-    </div>
-    <div class="bottomMenuFrontGreeting">
-      <app-button color='#f44336' (click)='cancelTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Cancel</app-button>
-      <app-button color='#8bc34a' (click)='saveTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>Save</app-button>
-    </div>
-  <!-- </div> -->
+  <div class="skeletonColorpickerDrawSignGreeting">
+    <label class="labelcolorpickersigngreeting" for="colorpickertextgreeting" [style]="{'background-color': this.edititngGift.colorText}" >{{ trnl.trnl(["Push to change", "Нажмите, чтобы изменить"]) }}</label>
+    <input id="colorpickertextgreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorTitleGreeting($event)" />
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='cancelTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveTitleColorGreeting();editingtextcolor.hideNoAnim();editgreetingpopup.showNoAnim();'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+  </div>
 </app-popup>
 
 <app-popup #drawsigngreetingpopup>
-  <!-- <div class="skeletonEditList"> -->
-    <div id="skeletonSignGreeting">
-      <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front" [imgback]="edititngGift.back" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
-      <app-draw #drawingobjectsigngreeting [width]="sizeforsigngreeting.w" [height]="0.2*sizeforsigngreeting.h" [color]="sizeforsigngreeting.color" [tool]="sizeforsigngreeting.tool" [style]="{position: 'absolute', 'z-index': '1', 'box-shadow': 'inset 0px 0px 0px 5px #ff9800', 'border': '5px solid #fff'}"></app-draw>
-    </div>
-    <div class="bottomMenuFrontGreeting">
-      <app-button color='#f44336' (click)='drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>Cancel</app-button>
-      <app-button #erasebuttonsigngreeting color='#00bcd4' (click)='switchtool()'>Erase</app-button>
-      <app-button color='#ff9800' (click)='drawsigngreetingpopup.hideNoAnim();drawsigncolorpickgreetingpopup.showNoAnim();refreshable(true)'>Color</app-button>
-      <app-button color='#8bc34a' (click)='saveDrawingSignGreeting();drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>Save</app-button>
-    </div>
-  <!-- </div> -->
+  <div id="skeletonSignGreeting">
+    <app-greeting-card [w]="sizeforsigngreeting.w" [h]="sizeforsigngreeting.h" [img]="edititngGift.front" [imgback]="edititngGift.back" [text]="edititngGift.text" [sign]="sizeforsigngreeting.sign" [style]="{transform: 'translateY('+sizeforsigngreeting.translateY+'px) rotateY(180deg)', position: 'absolute'}"></app-greeting-card>
+    <app-draw #drawingobjectsigngreeting [width]="sizeforsigngreeting.w" [height]="0.2*sizeforsigngreeting.h" [color]="sizeforsigngreeting.color" [tool]="sizeforsigngreeting.tool" [style]="{position: 'absolute', 'z-index': '1', 'box-shadow': 'inset 0px 0px 0px 5px #ff9800', 'border': '5px solid #fff'}"></app-draw>
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button #erasebuttonsigngreeting color='#00bcd4' (click)='switchtool()'>{{ trnl.trnl(["Erase", "Стереть"]) }}</app-button>
+    <app-button color='#ff9800' (click)='drawsigngreetingpopup.hideNoAnim();drawsigncolorpickgreetingpopup.showNoAnim();refreshable(true)'>{{ trnl.trnl(["Color", "Цвет"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveDrawingSignGreeting();drawsigngreetingpopup.hideNoAnim();editgreetingpopup.showNoAnim();listEditGreeting.scrollToStart();refreshable(true)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+  </div>
 </app-popup>
 
 <app-popup #drawsigncolorpickgreetingpopup>
-  <!-- <div class="skeletonEditList"> -->
-    <div class="skeletonColorpickerDrawSignGreeting">
-      <label class="labelcolorpickersigngreeting" for="colorpickerobjectsigngreeting" [style]="{'background-color': sizeforsigngreeting.color}" >Push to change</label>
-      <input id="colorpickerobjectsigngreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorPenSignGreeting($event)" />
-    </div>
-    <div class="bottomMenuFrontGreeting">
-      <app-button color='#f44336' (click)='cancelDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();refreshable(false)'>Cancel</app-button>
-      <app-button color='#8bc34a' (click)='saveDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();refreshable(false)'>Save</app-button>
-    </div>
-  <!-- </div> -->
+  <div class="skeletonColorpickerDrawSignGreeting">
+    <label class="labelcolorpickersigngreeting" for="colorpickerobjectsigngreeting" [style]="{'background-color': sizeforsigngreeting.color}" >{{ trnl.trnl(["Push to change", "Нажмите, чтобы изменить"]) }}</label>
+    <input id="colorpickerobjectsigngreeting" type="color" name="" [value]="" style='width: 1px; height: 1px;overflow:hidden;position:absolute;' (input)="setColorPenSignGreeting($event)" />
+  </div>
+  <div class="bottomMenuFrontGreeting">
+    <app-button color='#f44336' (click)='cancelDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();refreshable(false)'>{{ trnl.trnl(["Cancel", "Отмена"]) }}</app-button>
+    <app-button color='#8bc34a' (click)='saveDrawingSignColorGreeting();drawsigncolorpickgreetingpopup.hideNoAnim();drawsigngreetingpopup.showNoAnim();refreshable(false)'>{{ trnl.trnl(["Save", "Сохранить"]) }}</app-button>
+  </div>
 </app-popup>
 
 
@@ -391,37 +369,37 @@
       <div class="deleteGift" (click)="deleteGift($event, gift.id)"></div>
     </div>
 
-    <app-empty-list *ngIf="!gifts.length">First of all you need to add gifts</app-empty-list>
+    <app-empty-list *ngIf="!gifts.length">{{ trnl.trnl(['First of all you need to add gifts', 'добавьте подарки']) }}</app-empty-list>
 
     <div class="bottomMenu">
-      <app-button color='#8bc34a' (click)='addpopup.show($event.pageX, $event.pageY);slideradd.activate(true);setSizesDemoSlider()'>Add</app-button>
-      <app-button *ngIf="gifts.length" class="nextButton" color='#9c27b0' (click)='actShowBucks()'>Next</app-button>
+      <app-button color='#8bc34a' (click)='addpopup.show($event.pageX, $event.pageY);slideradd.activate(true);setSizesDemoSlider()'>{{ trnl.trnl(['Add', 'Добавить']) }}</app-button>
+      <app-button *ngIf="gifts.length" class="nextButton" color='#9c27b0' (click)='actShowBucks()'>{{ trnl.trnl(['Next', 'Далее']) }}</app-button>
     </div>
   </app-list2>
 </app-fullscreen>
 
 <div class="wrapRack" [style.right]="rack.right" [style.width]="rack.w+'px'" [style.height]="rack.h+'px'">
-  <div class="text">A box of the right size has been found<br><span *ngIf="isTouch" class="subtext">Tap to continue</span><span *ngIf="!isTouch" class="subtext">Click to continue</span></div>
+  <div class="text">{{ trnl.trnl(["A box of the right size has been found", "Коробка нужного размера была найдена"]) }}<br><span *ngIf="isTouch" class="subtext">{{ trnl.trnl(["Tap to continue", "Нажмите, чтобы продолжить"]) }}</span><span *ngIf="!isTouch" class="subtext">{{ trnl.trnl(["Click to continue", "Кликните, чтобы продолжить"]) }}</span></div>
 </div>
 
 <div class="workplace" [style.display]="workplace.display" [style.transform]="workplace.transform" (mouseup)="testdbltouchWorkplace($event)" (touchend)="testdbltouchWorkplace($event)" (touchstart)="startMoveWorkplace($event)" (mousedown)="startMoveWorkplace($event)" (touchmove)="moveWorkplace($event)" (mousemove)="moveWorkplace($event)" (touchend)="endMoveWorkplace($event)" (mouseup)="endMoveWorkplace($event)">
-  <app-navigation [show]="workplace.shownav" [bannext]="(this.workplace.stage == 2 && gifts.length != giftsintobox.length) ? '(add all gifts)' : ''" (choose)="chooseNavigation($event)"></app-navigation>
+  <app-navigation [show]="workplace.shownav" [bannext]="(this.workplace.stage == 2 && gifts.length != giftsintobox.length) ?  trnl.trnl(['(add all gifts)', '(добавьте все подарки)']) : ''" (choose)="chooseNavigation($event)"></app-navigation>
   <div *ngIf="workplace.activegiftintobox != null" [style.transform]="'translateX('+transAdditLeftWorkplaceX+'px) translateY('+transAdditLeftWorkplaceY+'px)'" [style.backgroundImage]="'url(../../assets/arrowcircle.png)'" (click)="rotateGiftIntoBox($event)" class="additButton"></div>
   <div *ngIf="workplace.activegiftintobox != null" [style.transform]="'translateX('+transAdditRightWorkplaceX+'px) translateY('+transAdditRightWorkplaceY+'px)'" [style.backgroundImage]="'url(../../assets/trash2.png)'" (click)="deleteGiftIntoBoxById(workplace.activegiftintobox.id)" class="additButton"></div>
   <app-list-of-wraps [show]="workplace.showlistwraping" (choosen)="chooseWrap($event)" (cancel)="cancelWrap()" ></app-list-of-wraps>
   <app-list-of-tapes [show]="workplace.showlisttape" (choosen)="chooseTape($event)" (cancel)="cancelTape()" ></app-list-of-tapes>
   <app-list-of-gifts [arr]="gifts" [added]="giftsintobox" [show]="workplace.showgiftlist" (close)="closelistgifts()" (choose)="chooselistgifts($event)" (unchoose)="deleteGiftIntoBoxById($event.id)" ></app-list-of-gifts>
   <app-color-picker [show]="workplace.showcolor" [color]="workplace.colorpen" (chng)="changeColorWorkplace($event)" ></app-color-picker>
-  <app-context-menu [show]="contextWorkplace.show" [x]="contextWorkplace.x" [y]="contextWorkplace.y" [options]="[{title: 'pen', img: '../../assets/pen.png', value: 'pen'}, {title: 'eraser', img: '../../assets/eraser.png', value: 'eraser'}, {title: 'move', img: '../../assets/moving.png', value: 'move'}, {title: 'color', img: '../../assets/palete.png', value: 'color'}]" (choose)="changeToolWorkplace($event)"></app-context-menu>
+  <app-context-menu [show]="contextWorkplace.show" [x]="contextWorkplace.x" [y]="contextWorkplace.y" [options]="[{title: trnl.trnl(['pen', 'ручка']), img: '../../assets/pen.png', value: 'pen'}, {title: trnl.trnl(['eraser', 'ластик']), img: '../../assets/eraser.png', value: 'eraser'}, {title: trnl.trnl(['move', 'обзор']), img: '../../assets/moving.png', value: 'move'}, {title: trnl.trnl(['color', 'цвет']), img: '../../assets/palete.png', value: 'color'}]" (choose)="changeToolWorkplace($event)"></app-context-menu>
   <div class="explanation"
   [style.display]="workplace.showFirstGui != 0 ? 'flex' : 'none'"
-  [style.transform]="'scale('+(workplace.showFirstGui != 2 ? '0' : '1')+')'">Write on the inside of the box if you like.</div>
+  [style.transform]="'scale('+(workplace.showFirstGui != 2 ? '0' : '1')+')'">{{ trnl.trnl(["Write on the inside of the box if you like", "Распишитесь на внутренней части коробки, если хотите"]) }}</div>
   <div class="explanation"
   [class.hide]="workplace.keyframesSecondTextGui == 0 || workplace.keyframesSecondTextGui == 5"
   [class.bottom]="workplace.keyframesSecondTextGui == 1 || workplace.keyframesSecondTextGui == 4"
   [class.center]="workplace.keyframesSecondTextGui == 2"
   [class.top]="workplace.keyframesSecondTextGui == 3"
-  >Put gifts into the box</div>
+  >{{ trnl.trnl(["Put gifts into the box", "Сложите подарки"]) }}</div>
   <app-draw
   [style.display]="workplace.showcanvas ? 'flex' : 'none'"
   [width]="2*box.size.x+2*box.size.y"
@@ -461,34 +439,33 @@
   [style.transform]="'scale('+(workplace.showFirstGui != 2 ? '0' : '1')+')'">
     <app-tools class="tools" [type]="workplace.tool" ></app-tools>
     <div *ngIf="isTouch" class="next">
-      <div class="text">Navigation</div>
-      <div class="subtext">triple tap</div>
+      <div class="text">{{ trnl.trnl(['Navigation', 'Меню']) }}</div>
+      <div class="subtext">{{ trnl.trnl(['triple tap', 'Тройное нажатие']) }}</div>
     </div>
     <div *ngIf="!isTouch" class="rightBtns">
       <div class="next back desktop" (click)="backToGifts()">
-        <div class="text">Back</div>
+        <div class="text">{{ trnl.trnl(['Back', 'Назад']) }}</div>
       </div>
       <div class="next desktop" (click)="trpltouchWorkplace()">
-        <div class="text">Next</div>
+        <div class="text">{{ trnl.trnl(['Next', 'Далее']) }}</div>
       </div>
     </div>
   </div>
   <div class="buttons" [style.transform]="workplace.keyframesSecondTextGui == 3 ? 'translateY(0vh)' : 'translateY(30vh)'" [style.display]="(workplace.keyframesSecondTextGui == 1 || workplace.keyframesSecondTextGui == 5) ? 'none' : 'flex'">
     <div class="btnGifts" *ngIf="isTouch">
-      <div class="textBtnGifts">Gifts</div>
-      <div class="subtextBtnGifts">double tap</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Gifts", "Подарки"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["double tap", "двойное нажатие"]) }}</div>
     </div>
     <div class="btnGifts desktop" *ngIf="!isTouch" (click)="showlistgifts()">
-      <div class="textBtnGifts">Gifts</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Gifts", "Подарки"]) }}</div>
     </div>
     <div class="btnNext" *ngIf="isTouch">
-      <div class="textBtnGifts" [style.color]="'#e91e63'">Navigation</div>
-      <!-- <div class="subtextBtnGifts" [style.display]="gifts.length != giftsintobox.length ? 'flex': 'none'">(add all gifts)</div> -->
-      <div class="subtextBtnGifts">triple tap</div>
+      <div class="textBtnGifts" [style.color]="'#e91e63'">{{ trnl.trnl(["Navigation", "Меню"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["triple tap", "тройное нажатие"]) }}</div>
     </div>
     <div *ngIf="!isTouch" class="rightBtns">
       <div class="next back desktop" (click)="backToDrawing()">
-        <div class="text">Back</div>
+        <div class="text">{{ trnl.trnl(["Back", "Назад"]) }}</div>
       </div>
       <div class="btnNext desktop" *ngIf="!isTouch" (click)="forwardToWarping()">
         <div class="textBtnGifts" [style.color]="gifts.length != giftsintobox.length ? '#999': '#e91e63'" [style.textDecoration]="gifts.length != giftsintobox.length ? 'line-through': 'none'">Next</div>
@@ -497,43 +474,43 @@
   </div>
   <div class="buttons" [style.transform]="workplace.keyframesThirdGui == 2 ? 'translateY(0vh)' : 'translateY(30vh)'" [style.display]="workplace.keyframesThirdGui == 0 ? 'none' : 'flex'">
     <div class="btnGifts" *ngIf="isTouch">
-      <div class="textBtnGifts">Wrapping</div>
-      <div class="subtextBtnGifts">double tap</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Wrapping", "Бумага"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["double tap", "двойное нажатие"]) }}</div>
     </div>
     <div class="btnGifts desktop" *ngIf="!isTouch" (click)="showlistwrapping()">
-      <div class="textBtnGifts">Wrapping</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Wrapping", "Бумага"]) }}</div>
     </div>
     <div class="btnNext" *ngIf="isTouch">
-      <div class="textBtnGifts" [style.color]="'#e91e63'">Navigation</div>
-      <div class="subtextBtnGifts">triple tap</div>
+      <div class="textBtnGifts" [style.color]="'#e91e63'">{{ trnl.trnl(["Navigation", "Меню"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["triple tap", "тройное нажатие"]) }}</div>
     </div>
     <div *ngIf="!isTouch" class="rightBtns">
       <div class="next back desktop" (click)="backToIntoGifts()">
-        <div class="text">Back</div>
+        <div class="text">{{ trnl.trnl(["Back", "Назад"]) }}</div>
       </div>
       <div class="btnNext desktop" (click)="forwardToBow()">
-        <div class="textBtnGifts" [style.color]="'#e91e63'">Next</div>
+        <div class="textBtnGifts" [style.color]="'#e91e63'">{{ trnl.trnl(['Next', 'Далее']) }}</div>
       </div>
     </div>
   </div>
   <div class="buttons" [style.transform]="workplace.keyframesFourGui == 2 ? 'translateY(0vh)' : 'translateY(30vh)'" [style.display]="workplace.keyframesFourGui == 0 ? 'none' : 'flex'">
     <div class="btnGifts" *ngIf="isTouch">
-      <div class="textBtnGifts">Tape</div>
-      <div class="subtextBtnGifts">double tap</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Tape", "Лента"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["double tap", "двойное нажатие"]) }}</div>
     </div>
     <div class="btnGifts desktop" *ngIf="!isTouch" (click)="showlisttape()">
-      <div class="textBtnGifts">Tape</div>
+      <div class="textBtnGifts">{{ trnl.trnl(["Tape", "Лента"]) }}</div>
     </div>
     <div class="btnNext" *ngIf="isTouch">
-      <div class="textBtnGifts" [style.color]="'#e91e63'">Navigation</div>
-      <div class="subtextBtnGifts">triple tap</div>
+      <div class="textBtnGifts" [style.color]="'#e91e63'">{{ trnl.trnl(["Navigation", "Меню"]) }}</div>
+      <div class="subtextBtnGifts">{{ trnl.trnl(["triple tap", "тройное нажатие"]) }}</div>
     </div>
     <div *ngIf="!isTouch" class="rightBtns">
       <div class="next back desktop" (click)="backToWarping()">
-        <div class="text">Back</div>
+        <div class="text">{{ trnl.trnl(["Back", "Назад"]) }}</div>
       </div>
       <div class="btnNext desktop" *ngIf="!isTouch">
-        <div class="textBtnGifts" [style.color]="'#e91e63'" (click)="forwardToReady()">Next</div>
+        <div class="textBtnGifts" [style.color]="'#e91e63'" (click)="forwardToReady()">{{ trnl.trnl(['Next', 'Далее']) }}</div>
       </div>
     </div>
   </div>

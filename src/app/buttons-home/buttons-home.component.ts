@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges, HostBinding } from '@angular/core'
 import { Router } from '@angular/router'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-buttons-home',
@@ -9,7 +10,10 @@ import { AsyncService } from '../async.service'
 })
 export class ButtonsHomeComponent implements OnInit {
 
-  constructor(public router: Router,) { }
+  constructor(
+    public router: Router,
+    public trnl: TranslateComponent
+  ) { }
 
   @Input('action') action: string = 'none'
 

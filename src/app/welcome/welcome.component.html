@@ -1,12 +1,12 @@
 <div class="container" [style.display]="style[0].display" [style.opacity]="style[0].opacity">
   <div class="left">
     <div class="text" [style.animationName]="style[0].animationLeft" [style.transform]="style[0].transformLeft">
-      Wow, there is<br>a gift for you!
+      {{ trnl.trnl(['Wow, there is', 'Вау, для вас']) }}<br>{{ trnl.trnl(['a gift for you!', 'подарок']) }}
     </div>
   </div>
   <div class="right">
     <div class="text" [style.animationName]="style[0].animationRight" [style.transform]="style[0].transformRight">
-      Wow, there is<br>a gift for you!
+      {{ trnl.trnl(['Wow, there is', 'Вау, для вас']) }}<br>{{ trnl.trnl(['a gift for you!', 'подарок']) }}
     </div>
   </div>
 </div>
@@ -18,6 +18,6 @@
 </div>
 
 <div [class]="showhint ? 'hint' : 'hint hide'">
-  <ng-container *ngIf="isTouch">double tap to continue</ng-container>
-  <ng-container *ngIf="!isTouch">click/space to continue</ng-container>
+  <ng-container *ngIf="isTouch">{{ trnl.trnl(['double tap to continue', 'Двойное нажатие, чтобы продолжить']) }}</ng-container>
+  <ng-container *ngIf="!isTouch">{{ trnl.trnl(['click/space to continue', 'клик/пробел, чтобы продолжить']) }}</ng-container>
 </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef, HostBinding } from '@angular/core';
-
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef, HostBinding } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-color-picker',
@@ -9,7 +9,10 @@ import { AsyncService } from '../async.service'
 })
 export class ColorPickerComponent implements OnInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
 
   @Input('show') show: boolean = false
   @Input('color') color: string = "#000"

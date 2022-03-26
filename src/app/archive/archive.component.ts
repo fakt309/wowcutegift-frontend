@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, HostBinding, ElementRef, HostListener } from '@angular/core'
-
-import { AsyncService } from '../async.service';
+import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-archive',
@@ -9,7 +9,10 @@ import { AsyncService } from '../async.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
 
   @HostBinding('style.display') display: string = 'none'
   @HostBinding('style.top') top: string = '-100vh'

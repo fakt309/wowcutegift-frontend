@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-slider-gifts',
@@ -7,7 +8,10 @@ import { Component, OnInit, ElementRef, HostBinding, AfterViewInit, ViewChild } 
 })
 export class SliderGiftsComponent implements AfterViewInit {
 
-  constructor(private host: ElementRef) { }
+  constructor(
+    private host: ElementRef,
+    public trnl: TranslateComponent
+  ) { }
   active: boolean = false
   el: any = this.host.nativeElement
   touch: any = {}

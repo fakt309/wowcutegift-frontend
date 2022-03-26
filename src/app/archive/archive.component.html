@@ -1,7 +1,7 @@
 <div [class]="isTouch ? 'content' : 'content desktop'">
   <app-list2 [scroll]="scroll">
     <div *ngIf="gifts.length == 0" class="empty">
-      Empty
+      {{ trnl.trnl(['Empty', 'Пусто']) }}
     </div>
     <ng-container *ngIf='activeGift == null'>
       <div *ngFor="let gift of gifts" class="option" (click)="activeGift = gift; setSizeDisplay(); showhint = true; this.touch.oldrotatedisplay = 0;">
@@ -15,52 +15,52 @@
     <ng-container *ngIf="activeGift != null && module == 'display'">
       <div class="display" [style.width]="this.sizeDisplay[0]+'px'" [style.height]="this.sizeDisplay[1]+'px'" (mousedown)="startfocus($event)" (touchstart)="startfocus($event)" (mousemove)="movefocus($event)" (touchmove)="movefocus($event)" (mouseup)="endfocus($event)" (touchend)="endfocus($event)">
         <div class="hint" [style.transform]="showhint ? 'scale(1)' : 'scale(0)'">
-          <ng-container *ngIf="isTouch">swipe left/right</ng-container>
-          <ng-container *ngIf="!isTouch">mouse left/right</ng-container>
+          <ng-container *ngIf="isTouch">{{ trnl.trnl(['swipe left/right', 'свайп влево/вправо']) }}</ng-container>
+          <ng-container *ngIf="!isTouch">{{ trnl.trnl(['mouse left/right', 'мышь влево/вправо']) }}</ng-container>
         </div>
         <app-greeting-card *ngIf="activeGift.type == 'greetingcard'" [w]="0.9*this.sizeDisplay[1]*(50/75)" [h]="0.9*this.sizeDisplay[1]" [img]="activeGift.front" [imgback]="activeGift.back" [text]="activeGift.text" [sign]="activeGift.sign" [textcolor]="activeGift.colorText" ></app-greeting-card>
         <app-game *ngIf="activeGift.type == 'game'" [size]="0.9*this.sizeDisplay[1]*(135/190)" [color]="activeGift.color" [img]="activeGift.img" [leftimg]="activeGift.leftimg" [wrap]="activeGift.wrap" [code]="activeGift.code" ></app-game>
       </div>
       <div class="optionActive" *ngIf="activeGift.type == 'game'">
-        <div class="title">Code</div>
+        <div class="title">{{ trnl.trnl(['Code', 'Код']) }}</div>
         <div class="value">{{activeGift.code}} <div class="copy" [attr.code]="activeGift.code" (click)="addToBuffer($event, activeGift.code)"></div></div>
       </div>
       <div class="optionActive pointer" (click)="module = 'addinfo'">
         <div class="title">
-          <ng-container *ngIf="activeGift.type == 'greetingcard'">Add. info.</ng-container>
-          <ng-container *ngIf="activeGift.type == 'game'">How activate</ng-container>
+          <ng-container *ngIf="activeGift.type == 'greetingcard'">{{ trnl.trnl(['Add. info.', 'Доп. инфо.']) }}</ng-container>
+          <ng-container *ngIf="activeGift.type == 'game'">{{ trnl.trnl(['How activate', 'Как активировать']) }}</ng-container>
         </div>
         <div class="value"></div>
       </div>
     </ng-container>
     <ng-container *ngIf="activeGift != null && module == 'addinfo'">
       <div *ngIf="activeGift.type == 'greetingcard'" class="textaddinfo">
-        This is a greeting card with best wishes on the back and a personal signature from the sender at the bottom.
+        {{ trnl.trnl(['This is a greeting card with best wishes on the back and a personal signature from the sender at the bottom.', 'Это обычная открытка с пожеланиями на задней стороне и персональной подписью отправителя.']) }}
       </div>
       <div *ngIf="activeGift.type == 'game'" class="textaddinfo">
         <ng-container *ngIf="activeGift.platform == 'playstation'">
-          1. Go to PlayStation Store and click on your Avatar at the top of the screen.<br><br>
-          2. Select Redeem Codes from the drop-down menu.<br><br>
-          3. Carefully enter the code and select Redeem.<br><br>
-          <a target="_blank" href="https://www.playstation.com/en-us/support/store/redeem-ps-store-voucher-code/">more</a>
+          1. {{ trnl.trnl(['Go to PlayStation Store and click on your Avatar at the top of the screen.', 'Зайдите в PlayStation Store и кликните на ваш аватар вверху экрана.']) }}<br><br>
+          2. {{ trnl.trnl(['Select Redeem Codes from the drop-down menu.', 'Выберите Выкупить код из выпадающего меню.']) }}<br><br>
+          3. {{ trnl.trnl(['Carefully enter the code and select Redeem.', 'Аккуратно введите код и нажмите выкупить.']) }}<br><br>
+          <a target="_blank" href="https://www.playstation.com/en-us/support/store/redeem-ps-store-voucher-code/">{{ trnl.trnl(['more', 'узнать больше']) }}</a>
         </ng-container>
         <ng-container *ngIf="activeGift.platform == 'xbox'">
-          1. Sign in to your Xbox console (make sure you’re signed in with the Microsoft account you want to redeem the code with).<br><br>
-          2. From the Home screen, select and open the Store app. (If the Store app is not displayed, go to My games & apps, select Apps, and select the Store app from there.)<br><br>
-          3. In the Store app, move the cursor left or press the View button on the controller to open the side menu.<br><br>
-          4. From that menu, select Redeem.<br><br>
-          5. Enter the 25-character code, and then follow the prompts. Don’t worry about hyphens, the system takes care of those for you.<br><br>
-          <a target="_blank" href="https://support.xbox.com/en-US/help/subscriptions-billing/redeem-codes-gifting/redeem-prepaid-codes">more</a>
+          1. {{ trnl.trnl(['Sign in to your Xbox console (make sure you’re signed in with the Microsoft account you want to redeem the code with).', 'Зайдите в Xbox меню (убедитесь что вы вошли под тем аккаунтом, под которым хотите получить игру)']) }}<br><br>
+          2. {{ trnl.trnl(['From the Home screen, select and open the Store app. (If the Store app is not displayed, go to My games & apps, select Apps, and select the Store app from there.)', 'На главном экране выберите открыть Магазин приложений (Если Магазин приложений не показывается, зайдите в Мои игры и приложения, и выберите Магазин приложений оттуда)']) }}<br><br>
+          3. {{ trnl.trnl(['In the Store app, move the cursor left or press the View button on the controller to open the side menu.', 'В Магазине приложений сдвиньте курсор влево или нажмите кнопку обзора на контроллере, чтобы открыть боковое меню']) }}<br><br>
+          4. {{ trnl.trnl(['From that menu, select Redeem.', 'В боковом меню выберите Выкупить']) }}<br><br>
+          5. {{ trnl.trnl(['Enter the 25-character code, and then follow the prompts. Don’t worry about hyphens, the system takes care of those for you.', 'Введите 25-значный код, и затем следуйте подсказкам. Не беспокойтесь о дефисах, система сделает все за вас.']) }}<br><br>
+          <a target="_blank" href="https://support.xbox.com/en-US/help/subscriptions-billing/redeem-codes-gifting/redeem-prepaid-codes">{{ trnl.trnl(['more', 'узнать больше']) }}</a>
         </ng-container>
         <ng-container *ngIf="activeGift.platform == 'other' || activeGift.platform == 'custom'">
-          Follow the instructions of the platform that this game belongs to
+          {{ trnl.trnl(['Follow the instructions of the platform that this game belongs to.', 'Следуйте инструкции той платформы, которой принадлежит ваша игра.']) }}
         </ng-container>
       </div>
     </ng-container>
     <div class="buttons">
-      <app-button *ngIf="activeGift == null" [color]="'#795548'" (click)="close.emit()">Close</app-button>
-      <app-button *ngIf="activeGift != null && module == 'display'" [color]="'#795548'" (click)="activeGift = null">Back</app-button>
-      <app-button *ngIf="activeGift != null && module == 'addinfo'" [color]="'#795548'" (click)="module = 'display'">Back</app-button>
+      <app-button *ngIf="activeGift == null" [color]="'#795548'" (click)="close.emit()">{{ trnl.trnl(['Close', 'Закрыть']) }}</app-button>
+      <app-button *ngIf="activeGift != null && module == 'display'" [color]="'#795548'" (click)="activeGift = null">{{ trnl.trnl(['Back', 'Назад']) }}</app-button>
+      <app-button *ngIf="activeGift != null && module == 'addinfo'" [color]="'#795548'" (click)="module = 'display'">{{ trnl.trnl(['Back', 'Назад']) }}</app-button>
     </div>
   </app-list2>
 </div>

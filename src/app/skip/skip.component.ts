@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, HostBinding, HostListener, Output, EventEmitter } from '@angular/core'
 import { AsyncService } from '../async.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-skip',
@@ -8,7 +9,7 @@ import { AsyncService } from '../async.service'
 })
 export class SkipComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   isTouch: boolean = false
   touch: any = { hasbeenmove: false, timeout: setTimeout(() => {}, 0), holding: false }

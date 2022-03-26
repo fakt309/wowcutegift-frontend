@@ -1,4 +1,5 @@
-import { Component, OnInit, HostBinding, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, HostBinding, Input, SimpleChanges } from '@angular/core'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-demo',
@@ -7,7 +8,7 @@ import { Component, OnInit, HostBinding, Input, SimpleChanges } from '@angular/c
 })
 export class DemoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public trnl: TranslateComponent) { }
 
   @Input('show') show: boolean = false
   @HostBinding('style.display') display: string = 'none'

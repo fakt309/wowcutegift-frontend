@@ -1,16 +1,18 @@
+<app-translate></app-translate>
+
 <app-skip [action]="menu.actionskip" (skip)="skipWelcome()"></app-skip>
 <app-continue [action]="menu.actioncontinue" (cntue)="continueWelcome()"></app-continue>
 
 <app-buttons-home [action]="menu.actionbuttons"></app-buttons-home>
 
 <app-title [value]="titlehint"></app-title>
-
+<!-- trnl.trnl(["Let's imagine you have a friend, girlfriend, brother someone else ...", "Давайте представим у вас есть друг, девушка, брат, кто-то еще"]) -->
 <div class="screen"
 [style.display]="styles.screen1.display"
 [style.opacity]="styles.screen1.opacity"
 >
   <div class="emoji" [style.backgroundImage]="'url(../../assets/home/firstscreen.png)'" [style.transform]="styles.screen1.transformemoji"></div>
-  <div class="text" [style.transform]="styles.screen1.transformtext">Let's imagine you have a friend, girlfriend, brother someone else ...</div>
+  <div class="text" [style.transform]="styles.screen1.transformtext">{{ trnl.trnl(["Let's imagine you have a friend, girlfriend, brother someone else ...", "Давайте представим у вас есть друг, девушка, брат, кто-то еще"]) }}</div>
 </div>
 
 <div class="screen"
@@ -18,7 +20,8 @@
 [style.opacity]="'1'"
 >
   <div class="emoji" [style.backgroundImage]="'url(../../assets/home/secondscreen.png)'" [style.transform]="styles.screen2.transformemoji"></div>
-  <div class="text" [style.transform]="styles.screen2.transformtext" [style.width]="'330px'">You decide to gift smth (birthday, new year, no reason, something else ...)</div>
+  <div class="text" [style.transform]="styles.screen2.transformtext" [style.width]="'330px'">
+  {{ trnl.trnl(["You decide to gift smth (birthday, new year, no reason, something else ...)", "Вы решаете сделать подарок (на день рождения, новый год, без причины, что-то еще)"]) }}</div>
 </div>
 
 <div class="screen"
@@ -26,7 +29,7 @@
 [style.opacity]="'1'"
 >
   <div class="emoji" [style.backgroundImage]="'url(../../assets/home/lastscreen.png)'" [style.transform]="styles.screenlast.transformemoji"></div>
-  <div class="text" [style.transform]="styles.screenlast.transformtext" [style.width]="'330px'">Cool, right?!</div>
+  <div class="text" [style.transform]="styles.screenlast.transformtext" [style.width]="'330px'">{{ trnl.trnl(["Cool, right?!", "Отлично, не правда ли?"]) }}</div>
 </div>
 
 <div class="screen" [style.display]="styles.box.display" [style.opacity]="'1'">
@@ -65,7 +68,6 @@
   </app-box2>
 </div>
 
-<!-- styles.box.display -->
 <div class="screen" [style.display]="chat.display" [style.opacity]="'1'">
   <app-chat [message]="chat.message" [style.transform]="chat.transform" [style.transition]="'all ease 0.5s'"></app-chat>
 </div>
