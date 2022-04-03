@@ -1,0 +1,20 @@
+<div class="background" [style.display]="background.display" [style.width]="background.width" [style.height]="background.height" [style.opacity]="background.opacity"></div>
+<div class="wrap"
+[style.right]="right+'px'">
+
+    <svg class="handle" viewBox="0 0 30 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 20 5 C 20 5, 20 95, 20 95" [attr.stroke]="handle.color" stroke-width="4" stroke-linecap="round" fill="transparent" [style.filter]='handle.shadow' >
+        <animate attributeName="d" values="M 20 5 C 20 5, 20 95, 20 95 ; M 20 5 C 5 35, 5 65, 20 95" dur="0.2s" begin="indefinite" fill="freeze" />
+        <animate attributeName="d" values="M 20 5 C 5 35, 5 65, 20 95 ; M 20 5 C 20 5, 20 95, 20 95" dur="0.2s" begin="indefinite" fill="freeze" />
+      </path>
+    </svg>
+    <div class="content" (touchstart)="ontouchstartlist($event)" (touchmove)="ontouchmovelist($event)" (touchend)="ontouchendlist($event)">
+      <div class="list" [style.transform]="'translateY('+(scroll.static+scroll.dynamic)+'px)'">
+        <div *ngFor="let option of options" class="option" (touchstart)="doripple($event)" (touchend)="undoripple($event, option.value)">
+          <div class="ico" [style.backgroundImage]="'url('+option.ico+')'"></div>
+          <div class="text">{{option.text}}</div>
+          <div class="wrapripple" [style.width]="ripple.w+'px'" [style.height]="ripple.h+'px'"><div class="ripple"></div></div>
+        </div>
+      </div>
+    </div>
+</div>

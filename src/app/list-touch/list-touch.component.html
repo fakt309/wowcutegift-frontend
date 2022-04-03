@@ -1,0 +1,36 @@
+<div class="reload" [style.transform]="'translateY('+refreshtranslate+'px)'">
+  <svg class="ico" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 15 4 C 15 4, 15 23, 15 23" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="transparent">
+      <animate attributeName="d" values="M 15 4 C 15 4, 15 23, 15 23 ; M 15 23 C 15 23, 15 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+      <animate attributeName="d" values="M 15 23 C 15 23, 15 23, 15 23 ; M 15 4 C 15 4, 15 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+    </path>
+    <path d="M 5 10 C 11 23, 11 23, 15 23" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="transparent">
+      <animate attributeName="d" values="M 5 10 C 11 23, 11 23, 15 23 ; M 15 5 C 2 5, 2 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+      <animate attributeName="d" values="M 15 5 C 2 5, 2 23, 15 23 ; M 5 10 C 11 23, 11 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+    </path>
+    <path d="M 25 10 C 19 23, 19 23, 15 23" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="transparent">
+      <animate attributeName="d" values="M 25 10 C 19 23, 19 23, 15 23 ; M 23 9 C 25 12, 27 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+      <animate attributeName="d" values="M 23 9 C 25 12, 27 23, 15 23 ; M 25 10 C 19 23, 19 23, 15 23" dur="0.2s" begin="indefinite" fill="freeze" />
+    </path>
+  </svg>
+  <div class="text">refresh page</div>
+</div>
+<div *ngIf="backenable" class="back">
+  <svg class="ico" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 10 5 C 10 5, 20 15, 20 15" stroke="#999" stroke-width="2" stroke-linecap="round" fill="transparent">
+      <animate attributeName="d" values="M 10 5 C 10 5, 20 15, 20 15 ; M 10 10 C 10 10, 20 15, 20 15" dur="0.2s" begin="indefinite" fill="freeze" />
+      <animate attributeName="d" values="M 10 10 C 10 10, 20 15, 20 15 ; M 10 5 C 10 5, 20 15, 20 15" dur="0.2s" begin="indefinite" fill="freeze" />
+    </path>
+    <path d="M 10 25 C 10 25, 20 15, 20 15" stroke="#999" stroke-width="2" stroke-linecap="round" fill="transparent">
+      <animate attributeName="d" values="M 10 25 C 10 25, 20 15, 20 15 ; M 10 20 C 10 20, 20 15, 20 15" dur="0.2s" begin="indefinite" fill="freeze" />
+      <animate attributeName="d" values="M 10 20 C 10 20, 20 15, 20 15 ; M 10 25 C 10 25, 20 15, 20 15" dur="0.2s" begin="indefinite" fill="freeze" />
+    </path>
+    <path d="M 5 15 C 5 15, 20 15, 20 15" stroke="#999" stroke-width="2" stroke-linecap="round" fill="transparent">
+
+    </path>
+  </svg>
+  <div class="text">back</div>
+</div>
+<div class="content" [style.transform]="'translateY('+(scroll.static+scroll.dynamic)+'px)'">
+  <ng-content></ng-content>
+</div>

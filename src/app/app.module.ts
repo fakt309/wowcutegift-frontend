@@ -52,6 +52,10 @@ import { ChatComponent } from './chat/chat.component';
 import { ButtonsHomeComponent } from './buttons-home/buttons-home.component';
 import { TranslateComponent } from './translate/translate.component';
 import { AnalyticComponent } from './analytic/analytic.component';
+import { TestComponent } from './test/test.component';
+import { ListTouchComponent } from './list-touch/list-touch.component';
+import { MenuTouchComponent } from './menu-touch/menu-touch.component';
+import { ListAddTouchComponent } from './list-add-touch/list-add-touch.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +107,11 @@ import { AnalyticComponent } from './analytic/analytic.component';
     ChatComponent,
     ButtonsHomeComponent,
     TranslateComponent,
-    AnalyticComponent
+    AnalyticComponent,
+    TestComponent,
+    ListTouchComponent,
+    MenuTouchComponent,
+    ListAddTouchComponent
   ],
   imports: [
     BrowserModule,

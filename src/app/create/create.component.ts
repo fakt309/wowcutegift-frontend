@@ -1375,11 +1375,11 @@ export class CreateComponent implements AfterViewInit {
       this.workplace.transform = 'scale(1)'
       await AsyncService.delay(300)
     } else if (type == 'demo') {
-      this.router.navigate(['gift'], { queryParams: { demo: '1' } })
+      this.router.navigate(['gift'], { queryParams: { demo: '1', lang: this.trnl.getlang() } })
     } else if (type == 'payment') {
-      this.router.navigate(['payment'])
+      this.router.navigate(['payment', { queryParams: { lang: this.trnl.getlang() } }])
     } else if (type == 'accept') {
-      this.router.navigate(['ready'])
+      this.router.navigate(['ready'], { queryParams: { lang: this.trnl.getlang() } })
     }
     return new Promise(res => res())
   }

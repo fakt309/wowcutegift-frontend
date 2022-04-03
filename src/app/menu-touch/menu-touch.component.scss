@@ -1,0 +1,92 @@
+:host {
+  overflow: hidden;
+  > .background {
+    position: fixed;
+    display: flex;
+    opacity: 0;
+    left: 0%;
+    top: 0%;
+    width: 0%;
+    height: 0%;
+    // backdrop-filter: blur(2px);
+    background-color: #00000099;
+    z-index: 1;
+  }
+  > .wrap {
+    position: fixed;
+    right: calc(-1 * min(100%, 300px) + 30px);
+    top: 0px;
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    > .content {
+      width: calc(100% - 30px);
+      height: 100%;
+      // background-color: #500e24;
+      background: linear-gradient(45deg, #e91e63, #500e24);
+      border-radius: 10px 0px 0px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      > .list {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        transform: translateY(0px);
+        > .option {
+          padding: 10px 0px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          overflow: hidden;
+          > .wrapripple {
+            position: absolute;
+            overflow: hidden;
+            z-index: 1;
+            > .ripple {
+              position: absolute;
+              width: 30px;
+              height: 30px;
+              border-radius: 1000px;
+              background-color: #00000022;
+              transform: translateX(0px) translateY(0px) scale(0);
+            }
+          }
+          > .ico {
+            margin: 10px;
+            margin-right: 0px;
+            width: 30px;
+            height: 30px;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            z-index: 2;
+          }
+          > .text {
+            margin: 10px;
+            font-size: 14px;
+            color: #fff;
+            user-select: none;
+            z-index: 2;
+          }
+        }
+      }
+    }
+    > .handle {
+      width: 30px;
+      height: 100px;
+    }
+    z-index: 2;
+  }
+
+}

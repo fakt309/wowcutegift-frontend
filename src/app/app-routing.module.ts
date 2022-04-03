@@ -7,6 +7,7 @@ import { GiftComponent } from './gift/gift.component'
 import { PaymentComponent } from './payment/payment.component'
 import { ReadyPageComponent } from './ready-page/ready-page.component'
 import { AnalyticComponent } from './analytic/analytic.component'
+import { TestComponent } from './test/test.component'
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     component: AnalyticComponent,
     path: 'analytic'
+  },
+  {
+    component: TestComponent,
+    path: 'test'
   }
 ];
 

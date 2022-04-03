@@ -6,6 +6,7 @@ import { AsyncService } from '../async.service'
 import { DatabaseService } from '../database.service'
 import { DeviceInfoService } from '../device-info.service'
 import { CryptoService } from '../crypto.service'
+import { TranslateComponent } from '../translate/translate.component'
 
 @Component({
   selector: 'app-ready-page',
@@ -20,15 +21,16 @@ export class ReadyPageComponent implements OnInit {
     private cookieService: CookieService,
     private databaseService: DatabaseService,
     private deviceInfo: DeviceInfoService,
-    private crypto: CryptoService
+    private crypto: CryptoService,
+    public trnl: TranslateComponent
   ) { }
 
   isTouch: boolean = false
 
   idbox: string = ''
   preview: any = {
-    title: "Gift for you",
-    descr: "Look what I have prepared for you",
+    title: this.trnl.trnl(['Gift for you', 'Подарок для тебя']),
+    descr: this.trnl.trnl(['Look what I have prepared for you', 'Погляди что внутри']),
     img: "/assets/preview.jpg",
     editing: false
   }

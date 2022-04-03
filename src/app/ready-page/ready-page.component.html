@@ -2,30 +2,30 @@
 
 <div [class]="isTouch ? 'content' : 'content desktop'">
   <app-list2>
-    <div class="title">Your gift is ready !!!</div>
-    <div class="explain">send this link to the recipient</div>
+    <div class="title">{{trnl.trnl(['Your gift is ready !!!', 'Ваш подарок готов к отправке !!!'])}}</div>
+    <div class="explain">{{trnl.trnl(['send this link to the recipient', 'отправьте данную ссылку получателю'])}}</div>
     <div class="link">
-      <div class="text">https://wowcutegift.com/gift;id={{this.idbox}}</div>
-      <div class="ico" (click)="copylink($event, 'https://wowcutegift.com/gift;id='+idbox)"></div>
+      <div class="text">https://wowcutegift.com/gift?id={{this.idbox}}&lang={{trnl.getlang()}}</div>
+      <div class="ico" (click)="copylink($event, 'https://wowcutegift.com/gift?id='+this.idbox+'&lang='+this.trnl.getlang())"></div>
     </div>
-    <div class="explain">how it will look like in chat</div>
+    <div class="explain">{{trnl.trnl(['how it will look like in chat', 'как это будет выглядеть в чате'])}}</div>
     <div class="chat">
       <div class="message me">
         <div class="value">
-          <div class="text">Hey, there i have a 🎁 for u </div>
+          <div class="text">{{trnl.trnl(['Hey, there i have a 🎁 for u ', 'Прив. у меня есть 🎁 для тебя'])}}</div>
           <div class="time">15:24</div>
         </div>
       </div>
       <div class="message">
         <div class="value">
-          <div class="text">SHOW ME!!! 😲😲😲</div>
+          <div class="text">ГДЕ?! 😲😲😲</div>
           <div class="time">15:24</div>
         </div>
       </div>
       <div class="message me">
         <div class="value">
           <div class="text">
-            <div class="linktext">https://wowcutegift.com/gift;id={{this.idbox}}</div>
+            <div class="linktext">https://wowcutegift.com/gift?id={{this.idbox}}&lang={{trnl.getlang()}}</div>
             <div class="linkblock">
               <div class="leftlinkblock">
                 <div class="linklinkblock">wowcutegift.com</div>

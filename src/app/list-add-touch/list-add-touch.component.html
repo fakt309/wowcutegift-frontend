@@ -1,0 +1,38 @@
+<app-list-touch [action]="action" [backenable]="true" (close)="choose.emit('')">
+  <div class="gift" (touchstart)="doripple($event)" (touchend)="undoripple($event, 'greetingcard')">
+    <div class="wrapripple" [style.width]="ripple.w+'px'" [style.height]="ripple.h+'px'"><div class="ripple"></div></div>
+    <div class="display">
+      <app-greeting-card
+      [w]="250*(100/150)"
+      [h]="250"
+      [animate]="false"
+      [img]="'../assets/greetingcard/front/8.jpg'"
+      [imgback]="'../assets/greetingcard/back/5.png'"
+      [text]="'May you be gifted with life’s biggest joys and never-ending bliss. After all, you yourself are a gift to earth, so you deserve the best. Happy birthday.'"
+      [sign]="'../../assets/greetingcard/sign2.png'"
+      [textcolor]="'#fff'"
+      ></app-greeting-card>
+    </div>
+    <div class="title">{{ trnl.trnl(['Greeting card', 'Открытка']) }}</div>
+    <div class="descr">{{ trnl.trnl(['Write a poem with wishes and sign with your own hand', 'Напишите стих с пожеланиями и подпишите собственной рукой']) }}</div>
+  </div>
+  <div class="gift" (touchstart)="doripple($event)" (touchend)="undoripple($event, 'game')">
+    <div class="wrapripple" [style.width]="ripple.w+'px'" [style.height]="ripple.h+'px'"><div class="ripple"></div></div>
+    <div class="display">
+      <app-game
+      [size]="250*(135/190)"
+      [color]="'#006FCD'"
+      [img]="'../../assets/game/example.jpg'"
+      [open]="false"
+      [wrap]="'../../assets/game/ps.png'"
+      [holes]="[]"
+      [code]="''"
+      [leftimg]="'../../assets/game/psleft.png'"
+      [animate]="false"
+      [scratch]="false"
+      ></app-game>
+    </div>
+    <div class="title">{{ trnl.trnl(['Game', 'Игра']) }}</div>
+    <div class="descr">{{ trnl.trnl(['Buy the game and enter the activation code', 'Купите электронную версю игры и впешите активационный код']) }}</div>
+  </div>
+</app-list-touch>

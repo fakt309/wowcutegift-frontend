@@ -94,7 +94,6 @@ export class TranslateComponent implements OnInit {
   }
 
   setlang(lang: string): void {
-    // let path = this.route.snapshot.url[0] ? this.route.snapshot.url[0].path : '/'
     let path = window.location.pathname
     let query: any = {}
     this.route.queryParams.subscribe(params => { query = {...params} })
@@ -105,15 +104,17 @@ export class TranslateComponent implements OnInit {
     }, 100)
   }
 
+  check(): void {
+    this.lang = this.getlang()
+    if (this.getlang() == 'unknown') {
+      this.setlang('en')
+    }
+  }
+
   ngOnInit(): void {
     this.isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
-    this.lang = this.getlang()
-
-    if (this.getlang() == 'unknown') {
-      this.setlang('en')
-      // this.show()
-    }
+    this.check()
   }
 
 }

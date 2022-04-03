@@ -377,7 +377,7 @@ export class GiftComponent implements OnInit {
 
   holding(): void {
     if (this.menu.archiveaction != 'show' && this.showdemomenu) {
-      this.router.navigate(['ready'])
+      this.router.navigate(['ready'], { queryParams: { lang: this.trnl.getlang() } })
     }
   }
 
@@ -749,14 +749,14 @@ export class GiftComponent implements OnInit {
             // this.addMeta('og:image', data.preview.img)
 
           } else {
-            this.router.navigate([''])
+            this.router.navigate([''], { queryParams: { lang: this.trnl.getlang() } })
           }
         } else {
-          this.router.navigate([''])
+          this.router.navigate([''], { queryParams: { lang: this.trnl.getlang() } })
         }
       })
     } else {
-      this.router.navigate([''])
+      this.router.navigate([''], { queryParams: { lang: this.trnl.getlang() } })
     }
 
     this.analytic.visit()
